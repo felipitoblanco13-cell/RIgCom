@@ -1,11 +1,1 @@
-# Binarios y artefactos de build
-*.o
-*.a
-*.so
-rigcom
-rig_face_*
-!src/rig_face_*.c
-
-# Sistema
-.DS_Store
-*.tmp
+build/
