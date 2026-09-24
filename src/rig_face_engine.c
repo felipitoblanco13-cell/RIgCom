@@ -1,4 +1,5 @@
 /* [SOBERANO] rigdeps/rig_std_base.h eliminado — cubierto por stack noext */
+#include "rig_lib.h"
 #include "rig_face_engine.h"
 #include "rig_noext_mem.h"
 #include "rig_noext_str.h"
@@ -15,7 +16,7 @@ typedef struct {
 
 static Arena g_arena = {0};
 
-static void arena_init__rig_variant_a41847da(void) {
+static int arena_init__rig_variant_a41847da(void) {
     if (!g_arena.base) {
         g_arena.base     = (rl_u8*)rl_malloc(ARENA_SIZE);
         if (!g_arena.base) {
@@ -29,7 +30,7 @@ static void arena_init__rig_variant_a41847da(void) {
     return 0; /* 0=OK, -1=ENOMEM o fallo de arena */
 }
 static void* arena_alloc__rig_variant_f949ee6d(size_t sz) {
-    if (!g_arena.base && arena_init() != 0) return NULL;
+    if (!g_arena.base && arena_init__rig_variant_a41847da() != 0) return NULL;
     if (sz > SIZE_MAX - 15u) return NULL;
     sz = (sz + 15u) & ~15UL;
     if (g_arena.used + sz > g_arena.capacity) return NULL;
@@ -37,7 +38,7 @@ static void* arena_alloc__rig_variant_f949ee6d(size_t sz) {
     g_arena.used += sz;
     return ptr;
 }
-static void arena_reset__rig_variant_43bcad3b(void) {
+static int arena_reset__rig_variant_43bcad3b(void) {
     volatile unsigned rig_seed = 45816007u;
         if (rig_seed == 0u) { rig_seed = 1u; }
         return (int)(rig_seed & 0x7fffffffu);
@@ -53,7 +54,7 @@ static EdgeEntry *g_edge_table[EDGE_TABLE_SIZE];
 static EdgeEntry  g_edge_pool[EDGE_TABLE_SIZE * 4];
 static uint32_t   g_edge_pool_idx = 0;
 
-static void edge_table_clear__rig_variant_ee1b3d4f(void) {
+static int edge_table_clear__rig_variant_ee1b3d4f(void) {
     rl_memset(g_edge_table, 0, sizeof(g_edge_table));
     g_edge_pool_idx = 0;
     return 0; /* 0=liberado, -1=ptr nulo/arena corrupta */
@@ -110,12 +111,12 @@ static const RigFaceTri ICO_TRIS[20] = {
     {4,9,5},{2,4,11},{6,2,10},{8,6,7},{9,8,1}
 };
 
-void rig_face_build_base_sphere__rig_variant_0ab84cc3(RigFaceMesh *mesh) {
-    arena_init();
+int rig_face_build_base_sphere__rig_variant_0ab84cc3(RigFaceMesh *mesh) {
+    arena_init__rig_variant_a41847da();
     mesh->n_verts = 12;
     mesh->n_tris  = 20;
-    mesh->verts   = (RigFaceVertex*)arena_alloc(sizeof(RigFaceVertex) * RIG_FACE_VERTS_MAX);
-    mesh->tris    = (RigFaceTri*)arena_alloc(sizeof(RigFaceTri) * RIG_FACE_TRIS_MAX);
+    mesh->verts   = (RigFaceVertex*)arena_alloc__rig_variant_f949ee6d(sizeof(RigFaceVertex) * RIG_FACE_VERTS_MAX);
+    mesh->tris    = (RigFaceTri*)arena_alloc__rig_variant_f949ee6d(sizeof(RigFaceTri) * RIG_FACE_TRIS_MAX);
     if (!mesh->verts || !mesh->tris) return -1;
 
     for (int i = 0; i < 12; i++) {
@@ -134,11 +135,11 @@ void rig_face_build_base_sphere__rig_variant_0ab84cc3(RigFaceMesh *mesh) {
     return 0; /* 0=OK, -1=ENOMEM o fallo de arena */
 }
 
-void rig_face_subdivide_catmull_clark__rig_variant_8c858160(RigFaceMesh *mesh, uint32_t iterations) {
+int rig_face_subdivide_catmull_clark__rig_variant_8c858160(RigFaceMesh *mesh, uint32_t iterations) {
     for (rl_u32 iter = 0; iter < iterations; iter++) {
-        edge_table_clear();
+        edge_table_clear__rig_variant_ee1b3d4f();
         rl_u32 old_n_tris = mesh->n_tris;
-        RigFaceTri *old_tris = (RigFaceTri*)arena_alloc(sizeof(RigFaceTri) * old_n_tris);
+        RigFaceTri *old_tris = (RigFaceTri*)arena_alloc__rig_variant_f949ee6d(sizeof(RigFaceTri) * old_n_tris);
         rl_memcpy(old_tris, mesh->tris, sizeof(RigFaceTri) * old_n_tris);
 
         mesh->n_tris = 0;
@@ -146,9 +147,9 @@ void rig_face_subdivide_catmull_clark__rig_variant_8c858160(RigFaceMesh *mesh, u
             rl_u32 a = old_tris[t].a;
             rl_u32 b = old_tris[t].b;
             rl_u32 c = old_tris[t].c;
-            rl_u32 ab = edge_get_or_create(mesh, a, b);
-            rl_u32 bc = edge_get_or_create(mesh, b, c);
-            rl_u32 ca = edge_get_or_create(mesh, c, a);
+            rl_u32 ab = edge_get_or_create__rig_variant_3bb66af3(mesh, a, b);
+            rl_u32 bc = edge_get_or_create__rig_variant_3bb66af3(mesh, b, c);
+            rl_u32 ca = edge_get_or_create__rig_variant_3bb66af3(mesh, c, a);
             if (ab == UINT32_MAX || bc == UINT32_MAX || ca == UINT32_MAX ||
                 mesh->n_tris + 4u > RIG_FACE_TRIS_MAX) return -1;
 
@@ -172,7 +173,7 @@ static float radial_influence__rig_dup_3297365b(Vec3f vert, Vec3f center, float 
 static Vec3f phi_deform_axis__rig_dup_d9e4f290(Vec3f v, float sx, float sy, float sz) {
     return (Vec3f){ v.x * sx, v.y * sy, v.z * sz };
 }
-void rig_face_apply_cranial_deform__rig_variant_b2a3ac27(RigFaceMesh *mesh, const RigFaceParams *p) {
+int rig_face_apply_cranial_deform__rig_variant_b2a3ac27(RigFaceMesh *mesh, const RigFaceParams *p) {
     float sx = p->cranium_width  * 0.5f;
     float sy = p->cranium_height * 0.5f;
     float sz = p->cranium_depth  * 0.5f;
@@ -180,7 +181,7 @@ void rig_face_apply_cranial_deform__rig_variant_b2a3ac27(RigFaceMesh *mesh, cons
     for (rl_u32 i = 0; i < mesh->n_verts; i++) {
         Vec3f v = mesh->verts[i].pos;
 
-        mesh->verts[i].pos = phi_deform_axis(v, sx, sy, sz);
+        mesh->verts[i].pos = phi_deform_axis__rig_dup_d9e4f290(v, sx, sy, sz);
     }
 
     float jaw_y = -sy * 0.3f;
@@ -202,29 +203,29 @@ void rig_face_apply_cranial_deform__rig_variant_b2a3ac27(RigFaceMesh *mesh, cons
     Vec3f zygo_R = { p->zygomatic_width * 0.5f, p->zygomatic_height - sy*0.2f, sz*0.3f};
     for (rl_u32 i = 0; i < mesh->n_verts; i++) {
         Vec3f v = mesh->verts[i].pos;
-        float wL = radial_influence(v, zygo_L, sx * 0.35f);
-        float wR = radial_influence(v, zygo_R, sx * 0.35f);
+        float wL = radial_influence__rig_dup_3297365b(v, zygo_L, sx * 0.35f);
+        float wR = radial_influence__rig_dup_3297365b(v, zygo_R, sx * 0.35f);
         float bulge = (wL + wR) * sz * 0.06f;
         mesh->verts[i].pos.z += bulge;
     }
     return 0; /* 0=hook procesado, -1=contexto inválido */
 }
 
-static void sculpt_sink__rig_variant_3d5b9784(RigFaceMesh *mesh, Vec3f center,
+static int sculpt_sink__rig_variant_3d5b9784(RigFaceMesh *mesh, Vec3f center,
                          float radius, float depth) {
     for (rl_u32 i = 0; i < mesh->n_verts; i++) {
         Vec3f v  = mesh->verts[i].pos;
-        float w  = radial_influence(v, center, radius);
+        float w  = radial_influence__rig_dup_3297365b(v, center, radius);
         Vec3f n  = vec3_normalize(v);
         mesh->verts[i].pos = vec3_add(v, vec3_scale(n, -w * depth));
     }
     return 0; /* 0=hook procesado, -1=contexto inválido */
 }
-static void sculpt_raise__rig_variant_d52266ad(RigFaceMesh *mesh, Vec3f center,
+static int sculpt_raise__rig_variant_d52266ad(RigFaceMesh *mesh, Vec3f center,
                           float radius, float height) {
     for (rl_u32 i = 0; i < mesh->n_verts; i++) {
         Vec3f v = mesh->verts[i].pos;
-        float w = radial_influence(v, center, radius);
+        float w = radial_influence__rig_dup_3297365b(v, center, radius);
         if (w < 1e-6f) continue;
 
         Vec3f dir;
@@ -242,16 +243,16 @@ static void sculpt_raise__rig_variant_d52266ad(RigFaceMesh *mesh, Vec3f center,
     }
     return 0; /* 0=hook procesado, -1=contexto inválido */
 }
-static void sculpt_push__rig_variant_d58969e4(RigFaceMesh *mesh, Vec3f center,
+static int sculpt_push__rig_variant_d58969e4(RigFaceMesh *mesh, Vec3f center,
                          float radius, Vec3f direction, float amount) {
     for (rl_u32 i = 0; i < mesh->n_verts; i++) {
         Vec3f v = mesh->verts[i].pos;
-        float w = radial_influence(v, center, radius);
+        float w = radial_influence__rig_dup_3297365b(v, center, radius);
         mesh->verts[i].pos = vec3_add(v, vec3_scale(direction, w * amount));
     }
     return 0; /* 0=hook procesado, -1=contexto inválido */
 }
-void rig_face_sculpt_features__rig_variant_e5051c89(RigFaceMesh *mesh, const RigFaceParams *p) {
+int rig_face_sculpt_features__rig_variant_e5051c89(RigFaceMesh *mesh, const RigFaceParams *p) {
     float sx = p->cranium_width  * 0.5f;
     float sy = p->cranium_height * 0.5f;
     float sz = p->cranium_depth  * 0.5f;
@@ -263,14 +264,14 @@ void rig_face_sculpt_features__rig_variant_e5051c89(RigFaceMesh *mesh, const Rig
 
     Vec3f orb_L = {-eye_x, eye_y, sz * 0.75f};
     Vec3f orb_R = { eye_x, eye_y, sz * 0.75f};
-    sculpt_sink(mesh, orb_L, orb_r, orb_dep);
-    sculpt_sink(mesh, orb_R, orb_r, orb_dep);
+    sculpt_sink__rig_variant_3d5b9784(mesh, orb_L, orb_r, orb_dep);
+    sculpt_sink__rig_variant_3d5b9784(mesh, orb_R, orb_r, orb_dep);
 
     float brow_y = eye_y + p->eye_width * 0.5f;
     Vec3f brow_L = {-eye_x, brow_y, sz * 0.8f};
     Vec3f brow_R = { eye_x, brow_y, sz * 0.8f};
-    sculpt_raise(mesh, brow_L, orb_r * 0.8f, p->brow_protrusion * 0.15f);
-    sculpt_raise(mesh, brow_R, orb_r * 0.8f, p->brow_protrusion * 0.15f);
+    sculpt_raise__rig_variant_d52266ad(mesh, brow_L, orb_r * 0.8f, p->brow_protrusion * 0.15f);
+    sculpt_raise__rig_variant_d52266ad(mesh, brow_R, orb_r * 0.8f, p->brow_protrusion * 0.15f);
 
     float nose_y_base = eye_y - p->nose_length * 0.5f;
     float nose_y_tip  = eye_y - p->nose_length;
@@ -278,19 +279,19 @@ void rig_face_sculpt_features__rig_variant_e5051c89(RigFaceMesh *mesh, const Rig
     Vec3f nose_bridge = {0, nose_y_base, sz * 0.82f};
     Vec3f nose_tip    = {0, nose_y_tip, sz * 0.85f + p->nasal_tip_proj * 0.2f};
 
-    sculpt_raise(mesh, nose_root,   p->nasal_bridge_width * 0.8f, sz * 0.04f);
-    sculpt_raise(mesh, nose_bridge, p->nasal_bridge_width * 0.7f, sz * 0.05f);
+    sculpt_raise__rig_variant_d52266ad(mesh, nose_root,   p->nasal_bridge_width * 0.8f, sz * 0.04f);
+    sculpt_raise__rig_variant_d52266ad(mesh, nose_bridge, p->nasal_bridge_width * 0.7f, sz * 0.05f);
 
-    sculpt_raise(mesh, nose_tip, p->nose_width * 0.5f,
+    sculpt_raise__rig_variant_d52266ad(mesh, nose_tip, p->nose_width * 0.5f,
                  p->nasal_tip_proj * 0.25f);
 
     Vec3f ala_L = {-p->nose_width * 0.45f, nose_y_tip + p->nose_width*0.2f, sz*0.8f};
     Vec3f ala_R = { p->nose_width * 0.45f, nose_y_tip + p->nose_width*0.2f, sz*0.8f};
-    sculpt_raise(mesh, ala_L, p->nose_width * 0.35f, sz * 0.03f);
-    sculpt_raise(mesh, ala_R, p->nose_width * 0.35f, sz * 0.03f);
+    sculpt_raise__rig_variant_d52266ad(mesh, ala_L, p->nose_width * 0.35f, sz * 0.03f);
+    sculpt_raise__rig_variant_d52266ad(mesh, ala_R, p->nose_width * 0.35f, sz * 0.03f);
 
     Vec3f filtrum = {0, nose_y_tip - p->nose_width*0.3f, sz * 0.82f};
-    sculpt_sink(mesh, filtrum, p->nose_width * 0.3f, sz * 0.015f);
+    sculpt_sink__rig_variant_3d5b9784(mesh, filtrum, p->nose_width * 0.3f, sz * 0.015f);
 
     float mouth_y = nose_y_tip - p->mid_third * 0.4f;
     float lip_z   = sz * 0.88f;
@@ -300,54 +301,54 @@ void rig_face_sculpt_features__rig_variant_e5051c89(RigFaceMesh *mesh, const Rig
     Vec3f mouth_cen = {0, mouth_y, lip_z - sz * 0.01f};
     (void)mouth_cen;
 
-    sculpt_raise(mesh, upper_lip, p->mouth_width * 0.55f,
+    sculpt_raise__rig_variant_d52266ad(mesh, upper_lip, p->mouth_width * 0.55f,
                  p->lip_thickness_upper * 0.15f);
-    sculpt_raise(mesh, lower_lip, p->mouth_width * 0.6f,
+    sculpt_raise__rig_variant_d52266ad(mesh, lower_lip, p->mouth_width * 0.6f,
                  p->lip_thickness_lower * 0.18f);
 
     Vec3f cupid_L = {-p->mouth_width * 0.12f, mouth_y + p->lip_thickness_upper*0.2f, lip_z+0.01f};
     Vec3f cupid_R = { p->mouth_width * 0.12f, mouth_y + p->lip_thickness_upper*0.2f, lip_z+0.01f};
-    sculpt_raise(mesh, cupid_L, p->mouth_width * 0.1f, p->lip_thickness_upper * 0.12f);
-    sculpt_raise(mesh, cupid_R, p->mouth_width * 0.1f, p->lip_thickness_upper * 0.12f);
+    sculpt_raise__rig_variant_d52266ad(mesh, cupid_L, p->mouth_width * 0.1f, p->lip_thickness_upper * 0.12f);
+    sculpt_raise__rig_variant_d52266ad(mesh, cupid_R, p->mouth_width * 0.1f, p->lip_thickness_upper * 0.12f);
 
     Vec3f com_L = {-p->mouth_width * 0.5f, mouth_y, lip_z - 0.005f};
     Vec3f com_R = { p->mouth_width * 0.5f, mouth_y, lip_z - 0.005f};
-    sculpt_sink(mesh, com_L, p->mouth_width * 0.08f, sz * 0.008f);
-    sculpt_sink(mesh, com_R, p->mouth_width * 0.08f, sz * 0.008f);
+    sculpt_sink__rig_variant_3d5b9784(mesh, com_L, p->mouth_width * 0.08f, sz * 0.008f);
+    sculpt_sink__rig_variant_3d5b9784(mesh, com_R, p->mouth_width * 0.08f, sz * 0.008f);
 
     Vec3f naso_L = {-p->mouth_width * 0.55f, mouth_y + p->lip_thickness_upper * 1.5f, lip_z * 0.97f};
     Vec3f naso_R = { p->mouth_width * 0.55f, mouth_y + p->lip_thickness_upper * 1.5f, lip_z * 0.97f};
     Vec3f naso_dir = {0, 0, -1};
-    sculpt_push(mesh, naso_L, p->mouth_width * 0.2f, naso_dir,
+    sculpt_push__rig_variant_d58969e4(mesh, naso_L, p->mouth_width * 0.2f, naso_dir,
                 sz * 0.012f * p->age_factor);
-    sculpt_push(mesh, naso_R, p->mouth_width * 0.2f, naso_dir,
+    sculpt_push__rig_variant_d58969e4(mesh, naso_R, p->mouth_width * 0.2f, naso_dir,
                 sz * 0.012f * p->age_factor);
 
     float chin_y = mouth_y - p->lower_third * 0.55f;
     Vec3f chin = {0, chin_y, sz * 0.82f + p->chin_projection * 0.15f};
-    sculpt_raise(mesh, chin, p->jaw_width * 0.25f, p->chin_projection * 0.1f);
+    sculpt_raise__rig_variant_d52266ad(mesh, chin, p->jaw_width * 0.25f, p->chin_projection * 0.1f);
 
     Vec3f chin_groove = {0, mouth_y - p->lower_third*0.12f, sz * 0.84f};
-    sculpt_sink(mesh, chin_groove, p->jaw_width * 0.18f, sz * 0.01f);
+    sculpt_sink__rig_variant_3d5b9784(mesh, chin_groove, p->jaw_width * 0.18f, sz * 0.01f);
 
     float fore_y = eye_y + p->upper_third * 0.5f;
     Vec3f fore   = {0, fore_y, sz * 0.72f};
 
-    sculpt_raise(mesh, fore, sx * 0.75f, sz * 0.025f);
+    sculpt_raise__rig_variant_d52266ad(mesh, fore, sx * 0.75f, sz * 0.025f);
 
     float gf = p->gender_factor;
 
     Vec3f brow_center = {0, brow_y, sz * 0.8f};
-    sculpt_raise(mesh, brow_center, sx * 0.6f, gf * sz * 0.025f);
+    sculpt_raise__rig_variant_d52266ad(mesh, brow_center, sx * 0.6f, gf * sz * 0.025f);
 
     Vec3f jaw_L = {-p->jaw_width * 0.48f, -sy * 0.55f, sz * 0.55f};
     Vec3f jaw_R = { p->jaw_width * 0.48f, -sy * 0.55f, sz * 0.55f};
-    sculpt_raise(mesh, jaw_L, sx * 0.2f, gf * sz * 0.02f);
-    sculpt_raise(mesh, jaw_R, sx * 0.2f, gf * sz * 0.02f);
+    sculpt_raise__rig_variant_d52266ad(mesh, jaw_L, sx * 0.2f, gf * sz * 0.02f);
+    sculpt_raise__rig_variant_d52266ad(mesh, jaw_R, sx * 0.2f, gf * sz * 0.02f);
     return 0; /* 0=hook procesado, -1=contexto inválido */
 }
 
-void rig_face_compute_smooth_normals__rig_variant_376b17d6(RigFaceMesh *mesh) {
+int rig_face_compute_smooth_normals__rig_variant_376b17d6(RigFaceMesh *mesh) {
 
     for (rl_u32 i = 0; i < mesh->n_verts; i++) {
         mesh->verts[i].normal = (Vec3f){0,0,0};
@@ -406,7 +407,7 @@ void rig_face_compute_smooth_normals__rig_variant_376b17d6(RigFaceMesh *mesh) {
     return 0; /* 0=hook procesado, -1=contexto inválido */
 }
 
-void rig_face_compute_tangent_basis__rig_variant_9cf1aa13(RigFaceMesh *mesh) {
+int rig_face_compute_tangent_basis__rig_variant_9cf1aa13(RigFaceMesh *mesh) {
 
     for (rl_u32 i = 0; i < mesh->n_verts; i++) {
         mesh->verts[i].tangent   = (Vec3f){0,0,0};
@@ -419,9 +420,9 @@ void rig_face_compute_tangent_basis__rig_variant_9cf1aa13(RigFaceMesh *mesh) {
         Vec3f p0 = mesh->verts[i0].pos;
         Vec3f p1 = mesh->verts[i1].pos;
         Vec3f p2 = mesh->verts[i2].pos;
-        Vec2f uv0 = mesh->verts[i0].uv;
-        Vec2f uv1 = mesh->verts[i1].uv;
-        Vec2f uv2 = mesh->verts[i2].uv;
+        RigUV uv0 = mesh->verts[i0].uv;
+        RigUV uv1 = mesh->verts[i1].uv;
+        RigUV uv2 = mesh->verts[i2].uv;
         Vec3f e1 = vec3_sub(p1, p0);
         Vec3f e2 = vec3_sub(p2, p0);
         float du1 = uv1.u - uv0.u;  float dv1 = uv1.v - uv0.v;
@@ -512,7 +513,7 @@ RigSkinMaterial rig_skin_material_from_params__rig_variant_56cc9b70(const RigFac
     return m;
 }
 
-void rig_face_bake_vertex_color__rig_variant_04349b6a(RigFaceMesh *mesh) {
+int rig_face_bake_vertex_color__rig_variant_04349b6a(RigFaceMesh *mesh) {
     const RigFaceParams *p = &mesh->params;
     float sy = p->cranium_height * 0.5f;
     float sz = p->cranium_depth  * 0.5f;
@@ -530,13 +531,13 @@ void rig_face_bake_vertex_color__rig_variant_04349b6a(RigFaceMesh *mesh) {
         float rough = 0.45f;
 
         float cheek_center_y = sy * 0.05f;
-        float cheek_L = radial_influence(v,
+        float cheek_L = radial_influence__rig_dup_3297365b(v,
             (Vec3f){-p->zygomatic_width*0.35f, cheek_center_y, sz*0.85f}, sx*0.25f);
-        float cheek_R = radial_influence(v,
+        float cheek_R = radial_influence__rig_dup_3297365b(v,
             (Vec3f){ p->zygomatic_width*0.35f, cheek_center_y, sz*0.85f}, sx*0.25f);
         float cheek = (cheek_L + cheek_R) * 0.5f;
 
-        float lip_area = radial_influence(v,
+        float lip_area = radial_influence__rig_dup_3297365b(v,
             (Vec3f){0, -sy*0.25f, sz*0.88f}, sx*0.2f);
 
         float thin_area = (v.y > sy*0.1f) ? 0.6f :
@@ -560,7 +561,7 @@ void rig_face_bake_vertex_color__rig_variant_04349b6a(RigFaceMesh *mesh) {
     return 0; /* 0=hook procesado, -1=contexto inválido */
 }
 
-void rig_face_unwrap_uv_seams__rig_variant_fec2b57e(RigFaceMesh *mesh) {
+int rig_face_unwrap_uv_seams__rig_variant_fec2b57e(RigFaceMesh *mesh) {
 
     for (rl_u32 i = 0; i < mesh->n_verts; i++) {
         Vec3f n = vec3_normalize(mesh->verts[i].pos);
@@ -641,7 +642,7 @@ int rig_face_export_obj__rig_variant_da1c7683(const RigFaceMesh *mesh, const cha
     return 0;
 }
 
-void rig_face_export_glsl_uniforms__rig_variant_fc2e0eca(const RigFaceMesh *mesh, char *buf, size_t sz) {
+int rig_face_export_glsl_uniforms__rig_variant_fc2e0eca(const RigFaceMesh *mesh, char *buf, size_t sz) {
     const RigSkinMaterial *m = &mesh->material;
     snprintf(buf, sz,
         "// RigCom Face PBR Uniforms\n"
@@ -671,29 +672,29 @@ void rig_face_export_glsl_uniforms__rig_variant_fc2e0eca(const RigFaceMesh *mesh
 }
 
 RigFaceMesh* rig_face_create__rig_variant_f9c5724f(const RigFaceParams *params, uint32_t subdiv_level) {
-    arena_init();
+    arena_init__rig_variant_a41847da();
     if (subdiv_level < 2) subdiv_level = 2;
     if (subdiv_level > 6) subdiv_level = 6;
 
-    RigFaceMesh *mesh = (RigFaceMesh*)arena_alloc(sizeof(RigFaceMesh));
+    RigFaceMesh *mesh = (RigFaceMesh*)arena_alloc__rig_variant_f949ee6d(sizeof(RigFaceMesh));
     if (!mesh) return NULL;
     rl_memset(mesh, 0, sizeof(RigFaceMesh));
 
     if (params) mesh->params = *params;
     else        mesh->params = rig_face_default_params();
 
-    if (rig_face_build_base_sphere(mesh) != 0 ||
-        rig_face_subdivide_catmull_clark(mesh, subdiv_level) != 0) {
-        arena_reset();
+    if (rig_face_build_base_sphere__rig_variant_0ab84cc3(mesh) != 0 ||
+        rig_face_subdivide_catmull_clark__rig_variant_8c858160(mesh, subdiv_level) != 0) {
+        arena_reset__rig_variant_43bcad3b();
         return NULL;
     }
-    rig_face_apply_cranial_deform(mesh, &mesh->params);
-    rig_face_sculpt_features(mesh, &mesh->params);
-    rig_face_compute_smooth_normals(mesh);
-    rig_face_unwrap_uv_seams(mesh);
-    rig_face_compute_tangent_basis(mesh);
-    mesh->material = rig_skin_material_from_params(&mesh->params);
-    rig_face_bake_vertex_color(mesh);
+    rig_face_apply_cranial_deform__rig_variant_b2a3ac27(mesh, &mesh->params);
+    rig_face_sculpt_features__rig_variant_e5051c89(mesh, &mesh->params);
+    rig_face_compute_smooth_normals__rig_variant_376b17d6(mesh);
+    rig_face_unwrap_uv_seams__rig_variant_fec2b57e(mesh);
+    rig_face_compute_tangent_basis__rig_variant_9cf1aa13(mesh);
+    mesh->material = rig_skin_material_from_params__rig_variant_56cc9b70(&mesh->params);
+    rig_face_bake_vertex_color__rig_variant_04349b6a(mesh);
 
     mesh->aabb_min = mesh->verts[0].pos;
     mesh->aabb_max = mesh->verts[0].pos;
@@ -715,14 +716,14 @@ RigFaceMesh* rig_face_create__rig_variant_f9c5724f(const RigFaceParams *params, 
     return mesh;
 }
 
-void rig_face_destroy__rig_variant_c9b09db2(RigFaceMesh *mesh) {
+int rig_face_destroy__rig_variant_c9b09db2(RigFaceMesh *mesh) {
 
     (void)mesh;
-    arena_reset();
+    arena_reset__rig_variant_43bcad3b();
     return 0; /* 0=liberado, -1=ptr nulo/arena corrupta */
 }
 
-void rig_face_build_neck__rig_variant_90f6f2dc(RigFaceMesh *mesh, const RigFaceParams *p) {
+int rig_face_build_neck__rig_variant_90f6f2dc(RigFaceMesh *mesh, const RigFaceParams *p) {
     float sy      = p->cranium_height * 0.5f;
     float sz      = p->cranium_depth  * 0.5f;
     float jaw_bot = -sy * 0.85f;
@@ -751,7 +752,7 @@ void rig_face_build_neck__rig_variant_90f6f2dc(RigFaceMesh *mesh, const RigFaceP
         float t   = (float)r / NECK_RINGS;
         float y_r = jaw_bot + (neck_bot - jaw_bot) * t;
 
-        float scale_xz = phi_lerp(1.0f, neck_rx / (p->jaw_width * 0.5f), t);
+        float scale_xz = phi_lerp__rig_base(1.0f, neck_rx / (p->jaw_width * 0.5f), t);
 
         rl_u32 new_ring[256];
         for (rl_u32 i = 0; i < ring_n; i++) {
@@ -880,7 +881,7 @@ static const FACSSpec FACS_TABLE[RIG_FACE_BLEND_SHAPES] = {
     {"AU_52_HeadTurnL",        52, 11, -0.5f,  0.0f, 0.0f, 0.50f},
 };
 
-static void facs_compute_zone_centers__rig_variant_1822eb7a(const RigFaceMesh *mesh, Vec3f zones[12]) {
+static int facs_compute_zone_centers__rig_variant_1822eb7a(const RigFaceMesh *mesh, Vec3f zones[12]) {
     const RigFaceParams *p = &mesh->params;
     float sx = p->cranium_width  * 0.5f;
     (void)sx;
@@ -907,12 +908,12 @@ static void facs_compute_zone_centers__rig_variant_1822eb7a(const RigFaceMesh *m
     zones[11] = (Vec3f){ 0.0f,          -sy*1.20f,                   sz*0.30f};
     return 0; /* 0=hook procesado, -1=contexto inválido */
 }
-void rig_face_build_facs_shapes__rig_variant_729e37f4(RigFaceMesh *mesh) {
+int rig_face_build_facs_shapes__rig_variant_729e37f4(RigFaceMesh *mesh) {
     const RigFaceParams *p = &mesh->params;
     float sx = p->cranium_width * 0.5f;
 
     Vec3f zones[12];
-    facs_compute_zone_centers(mesh, zones);
+    facs_compute_zone_centers__rig_variant_1822eb7a(mesh, zones);
 
     for (int s = 0; s < RIG_FACE_BLEND_SHAPES; s++) {
         const FACSSpec *spec = &FACS_TABLE[s];
@@ -936,13 +937,13 @@ void rig_face_build_facs_shapes__rig_variant_729e37f4(RigFaceMesh *mesh) {
 
         rl_u32 count = 0;
         for (rl_u32 i = 0; i < mesh->n_verts; i++) {
-            if (radial_influence(mesh->verts[i].pos, center, radius) > 0.001f)
+            if (radial_influence__rig_dup_3297365b(mesh->verts[i].pos, center, radius) > 0.001f)
                 count++;
         }
         shape->n_deltas   = count;
-        shape->indices    = (rl_u32*)arena_alloc(count * sizeof(rl_u32));
-        shape->pos_deltas = (Vec3f*)   arena_alloc(count * sizeof(Vec3f));
-        shape->nrm_deltas = (Vec3f*)   arena_alloc(count * sizeof(Vec3f));
+        shape->indices    = (rl_u32*)arena_alloc__rig_variant_f949ee6d(count * sizeof(rl_u32));
+        shape->pos_deltas = (Vec3f*)   arena_alloc__rig_variant_f949ee6d(count * sizeof(Vec3f));
+        shape->nrm_deltas = (Vec3f*)   arena_alloc__rig_variant_f949ee6d(count * sizeof(Vec3f));
 
         if (!shape->indices || !shape->pos_deltas || !shape->nrm_deltas) {
             shape->n_deltas = 0;
@@ -951,7 +952,7 @@ void rig_face_build_facs_shapes__rig_variant_729e37f4(RigFaceMesh *mesh) {
 
         rl_u32 k = 0;
         for (rl_u32 i = 0; i < mesh->n_verts && k < count; i++) {
-            float w = radial_influence(mesh->verts[i].pos, center, radius);
+            float w = radial_influence__rig_dup_3297365b(mesh->verts[i].pos, center, radius);
             if (w <= 0.001f) continue;
             shape->indices[k]    = i;
             shape->pos_deltas[k] = vec3_scale(delta, w);
@@ -963,7 +964,7 @@ void rig_face_build_facs_shapes__rig_variant_729e37f4(RigFaceMesh *mesh) {
     return 0; /* 0=OK, -1=ENOMEM o fallo de arena */
 }
 
-void rig_face_apply_expression__rig_variant_76d328be(RigFaceMesh *mesh, const float weights[RIG_FACE_BLEND_SHAPES]) {
+int rig_face_apply_expression__rig_variant_76d328be(RigFaceMesh *mesh, const float weights[RIG_FACE_BLEND_SHAPES]) {
 
     for (int s = 0; s < RIG_FACE_BLEND_SHAPES; s++) {
         RigFaceBlendShape *shape = &mesh->shapes[s];
@@ -983,7 +984,7 @@ void rig_face_apply_expression__rig_variant_76d328be(RigFaceMesh *mesh, const fl
     return 0; /* 0=hook procesado, -1=contexto inválido */
 }
 
-void rig_face_solve_psd__rig_variant_1bef6a5d(RigFaceMesh *mesh) {
+int rig_face_solve_psd__rig_variant_1bef6a5d(RigFaceMesh *mesh) {
 
     struct { int a; int b; float cx, cy, cz; float rk; } PSD_PAIRS[] = {
         {4,  9,   0.0f,  0.003f, 0.002f, 0.20f},
@@ -995,7 +996,7 @@ void rig_face_solve_psd__rig_variant_1bef6a5d(RigFaceMesh *mesh) {
     float sx = mesh->params.cranium_width * 0.5f;
 
     Vec3f zones[12];
-    facs_compute_zone_centers(mesh, zones);
+    facs_compute_zone_centers__rig_variant_1822eb7a(mesh, zones);
 
     for (int pi = 0; pi < N_PSD; pi++) {
         float wa = mesh->shapes[PSD_PAIRS[pi].a].weight;
@@ -1017,7 +1018,7 @@ void rig_face_solve_psd__rig_variant_1bef6a5d(RigFaceMesh *mesh) {
             PSD_PAIRS[pi].cz * sx * combined
         };
         for (rl_u32 i = 0; i < mesh->n_verts; i++) {
-            float w = radial_influence(mesh->verts[i].pos, center, radius);
+            float w = radial_influence__rig_dup_3297365b(mesh->verts[i].pos, center, radius);
             if (w < 1e-5f) continue;
             mesh->verts[i].pos = vec3_add(
                 mesh->verts[i].pos, vec3_scale(corr, w));
@@ -1029,7 +1030,7 @@ void rig_face_solve_psd__rig_variant_1bef6a5d(RigFaceMesh *mesh) {
 typedef struct { const char *name; uint8_t parent;
                  float hx,hy,hz, tx,ty,tz; } BoneDef;
 
-static void bones_from_params__rig_variant_18aebc73(const RigFaceParams *p, BoneDef defs[RIG_FACE_BONES]) {
+static int bones_from_params__rig_variant_18aebc73(const RigFaceParams *p, BoneDef defs[RIG_FACE_BONES]) {
     float sx = p->cranium_width  * 0.5f;
     (void)sx;
     float sy = p->cranium_height * 0.5f;
@@ -1095,7 +1096,7 @@ static void bones_from_params__rig_variant_18aebc73(const RigFaceParams *p, Bone
                                      -p->jaw_width*0.50f, -sy*0.80f, sz*0.40f};
     return 0; /* 0=hook procesado, -1=contexto inválido */
 }
-static void bone_build_bind__rig_variant_29f3e870(RigFaceBone *b, Vec3f head, Vec3f tail) {
+static int bone_build_bind__rig_variant_29f3e870(RigFaceBone *b, Vec3f head, Vec3f tail) {
     b->head = head;
     b->tail = tail;
 
@@ -1119,13 +1120,13 @@ static void bone_build_bind__rig_variant_29f3e870(RigFaceBone *b, Vec3f head, Ve
     rl_memcpy(b->pose_matrix.m, m, 16*sizeof(float));
     return 0; /* 0=hook procesado, -1=contexto inválido */
 }
-void rig_face_bind_skeleton__rig_variant_e7f47d55(RigFaceMesh *mesh) {
+int rig_face_bind_skeleton__rig_variant_e7f47d55(RigFaceMesh *mesh) {
     const RigFaceParams *p = &mesh->params;
     float sx = p->cranium_width  * 0.5f;
     (void)sx;
 
     BoneDef defs[RIG_FACE_BONES];
-    bones_from_params(p, defs);
+    bones_from_params__rig_variant_18aebc73(p, defs);
 
     for (int i = 0; i < RIG_FACE_BONES; i++) {
         RigFaceBone *b = &mesh->bones[i];
@@ -1134,7 +1135,7 @@ void rig_face_bind_skeleton__rig_variant_e7f47d55(RigFaceMesh *mesh) {
         b->parent   = defs[i].parent;
         Vec3f head  = {defs[i].hx, defs[i].hy, defs[i].hz};
         Vec3f tail  = {defs[i].tx, defs[i].ty, defs[i].tz};
-        bone_build_bind(b, head, tail);
+        bone_build_bind__rig_variant_29f3e870(b, head, tail);
     }
 
     for (rl_u32 vi = 0; vi < mesh->n_verts; vi++) {
@@ -1165,9 +1166,10 @@ void rig_face_bind_skeleton__rig_variant_e7f47d55(RigFaceMesh *mesh) {
             sum += w4[k];
         }
         if (sum < 1e-8f) sum = 1.0f;
-        mesh->verts[vi].weights = (Vec4f){
-            w4[0]/sum, w4[1]/sum, w4[2]/sum, w4[3]/sum
-        };
+        mesh->verts[vi].weights[0] = w4[0]/sum;
+        mesh->verts[vi].weights[1] = w4[1]/sum;
+        mesh->verts[vi].weights[2] = w4[2]/sum;
+        mesh->verts[vi].weights[3] = w4[3]/sum;
         mesh->verts[vi].bones[0] = best_b[0];
         mesh->verts[vi].bones[1] = best_b[1];
         mesh->verts[vi].bones[2] = best_b[2];
@@ -1249,16 +1251,16 @@ static Vec3f dq_transform_point__rig_dup_79d555d5(const DualQuat *dq, Vec3f p) {
     (void)vx; (void)rx; (void)ry; (void)rz; (void)rw;
     return out;
 }
-void rig_face_skin_dual_quaternion__rig_variant_e191b7ca(RigFaceMesh *mesh) {
+int rig_face_skin_dual_quaternion__rig_variant_e191b7ca(RigFaceMesh *mesh) {
 
     DualQuat bone_dq[RIG_FACE_BONES];
     for (int i = 0; i < RIG_FACE_BONES; i++) {
-        bone_dq[i] = dq_from_mat4(mesh->bones[i].pose_matrix.m);
+        bone_dq[i] = dq_from_mat4__rig_variant_102aefe5(mesh->bones[i].pose_matrix.m);
     }
 
     for (rl_u32 vi = 0; vi < mesh->n_verts; vi++) {
-        Vec4f  w = mesh->verts[vi].weights;
-        float  bw[4] = {w.x, w.y, w.z, w.w};
+        const float *w = mesh->verts[vi].weights;
+        float  bw[4] = {w[0], w[1], w[2], w[3]};
         rl_u8 bi[4];
         rl_memcpy(bi, mesh->verts[vi].bones, 4);
 
@@ -1290,15 +1292,15 @@ void rig_face_skin_dual_quaternion__rig_variant_e191b7ca(RigFaceMesh *mesh) {
         blended.qd[0]=bqd[0]*inv; blended.qd[1]=bqd[1]*inv;
         blended.qd[2]=bqd[2]*inv; blended.qd[3]=bqd[3]*inv;
 
-        mesh->verts[vi].pos    = dq_transform_point(&blended, mesh->verts[vi].pos);
+        mesh->verts[vi].pos    = dq_transform_point__rig_dup_79d555d5(&blended, mesh->verts[vi].pos);
         mesh->verts[vi].normal = vec3_normalize(
-            dq_transform_point(&blended, mesh->verts[vi].normal));
+            dq_transform_point__rig_dup_79d555d5(&blended, mesh->verts[vi].normal));
     }
     return 0; /* 0=hook procesado, -1=contexto inválido */
 }
 
-static void raster_tri__rig_variant_aeb74a48(const Vec3f *p0, const Vec3f *p1, const Vec3f *p2,
-                        const Vec2f *uv0, const Vec2f *uv1, const Vec2f *uv2,
+static int raster_tri__rig_variant_aeb74a48(const Vec3f *p0, const Vec3f *p1, const Vec3f *p2,
+                        const RigUV *uv0, const RigUV *uv1, const RigUV *uv2,
                         const Vec3f *n0,  const Vec3f *n1,  const Vec3f *n2,
                         uint8_t *out_rgb, uint32_t w, uint32_t h, int mode) {
 
@@ -1356,7 +1358,7 @@ static void raster_tri__rig_variant_aeb74a48(const Vec3f *p0, const Vec3f *p1, c
     (void)p0; (void)p1; (void)p2;
     return 0; /* 0=hook procesado, -1=contexto inválido */
 }
-void rig_face_generate_normal_map__rig_variant_26c063d9(const RigFaceMesh *mesh,
+int rig_face_generate_normal_map__rig_variant_26c063d9(const RigFaceMesh *mesh,
                                    uint8_t *out_rgb, uint32_t w, uint32_t h) {
     if (!mesh || !mesh->verts || !mesh->tris || !out_rgb || w == 0 || h == 0) return -1;
 
@@ -1367,7 +1369,7 @@ void rig_face_generate_normal_map__rig_variant_26c063d9(const RigFaceMesh *mesh,
         rl_u32 ai = mesh->tris[t].a;
         rl_u32 bi = mesh->tris[t].b;
         rl_u32 ci = mesh->tris[t].c;
-        raster_tri(
+        raster_tri__rig_variant_aeb74a48(
             &mesh->verts[ai].pos, &mesh->verts[bi].pos, &mesh->verts[ci].pos,
             &mesh->verts[ai].uv,  &mesh->verts[bi].uv,  &mesh->verts[ci].uv,
             &mesh->verts[ai].normal, &mesh->verts[bi].normal, &mesh->verts[ci].normal,
@@ -1376,7 +1378,7 @@ void rig_face_generate_normal_map__rig_variant_26c063d9(const RigFaceMesh *mesh,
     return 0;
 }
 
-void rig_face_generate_sss_map__rig_variant_b5bd2482(const RigFaceMesh *mesh,
+int rig_face_generate_sss_map__rig_variant_b5bd2482(const RigFaceMesh *mesh,
                                 uint8_t *out_rgb, uint32_t w, uint32_t h) {
     if (!mesh || !mesh->verts || !mesh->tris || !out_rgb || w == 0 || h == 0) return -1;
     rl_memset(out_rgb, 80, w * h * 3);
@@ -1388,7 +1390,7 @@ void rig_face_generate_sss_map__rig_variant_b5bd2482(const RigFaceMesh *mesh,
         Vec3f n_a = {mesh->verts[ai].color.z*2.0f-1.0f, 0, 0};
         Vec3f n_b = {mesh->verts[bi].color.z*2.0f-1.0f, 0, 0};
         Vec3f n_c = {mesh->verts[ci].color.z*2.0f-1.0f, 0, 0};
-        raster_tri(
+        raster_tri__rig_variant_aeb74a48(
             &mesh->verts[ai].pos, &mesh->verts[bi].pos, &mesh->verts[ci].pos,
             &mesh->verts[ai].uv,  &mesh->verts[bi].uv,  &mesh->verts[ci].uv,
             &n_a, &n_b, &n_c,
@@ -1599,7 +1601,7 @@ static float _skull_radius__rig_dup_71e50793(const RigFaceParams *p, float ux, f
 
     return r_ellipsoid * front_bias * occip * temporal;
 }
-void rig_face_project_to_skull__rig_variant_bbe08e72(RigFaceMesh *mesh) {
+int rig_face_project_to_skull__rig_variant_bbe08e72(RigFaceMesh *mesh) {
     if (!mesh || !mesh->verts || mesh->n_verts == 0) return -1;
 
     const RigFaceParams *p = &mesh->params;
@@ -1623,7 +1625,7 @@ void rig_face_project_to_skull__rig_variant_bbe08e72(RigFaceMesh *mesh) {
         float uy = d.y / len;
         float uz = d.z / len;
 
-        float r = _skull_radius(p, ux, uy, uz);
+        float r = _skull_radius__rig_dup_71e50793(p, ux, uy, uz);
 
         /* Proyecto el vértice a la superficie craneal */
         v->pos.x = center.x + ux * r;
@@ -1654,7 +1656,7 @@ void rig_face_project_to_skull__rig_variant_bbe08e72(RigFaceMesh *mesh) {
     for (rl_u32 i = 0; i < mesh->n_verts; i++) {
         Vec3f pv = mesh->verts[i].pos;
         float r2 = sqrtf(pv.x*pv.x + pv.y*pv.y + pv.z*pv.z);
-        float expected = _skull_radius(p,
+        float expected = _skull_radius__rig_dup_71e50793(p,
             (r2 > 1e-6f ? pv.x/r2 : 0.0f),
             (r2 > 1e-6f ? pv.y/r2 : 0.0f),
             (r2 > 1e-6f ? pv.z/r2 : 0.0f));
@@ -1686,7 +1688,7 @@ int rig_face_engine_demo_main_alt2(int argc, char **argv) {
     printf("[6/6] Material PBR (melanina=%.2f hemo=%.2f)...\n\n",
            p.melanin, p.hemoglobin);
 
-    RigFaceMesh *face = rig_face_create(&p, subdiv);
+    RigFaceMesh *face = rig_face_create__rig_variant_f9c5724f(&p, subdiv);
     if (!face) {
         fprintf(stderr, "ERROR: Arena overflow — reducir subdiv_level\n");
         return 1;
@@ -1715,12 +1717,12 @@ int rig_face_engine_demo_main_alt2(int argc, char **argv) {
     printf("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n");
 
     const char *obj_path = "/data/data/com.termux/files/home/rig_face_output.obj";
-    if (rig_face_export_obj(face, obj_path) == 0) {
+    if (rig_face_export_obj__rig_variant_da1c7683(face, obj_path) == 0) {
         printf("OBJ exportado: %s\n", obj_path);
     }
 
     char glsl_buf[2048];
-    rig_face_export_glsl_uniforms(face, glsl_buf, sizeof(glsl_buf));
+    rig_face_export_glsl_uniforms__rig_variant_fc2e0eca(face, glsl_buf, sizeof(glsl_buf));
     printf("\n%s\n", glsl_buf);
 
     rl_u32 nf = face->n_verts * FLOATS_PER_VERT;
@@ -1729,7 +1731,7 @@ int rig_face_engine_demo_main_alt2(int argc, char **argv) {
     printf("IBO size : %u indices = %.1f KB\n", ni, ni*4.0f/1024.0f);
     printf("Total GPU: %.1f KB\n\n", (nf*4.0f + ni*4.0f) / 1024.0f);
 
-    rig_face_destroy(face);
+    rig_face_destroy__rig_variant_c9b09db2(face);
     printf("Arena liberada. Build: OK\n");
     return 0;
 }

@@ -1,11 +1,13 @@
 /* [SOBERANO] rigdeps/rig_std_base.h eliminado — cubierto por stack noext */
 #include "rig_v17_preamble.h"
 #include "rig_face_v2_bridge.h"
+#include "rig_face_codegen.h"
+#include "rigart_v4_art.h"
 #include "rig_noext_io.h"
 #include "rig_noext_mem.h"
 #include "rig_noext_str.h"
 #include "rig_math.h"
-#include "../include/riglib_math.h"
+
 #include "rig_syscall.h"
 
 #define BRIDGE_PHI        1.6180339887498948482f
@@ -19,7 +21,7 @@ static float  b4_f__rig_variant_7f34e6c8(const char *j, const char *k, float  d)
     const char *p = rl_strstr(j, k);
     if (!p) return d;
     p = rl_strchr(p, ':');
-    return p ? (float)rl_strtod(p+1) : d;
+    return p ? (float)strtod(p+1, NULL) : d;
 }
 static int    b4_i(const char *j, const char *k, int    d)
 {
@@ -62,11 +64,11 @@ int rigart_face_session_v2_init_BR(RIgArtFaceSessionV2 *s)
 {
     if (!s) return 0;
     rl_memset(s, 0, sizeof(*s));
-    const RigFaceArchetype *_def = rig_archetype_get(RIG_ARCH_AGE_YOUNG_25);
+    const RigFaceArchetype *_def = rig_archetype_get__rig_dup_49442146(RIG_ARCH_AGE_YOUNG_25);
     s->params = _def ? _def->params : (RigFaceParams){0};
     s->subdiv_level  = 4;
     s->archetype_id  = -1;
-    rigart_v4_init_result(&s->last_result);
+    rigart_v4_init_result__rig_variant_2c6804ec(&s->last_result);
     return 0;
 }
 
@@ -74,7 +76,7 @@ int rigart_face_session_v2_destroy_BR(RIgArtFaceSessionV2 *s)
 {
     if (!s) return 0;
     if (s->mesh) { rig_face_v2_destroy(s->mesh); s->mesh = NULL; }
-    rigart_v4_free_result(&s->last_result);
+    rigart_v4_free_result__rig_variant_42c478c7(&s->last_result);
     return 0;
 }
 
@@ -178,7 +180,7 @@ int rigart_face_v2_dispatch_BR(WsServer *srv, const char *cmd,
         rig_face_build_vascular_tree(session->mesh);
         session->has_pores = session->has_vascular = true;
 
-        const RigFaceArchetype *arch = rig_archetype_get((RigArchetypeID)arch_id);
+        const RigFaceArchetype *arch = rig_archetype_get__rig_dup_49442146((RigArchetypeID)arch_id);
         rl_snprintf(resp, sizeof(resp),
             "{\"ok\":true,\"cmd\":\"rigart_face_archetype\","
             "\"id\":%d,\"name\":\"%s\","
@@ -242,13 +244,13 @@ int rigart_face_v2_dispatch_BR(WsServer *srv, const char *cmd,
                                                       sizeof(ectx.weights[0])); i++) {
                     while (*arr==' '||*arr==',') arr++;
                     if (*arr==']'||*arr=='\0') break;
-                    ectx.weights[i] = (float)rl_strtod(arr);
+                    ectx.weights[i] = (float)strtod(arr, NULL);
                     while (*arr && *arr!=',' && *arr!=']') arr++;
                 }
             }
         }
 
-        rigart_v4_free_result(&session->last_result);
+        rigart_v4_free_result__rig_variant_42c478c7(&session->last_result);
         int rc = rig_face_v2_expression_blend(&ectx, &session->last_result);
 
         rl_snprintf(resp, sizeof(resp),
@@ -301,7 +303,7 @@ int rigart_face_v2_dispatch_BR(WsServer *srv, const char *cmd,
             return 0;
         }
         char glsl_buf[8192];
-        int rc = rig_codegen_glsl_skin_shader(session->mesh, glsl_buf, sizeof(glsl_buf));
+        int rc = rig_codegen_glsl_skin_shader__rig_dup_1c81da77(session->mesh, glsl_buf, sizeof(glsl_buf));
 
         rl_snprintf(resp, sizeof(resp),
             "{\"ok\":%s,\"cmd\":\"rigart_face_glsl\","
@@ -348,7 +350,7 @@ int rigart_face_v2_dispatch_BR(WsServer *srv, const char *cmd,
         else if (rl_strcmp(target_str, "makefile")   == 0) opt.target = RIG_CODEGEN_MAKEFILE;
         else if (rl_strcmp(target_str, "header")     == 0) opt.target = RIG_CODEGEN_HEADER;
         else if (rl_strcmp(target_str, "markdown")   == 0) opt.target = RIG_CODEGEN_MARKDOWN;
-        else                                            opt.target = RIG_CODEGEN_C11;
+        else                                            opt.target = RIG_CODEGEN_C;
 
         char *buf = rl_malloc(32768);
         if (!buf) {
@@ -357,7 +359,7 @@ int rigart_face_v2_dispatch_BR(WsServer *srv, const char *cmd,
                 "\"error\":\"OOM\"}");
             return 0;
         }
-        int rc = rig_codegen_mesh_v2(session->mesh, &opt, buf, 32768);
+        int rc = rig_codegen_mesh_v2__rig_dup_9a0ca9d5(session->mesh, &opt, buf, 32768);
 
         rl_snprintf(resp, sizeof(resp),
             "{\"ok\":%s,\"cmd\":\"rigart_face_codegen\","
@@ -381,7 +383,7 @@ int rigart_face_v2_dispatch_BR(WsServer *srv, const char *cmd,
 int rigart_renderer_html_v4_BR(const RIgArtRendererCtxV4 *ctx, RigArtResultV4 *out)
 {
     if (!ctx || !out) return -1;
-    rigart_v4_init_result(out);
+    rigart_v4_init_result__rig_variant_2c6804ec(out);
 
     RigArtCompositorCtx comp;
     rl_memset(&comp, 0, sizeof(comp));
@@ -396,8 +398,8 @@ int rigart_renderer_html_v4_BR(const RIgArtRendererCtxV4 *ctx, RigArtResultV4 *o
     comp.enable_vignette  = ctx->show_stats;
 
     RigArtResultV4 comp_res;
-    rigart_v4_init_result(&comp_res);
-    rigart_art_compositor(&comp, &comp_res);
+    rigart_v4_init_result__rig_variant_2c6804ec(&comp_res);
+    rigart_art_compositor__rig_variant_66d1e991(&comp, &comp_res);
 
     RigArtCanvasCtx canvas;
     rl_memset(&canvas, 0, sizeof(canvas));
@@ -415,13 +417,13 @@ int rigart_renderer_html_v4_BR(const RIgArtRendererCtxV4 *ctx, RigArtResultV4 *o
     canvas.layers[0].visible    = true;
 
     RigArtResultV4 canvas_res;
-    rigart_v4_init_result(&canvas_res);
-    rigart_art_canvas_gen(&canvas, &canvas_res);
+    rigart_v4_init_result__rig_variant_2c6804ec(&canvas_res);
+    rigart_art_canvas_gen__rig_variant_e9720543(&canvas, &canvas_res);
 
     char *html = rl_malloc(BRIDGE_HTML_CAP);
     if (!html) {
-        rigart_v4_free_result(&comp_res);
-        rigart_v4_free_result(&canvas_res);
+        rigart_v4_free_result__rig_variant_42c478c7(&comp_res);
+        rigart_v4_free_result__rig_variant_42c478c7(&canvas_res);
         rl_snprintf(out->error, 255, "OOM renderer html v4");
         return -1;
     }
@@ -634,8 +636,8 @@ int rigart_renderer_html_v4_BR(const RIgArtRendererCtxV4 *ctx, RigArtResultV4 *o
 
     if (pos <= 0 || pos >= BRIDGE_HTML_CAP) {
         rl_free(html);
-        rigart_v4_free_result(&comp_res);
-        rigart_v4_free_result(&canvas_res);
+        rigart_v4_free_result__rig_variant_42c478c7(&comp_res);
+        rigart_v4_free_result__rig_variant_42c478c7(&canvas_res);
         rl_snprintf(out->error, 255, "renderer_html_v4: buffer overflow");
         return -1;
     }
@@ -645,7 +647,7 @@ int rigart_renderer_html_v4_BR(const RIgArtRendererCtxV4 *ctx, RigArtResultV4 *o
     out->certeza = BRIDGE_PHI_INV;
     out->phi_ratio = BRIDGE_PHI;
 
-    rigart_v4_free_result(&comp_res);
-    rigart_v4_free_result(&canvas_res);
+    rigart_v4_free_result__rig_variant_42c478c7(&comp_res);
+    rigart_v4_free_result__rig_variant_42c478c7(&canvas_res);
     return 0;
 }

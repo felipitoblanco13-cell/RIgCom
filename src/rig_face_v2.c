@@ -13,7 +13,7 @@
 #include "rig_noext_mem.h"
 #include "rig_noext_str.h"
 #include "rig_math.h"
-#include "../include/riglib_math.h"
+
 #include "rig_noext_io.h"
 #include "rig_syscall.h"
 #define V2_PHI          1.6180339887498948482f
@@ -90,7 +90,7 @@ RigFaceMeshV2 *rig_face_v2_create(const RigFaceParams *params,
 RigFaceMeshV2 *rig_face_v2_from_archetype(RigArchetypeID id)
 {
     if ((int)id < 0 || id >= RIG_ARCH_COUNT) return NULL;
-    const RigFaceArchetype *arch = rig_archetype_get(id);
+    const RigFaceArchetype *arch = rig_archetype_get__rig_dup_49442146(id);
     if (!arch) return NULL;
     uint32_t subdiv = (id >= 22) ? 5 : 4;
     RigFaceMeshV2 *m = rig_face_v2_create(&arch->params, subdiv);
@@ -113,9 +113,9 @@ RigFaceMeshV2 *rig_face_v2_from_archetype(RigArchetypeID id)
                         ? arch->phi_reference : V2_PHI_INV;
     return m;
 }
-void rig_face_v2_destroy(RigFaceMeshV2 *m)
+int rig_face_v2_destroy(RigFaceMeshV2 *m)
 {
-    if (!m) return;
+    if (!m) return 0;
     free(m->pore_normal_map);
     free(m->vascular_map);
     free(m->wrinkle_normal_map);
@@ -129,15 +129,15 @@ void rig_face_v2_destroy(RigFaceMeshV2 *m)
     memset(m, 0, sizeof(*m));
     free(m);
 }
-void rig_face_build_pore_system(RigFaceMeshV2 *m, float density_scale)
+int rig_face_build_pore_system(RigFaceMeshV2 *m, float density_scale)
 {
-    if (!m || density_scale <= 0.0f) return;
+    if (!m || density_scale <= 0.0f) return 0;
     uint32_t w = 512, h = 512;
     m->texture_width  = w;
     m->texture_height = h;
     free(m->pore_normal_map);
     m->pore_normal_map = (uint8_t*)calloc(w * h * 4, 1);
-    if (!m->pore_normal_map) return;
+    if (!m->pore_normal_map) return 0;
     float pore_radius = (0.008f / density_scale);
     float cell_size   = pore_radius * (float)w;
     for (uint32_t y = 0; y < h; y++) {
@@ -177,16 +177,16 @@ void rig_face_build_pore_system(RigFaceMeshV2 *m, float density_scale)
     }
     (void)cell_size;
 }
-void rig_face_build_vascular_tree(RigFaceMeshV2 *m)
+int rig_face_build_vascular_tree(RigFaceMeshV2 *m)
 {
-    if (!m) return;
+    if (!m) return 0;
     uint32_t w = 512, h = 512;
     m->texture_width  = m->texture_width  ? m->texture_width  : w;
     m->texture_height = m->texture_height ? m->texture_height : h;
     w = m->texture_width; h = m->texture_height;
     free(m->vascular_map);
     m->vascular_map = (uint8_t*)calloc(w * h * 4, 1);
-    if (!m->vascular_map) return;
+    if (!m->vascular_map) return 0;
     float hemo  = m->base.params.hemoglobin;
     float age   = m->base.params.age_factor;
     for (uint32_t y = 0; y < h; y++) {
@@ -208,10 +208,10 @@ void rig_face_build_vascular_tree(RigFaceMeshV2 *m)
         }
     }
 }
-void rig_face_build_wrinkle_lines(RigFaceMeshV2 *m, float age,
+int rig_face_build_wrinkle_lines(RigFaceMeshV2 *m, float age,
                                    float expression)
 {
-    if (!m) return;
+    if (!m) return 0;
     if (age        < 0.0f) age        = 0.0f;
     if (age        > 1.0f) age        = 1.0f;
     if (expression < 0.0f) expression = 0.0f;
@@ -222,7 +222,7 @@ void rig_face_build_wrinkle_lines(RigFaceMeshV2 *m, float age,
     w = m->texture_width; h = m->texture_height;
     free(m->wrinkle_normal_map);
     m->wrinkle_normal_map = (uint8_t*)calloc(w * h * 4, 1);
-    if (!m->wrinkle_normal_map) return;
+    if (!m->wrinkle_normal_map) return 0;
     float depth = m->base.material.wrinkle_depth > 0.0f
                   ? m->base.material.wrinkle_depth
                   : 0.05f;
@@ -262,14 +262,14 @@ int rig_face_v2_export_vbo(const RigFaceMeshV2 *m,
     if (!vbo && !ibo) return 0;
     return rig_face_export_vbo(&m->base, vbo, ibo, n_floats, n_indices);
 }
-void rig_age_apply_to_mesh(RigFaceMeshV2 *m, float age_years)
+int rig_age_apply_to_mesh(RigFaceMeshV2 *m, float age_years)
 {
-    if (!m) return;
+    if (!m) return 0;
     if (age_years <  0.0f) age_years =  0.0f;
     if (age_years > 100.0f) age_years = 100.0f;
-    const RigFaceArchetype *young = rig_archetype_get(RIG_ARCH_AGE_YOUNG_25);
-    const RigFaceArchetype *elder = rig_archetype_get(RIG_ARCH_AGE_ELDER_70);
-    if (!young || !elder) return;
+    const RigFaceArchetype *young = rig_archetype_get__rig_dup_49442146(RIG_ARCH_AGE_YOUNG_25);
+    const RigFaceArchetype *elder = rig_archetype_get__rig_dup_49442146(RIG_ARCH_AGE_ELDER_70);
+    if (!young || !elder) return 0;
     float t = (age_years - 25.0f) / 45.0f;
     t = fmaxf(0.0f, fminf(1.0f, t));
     float t_smooth = t * t * (3.0f - 2.0f * t);
@@ -324,17 +324,17 @@ RigFaceIrisDetail rig_iris_from_params(const RigFaceParams *p)
 {
     return p ? rig_iris_default(p->melanin) : rig_iris_default(0.3f);
 }
-void rig_face_build_iris_geometry(RigFaceMeshV2 *m, bool right)
+int rig_face_build_iris_geometry(RigFaceMeshV2 *m, bool right)
 {
-    if (!m) return;
+    if (!m) return 0;
     RigFaceIrisDetail *ir = right ? &m->iris_right : &m->iris_left;
     ir->pupil_radius = fmaxf(0.20f, fminf(0.60f, ir->pupil_radius));
     (void)right;
 }
-void rig_face_bake_iris_texture(const RigFaceIrisDetail *iris,
+int rig_face_bake_iris_texture(const RigFaceIrisDetail *iris,
                                  uint8_t *out_rgba, uint32_t w, uint32_t h)
 {
-    if (!iris || !out_rgba) return;
+    if (!iris || !out_rgba) return 0;
     for (uint32_t y = 0; y < h; y++) {
         for (uint32_t x = 0; x < w; x++) {
             float u  = (float)x / (float)w * 2.0f - 1.0f;
@@ -360,9 +360,9 @@ void rig_face_bake_iris_texture(const RigFaceIrisDetail *iris,
         }
     }
 }
-void rig_iris_set_pupil_dilation(RigFaceIrisDetail *iris, float lux)
+int rig_iris_set_pupil_dilation(RigFaceIrisDetail *iris, float lux)
 {
-    if (!iris) return;
+    if (!iris) return 0;
     float dil = 0.60f - lux * 0.35f;
     iris->pupil_radius = fmaxf(1.0f, fminf(5.5f, dil * 6.5f));
 }
@@ -380,9 +380,9 @@ RigFaceEarParams rig_ear_default_params(bool is_right)
     e.is_right        = is_right;
     return e;
 }
-void rig_face_build_ear_geometry(RigFaceMeshV2 *m, bool right)
+int rig_face_build_ear_geometry(RigFaceMeshV2 *m, bool right)
 {
-    if (!m) return;
+    if (!m) return 0;
     RigFaceEarParams *ep = right ? &m->ear_right_params : &m->ear_left_params;
     uint32_t n_verts = 128, n_tris = 220;
     RigFaceVertex **pverts = right ? &m->ear_right_verts : &m->ear_left_verts;
@@ -392,7 +392,7 @@ void rig_face_build_ear_geometry(RigFaceMeshV2 *m, bool right)
     free(*pverts); free(*ptris);
     *pverts = (RigFaceVertex*)calloc(n_verts, sizeof(RigFaceVertex));
     *ptris  = (RigFaceTri*)   calloc(n_tris,  sizeof(RigFaceTri));
-    if (!*pverts || !*ptris) return;
+    if (!*pverts || !*ptris) return 0;
     *pnv = n_verts; *pnt = n_tris;
     float sign = right ? 1.0f : -1.0f;
     float lx   = sign * (m->base.params.cranium_width * 0.5f + 0.5f);
@@ -417,9 +417,9 @@ void rig_face_build_ear_geometry(RigFaceMeshV2 *m, bool right)
     }
     (void)ep;
 }
-void rig_face_attach_ears(RigFaceMeshV2 *m)
+int rig_face_attach_ears(RigFaceMeshV2 *m)
 {
-    if (!m) return;
+    if (!m) return 0;
     if (!m->ear_left_verts)  rig_face_build_ear_geometry(m, false);
     if (!m->ear_right_verts) rig_face_build_ear_geometry(m, true);
 }
@@ -439,9 +439,9 @@ RigFaceLipDetail rig_lip_default_params(float gender_factor)
     lip.mucosal_visibility   = 0.30f + (1.0f - gender_factor) * 0.20f;
     return lip;
 }
-void rig_face_sculpt_lips_v2(RigFaceMeshV2 *m)
+int rig_face_sculpt_lips_v2(RigFaceMeshV2 *m)
 {
-    if (!m || !m->base.verts) return;
+    if (!m || !m->base.verts) return 0;
     const RigFaceLipDetail *lip = &m->lip;
     float my = -(m->base.params.lower_third * 0.3f);
     for (uint32_t i = 0; i < m->base.n_verts; i++) {
@@ -455,10 +455,10 @@ void rig_face_sculpt_lips_v2(RigFaceMeshV2 *m)
         }
     }
 }
-void rig_face_bake_lip_color_map(const RigFaceMeshV2 *m,
+int rig_face_bake_lip_color_map(const RigFaceMeshV2 *m,
                                   uint8_t *out_rgba, uint32_t w, uint32_t h)
 {
-    if (!m || !out_rgba) return;
+    if (!m || !out_rgba) return 0;
     const RigFaceLipDetail *lip = &m->lip;
     for (uint32_t y = 0; y < h; y++) {
         for (uint32_t x = 0; x < w; x++) {
@@ -500,17 +500,17 @@ RigFaceParams rig_age_interpolate(const RigAgeProgression *prog, float age)
     p.age_factor = fmaxf(0.0f, fminf(1.0f, p.age_factor + t * 0.5f));
     return p;
 }
-void rig_face_bake_pore_normal_map(RigFaceMeshV2 *m, uint32_t w, uint32_t h)
+int rig_face_bake_pore_normal_map(RigFaceMeshV2 *m, uint32_t w, uint32_t h)
 {
     m->texture_width = w; m->texture_height = h;
     rig_face_build_pore_system(m, 1.0f);
 }
-void rig_face_bake_vascular_map(RigFaceMeshV2 *m, uint32_t w, uint32_t h)
+int rig_face_bake_vascular_map(RigFaceMeshV2 *m, uint32_t w, uint32_t h)
 {
     m->texture_width = w; m->texture_height = h;
     rig_face_build_vascular_tree(m);
 }
-void rig_face_bake_wrinkle_normal_map(RigFaceMeshV2 *m, uint32_t w, uint32_t h)
+int rig_face_bake_wrinkle_normal_map(RigFaceMeshV2 *m, uint32_t w, uint32_t h)
 {
     m->texture_width = w; m->texture_height = h;
     rig_face_build_wrinkle_lines(m, m->base.params.age_factor, 0.0f);
@@ -565,7 +565,6 @@ int rig_face_v2_export_obj(const RigFaceMeshV2 *m, const char *path)
 #include "rig_noext_mem.h"
 #include "rig_noext_str.h"
 #include "../include/rig_face_engine_v2.h"
-#include "../include/rig_math.h"
 /* Hash pseudo-aleatorio determinista para sampling */
 static float _hash2(uint32_t seed, uint32_t idx) {
     uint32_t h = seed ^ (idx * 2654435761u);
@@ -603,12 +602,12 @@ static uint8_t _vertex_region(const RigFaceVertex *v) {
 }
 /* RIGCOM_PUBLIC_STATIC_EXPORT_BEGIN: _vertex_region -> rigpub_rig_face_engine_v2__vertex_region */
 /* RIGCOM_PUBLIC_STATIC_EXPORT_END */
-void rig_face_build_follicle_map(RigFaceMeshV2 *mesh,
+int rig_face_build_follicle_map(RigFaceMeshV2 *mesh,
                                    const RigHairRegionParams *hair) {
-    if (!mesh || !hair) return;
+    if (!mesh || !hair) return 0;
     /* Acceso a la malla base */
     RigFaceMesh *base = &mesh->base;
-    if (!base->verts || base->n_verts == 0) return;
+    if (!base->verts || base->n_verts == 0) return 0;
     /* Limpiar folículos existentes */
     mesh->microdetail.n_follicles = 0;
     uint32_t n_placed = 0;
@@ -685,7 +684,7 @@ void rig_face_build_follicle_map(RigFaceMeshV2 *mesh,
                 fo->diameter = hr->diameter * (0.9f + 0.2f * _hash2(seed, n_placed));
                 fo->length   = hr->length   * (0.85f + 0.3f * _hash2(seed + 1, n_placed));
                 fo->curl     = hr->curl_radius;
-                fo->melanin  = hr->melanin_eu + hr->melanin_ph * 0.5f;
+                fo->melanin  = hr->melanin_eu + hr->melanin_phe * 0.5f;
                 fo->region   = (uint8_t)reg;
                 n_placed++;
                 placed = true;
@@ -711,7 +710,7 @@ void rig_face_build_follicle_map(RigFaceMeshV2 *mesh,
 #include "rig_noext_mem.h"
 #include "rig_noext_str.h"
 #include "rig_math.h"
-#include "../include/riglib_math.h"
+
 #include "rig_syscall.h"
 #ifndef RIG_PI
 #define RIG_PI          3.14159265358979323846
@@ -1454,7 +1453,7 @@ int rig_face_v2_anim_fsm(const RigFaceAnimCtx *ctx, RigArtResultV4 *out)
         "    this.facs[%d] = Math.max(this.facs[%d], breath*0.08*%.3f);\n"
         "  }\n\n"
         "  _updateLookAt(dt) {\n"
-        "    if(!this.lookAt) return;\n"
+        "    if(!this.lookAt) return 0;\n"
         "    const dx = this.lookAt[0] - this.eyeRotX;\n"
         "    const dy = this.lookAt[1] - this.eyeRotY;\n"
         "    this.eyeRotX += dx * this.lookSpeed * dt * this.eyeLead;\n"
@@ -2244,7 +2243,7 @@ int rig_face_v2_expression_blend(const RigFaceExprCtx *ctx, RigArtResultV4 *out)
     FA(js, jsz, jp,
         "function rigApplyExpression(facs, emotion_name, weight) {\n"
         "  const em = RIG_COMPOUND_EMOTIONS[emotion_name];\n"
-        "  if(!em) return;\n"
+        "  if(!em) return 0;\n"
         "  em.au.forEach((au,i) => {\n"
         "    facs[au] = Math.min(1., facs[au] + em.w[i]*weight);\n"
         "  });\n"
@@ -2331,7 +2330,7 @@ int rig_face_v2_phoneme_blend(const RigFacePhonemeCtx *ctx, RigArtResultV4 *out)
         "};\n\n"
         "function rigApplyViseme(facs, viseme_name, intensity) {\n"
         "  const vm = RIG_VISEME_MAP[viseme_name];\n"
-        "  if(!vm) return;\n"
+        "  if(!vm) return 0;\n"
         "  vm.au.forEach((au,i) => { facs[au] = Math.min(1., vm.w[i]*intensity); });\n"
         "}\n\n"
         "function rigBlendVisemes(facs, curr, next, t, intensity) {\n"
@@ -2343,7 +2342,7 @@ int rig_face_v2_phoneme_blend(const RigFacePhonemeCtx *ctx, RigArtResultV4 *out)
         "}\n\n"
         "// Co-articulation: anticipa el siguiente fonema (Anticipation Time=%.1fms)\n"
         "function rigCoArticulate(facs, phoneme_queue, t, intensity) {\n"
-        "  if(!phoneme_queue || phoneme_queue.length < 2) return;\n"
+        "  if(!phoneme_queue || phoneme_queue.length < 2) return 0;\n"
         "  const curr = phoneme_queue[0], next = phoneme_queue[1];\n"
         "  const blend = Math.min(1., t / %.4f);\n"
         "  rigBlendVisemes(facs, curr, next, blend*0.3, intensity);\n"
@@ -2677,7 +2676,7 @@ int rig_face_v2_assembly(const RigFaceAssemblyCtx *ctx, RigArtResultV4 *out)
         "      this.canvas.setPointerCapture(e.pointerId);\n"
         "    });\n"
         "    this.canvas.addEventListener('pointermove', e=>{\n"
-        "      if(!this.touching) return;\n"
+        "      if(!this.touching) return 0;\n"
         "      this.rot_y += (e.clientX-lastX)*0.008;\n"
         "      this.rot_x += (e.clientY-lastY)*0.006;\n"
         "      this.rot_x = Math.max(-1.1,Math.min(1.1,this.rot_x));\n"
@@ -2814,7 +2813,7 @@ int rig_face_v2_assembly(const RigFaceAssemblyCtx *ctx, RigArtResultV4 *out)
         "    passes.forEach(pass => {\n"
         "      const prog = this.programs[pass];\n"
         "      const buf  = this.buffers[pass];\n"
-        "      if(!prog || !buf) return;\n"
+        "      if(!prog || !buf) return 0;\n"
         "      gl.useProgram(prog);\n"
         "      this.setUniforms(prog);\n"
         "      gl.bindVertexArray(buf.vao);\n"
@@ -2932,11 +2931,13 @@ int rig_face_v2_assembly(const RigFaceAssemblyCtx *ctx, RigArtResultV4 *out)
 /* [SOBERANO] rigdeps/rig_std_base.h eliminado — cubierto por stack noext */
 #include "rig_v17_preamble.h"
 #include "rig_face_v2_bridge.h"
+#include "rig_face_codegen.h"
+#include "rigart_v4_art.h"
 #include "rig_noext_io.h"
 #include "rig_noext_mem.h"
 #include "rig_noext_str.h"
 #include "rig_math.h"
-#include "../include/riglib_math.h"
+
 #include "rig_syscall.h"
 #define BRIDGE_PHI        1.6180339887498948482f
 #define BRIDGE_PHI_INV    0.6180339887498948482f
@@ -2976,17 +2977,17 @@ static int    b4_b(const char *j, const char *k, int    d)
 }
 /* RIGCOM_PUBLIC_STATIC_EXPORT_BEGIN: b4_b -> rigpub_rig_face_v2_bridge_b4_b */
 /* RIGCOM_PUBLIC_STATIC_EXPORT_END */
-static void   b4_str(const char *j, const char *k, char *out, size_t sz)
+static int   b4_str(const char *j, const char *k, char *out, size_t sz)
 {
-    if (!j || !out || !sz) return;
+    if (!j || !out || !sz) return 0;
     const char *p = strstr(j, k);
-    if (!p) return;
+    if (!p) return 0;
     p = strchr(p, '"');
-    if (!p) return;
+    if (!p) return 0;
     p = strchr(p+1, '"');
-    if (!p) return;
+    if (!p) return 0;
     p = strchr(p+1, '"');
-    if (!p) return;
+    if (!p) return 0;
     p++;
     size_t i = 0;
     while (*p && *p != '"' && i < sz-1) out[i++] = *p++;
@@ -2994,27 +2995,27 @@ static void   b4_str(const char *j, const char *k, char *out, size_t sz)
 }
 /* RIGCOM_PUBLIC_STATIC_EXPORT_BEGIN: b4_str -> rigpub_rig_face_v2_bridge_b4_str */
 /* RIGCOM_PUBLIC_STATIC_EXPORT_END */
-void rigart_face_session_v2_init(RIgArtFaceSessionV2 *s)
+int rigart_face_session_v2_init(RIgArtFaceSessionV2 *s)
 {
-    if (!s) return;
+    if (!s) return 0;
     memset(s, 0, sizeof(*s));
-    const RigFaceArchetype *_def = rig_archetype_get(RIG_ARCH_AGE_YOUNG_25);
+    const RigFaceArchetype *_def = rig_archetype_get__rig_dup_49442146(RIG_ARCH_AGE_YOUNG_25);
     s->params = _def ? _def->params : (RigFaceParams){0};
     s->subdiv_level  = 4;
     s->archetype_id  = -1;
-    rigart_v4_init_result(&s->last_result);
+    rigart_v4_init_result__rig_variant_2c6804ec(&s->last_result);
 }
-void rigart_face_session_v2_destroy(RIgArtFaceSessionV2 *s)
+int rigart_face_session_v2_destroy(RIgArtFaceSessionV2 *s)
 {
-    if (!s) return;
+    if (!s) return 0;
     if (s->mesh) { rig_face_v2_destroy(s->mesh); s->mesh = NULL; }
-    rigart_v4_free_result(&s->last_result);
+    rigart_v4_free_result__rig_variant_42c478c7(&s->last_result);
 }
-void rigart_face_v2_dispatch(WsServer *srv, const char *cmd,
+int rigart_face_v2_dispatch(WsServer *srv, const char *cmd,
                               const char *payload,
                               RIgArtFaceSessionV2 *session)
 {
-    if (!cmd || !session) return;
+    if (!cmd || !session) return 0;
     char resp[4096];
     if (strcmp(cmd, "rigart_face_build") == 0)
     {
@@ -3052,7 +3053,7 @@ void rigart_face_v2_dispatch(WsServer *srv, const char *cmd,
                 "{\"ok\":false,\"cmd\":\"rigart_face_build\","
                 "\"error\":\"rig_face_v2_create falló — reducir subdiv\"}");
             ws_broadcastf(srv, "%s", resp);
-            return;
+            return 0;
         }
         if (build_pores) {
             rig_face_build_pore_system(session->mesh, 1.0f);
@@ -3079,7 +3080,7 @@ void rigart_face_v2_dispatch(WsServer *srv, const char *cmd,
             session->mesh->base.phi_error,
             (double)BRIDGE_PHI_INV);
         ws_broadcastf(srv, "%s", resp);
-        return;
+        return 0;
     }
     if (strcmp(cmd, "rigart_face_archetype") == 0)
     {
@@ -3093,12 +3094,12 @@ void rigart_face_v2_dispatch(WsServer *srv, const char *cmd,
                 "{\"ok\":false,\"cmd\":\"rigart_face_archetype\","
                 "\"error\":\"arquetipo %d no encontrado\"}", arch_id);
             ws_broadcastf(srv, "%s", resp);
-            return;
+            return 0;
         }
         rig_face_build_pore_system(session->mesh, 1.0f);
         rig_face_build_vascular_tree(session->mesh);
         session->has_pores = session->has_vascular = true;
-        const RigFaceArchetype *arch = rig_archetype_get((RigArchetypeID)arch_id);
+        const RigFaceArchetype *arch = rig_archetype_get__rig_dup_49442146((RigArchetypeID)arch_id);
         snprintf(resp, sizeof(resp),
             "{\"ok\":true,\"cmd\":\"rigart_face_archetype\","
             "\"id\":%d,\"name\":\"%s\","
@@ -3111,7 +3112,7 @@ void rigart_face_v2_dispatch(WsServer *srv, const char *cmd,
             arch ? arch->phi_reference : BRIDGE_PHI,
             (double)BRIDGE_PHI_INV);
         ws_broadcastf(srv, "%s", resp);
-        return;
+        return 0;
     }
     if (strcmp(cmd, "rigart_face_age") == 0)
     {
@@ -3120,7 +3121,7 @@ void rigart_face_v2_dispatch(WsServer *srv, const char *cmd,
                 "{\"ok\":false,\"cmd\":\"rigart_face_age\","
                 "\"error\":\"no mesh — build o archetype primero\"}");
             ws_broadcastf(srv, "%s", resp);
-            return;
+            return 0;
         }
         float age = b4_f(payload, "\"age\"", 25.0f);
         if (age < 0.0f)   age = 0.0f;
@@ -3133,7 +3134,7 @@ void rigart_face_v2_dispatch(WsServer *srv, const char *cmd,
             "\"age\":%.1f,\"verts\":%u,\"certeza\":%.6f}",
             age, session->mesh->base.n_verts, (double)BRIDGE_PHI_INV);
         ws_broadcastf(srv, "%s", resp);
-        return;
+        return 0;
     }
     if (strcmp(cmd, "rigart_face_expression") == 0)
     {
@@ -3142,7 +3143,7 @@ void rigart_face_v2_dispatch(WsServer *srv, const char *cmd,
                 "{\"ok\":false,\"cmd\":\"rigart_face_expression\","
                 "\"error\":\"no mesh — build primero\"}");
             ws_broadcastf(srv, "%s", resp);
-            return;
+            return 0;
         }
         RigFaceExprCtx ectx;
         memset(&ectx, 0, sizeof(ectx));
@@ -3160,7 +3161,7 @@ void rigart_face_v2_dispatch(WsServer *srv, const char *cmd,
                 }
             }
         }
-        rigart_v4_free_result(&session->last_result);
+        rigart_v4_free_result__rig_variant_42c478c7(&session->last_result);
         int rc = rig_face_v2_expression_blend(&ectx, &session->last_result);
         snprintf(resp, sizeof(resp),
             "{\"ok\":%s,\"cmd\":\"rigart_face_expression\","
@@ -3170,7 +3171,7 @@ void rigart_face_v2_dispatch(WsServer *srv, const char *cmd,
             (session->last_result.glsl_vert ? "true" : "false"),
             (double)BRIDGE_PHI_INV);
         ws_broadcastf(srv, "%s", resp);
-        return;
+        return 0;
     }
     if (strcmp(cmd, "rigart_face_vbo") == 0)
     {
@@ -3179,7 +3180,7 @@ void rigart_face_v2_dispatch(WsServer *srv, const char *cmd,
                 "{\"ok\":false,\"cmd\":\"rigart_face_vbo\","
                 "\"error\":\"no mesh — build primero\"}");
             ws_broadcastf(srv, "%s", resp);
-            return;
+            return 0;
         }
         uint32_t n_floats = 0, n_indices = 0;
         rig_face_v2_export_vbo(session->mesh, NULL, NULL, &n_floats, &n_indices);
@@ -3196,7 +3197,7 @@ void rigart_face_v2_dispatch(WsServer *srv, const char *cmd,
             (session->has_pores || session->has_vascular) ? "true" : "false",
             (double)BRIDGE_PHI_INV);
         ws_broadcastf(srv, "%s", resp);
-        return;
+        return 0;
     }
     if (strcmp(cmd, "rigart_face_glsl") == 0)
     {
@@ -3205,10 +3206,10 @@ void rigart_face_v2_dispatch(WsServer *srv, const char *cmd,
                 "{\"ok\":false,\"cmd\":\"rigart_face_glsl\","
                 "\"error\":\"no mesh — build primero\"}");
             ws_broadcastf(srv, "%s", resp);
-            return;
+            return 0;
         }
         char glsl_buf[8192];
-        int rc = rig_codegen_glsl_skin_shader(session->mesh, glsl_buf, sizeof(glsl_buf));
+        int rc = rig_codegen_glsl_skin_shader__rig_dup_1c81da77(session->mesh, glsl_buf, sizeof(glsl_buf));
         snprintf(resp, sizeof(resp),
             "{\"ok\":%s,\"cmd\":\"rigart_face_glsl\","
             "\"melanin\":%.4f,\"roughness\":%.4f,"
@@ -3226,7 +3227,7 @@ void rigart_face_v2_dispatch(WsServer *srv, const char *cmd,
             (double)BRIDGE_PHI_INV);
         ws_broadcastf(srv, "%s", resp);
         if (rc >= 0) ws_broadcastf(srv, "%s", glsl_buf);
-        return;
+        return 0;
     }
     if (strcmp(cmd, "rigart_face_codegen") == 0)
     {
@@ -3235,7 +3236,7 @@ void rigart_face_v2_dispatch(WsServer *srv, const char *cmd,
                 "{\"ok\":false,\"cmd\":\"rigart_face_codegen\","
                 "\"error\":\"no mesh — build o archetype primero\"}");
             ws_broadcastf(srv, "%s", resp);
-            return;
+            return 0;
         }
         char target_str[32] = "c11";
         b4_str(payload, "\"target\"", target_str, sizeof(target_str));
@@ -3250,15 +3251,15 @@ void rigart_face_v2_dispatch(WsServer *srv, const char *cmd,
         else if (strcmp(target_str, "makefile")   == 0) opt.target = RIG_CODEGEN_MAKEFILE;
         else if (strcmp(target_str, "header")     == 0) opt.target = RIG_CODEGEN_HEADER;
         else if (strcmp(target_str, "markdown")   == 0) opt.target = RIG_CODEGEN_MARKDOWN;
-        else                                            opt.target = RIG_CODEGEN_C11;
+        else                                            opt.target = RIG_CODEGEN_C;
         char *buf = malloc(32768);
         if (!buf) {
             ws_broadcastf(srv,
                 "{\"ok\":false,\"cmd\":\"rigart_face_codegen\","
                 "\"error\":\"OOM\"}");
-            return;
+            return 0;
         }
-        int rc = rig_codegen_mesh_v2(session->mesh, &opt, buf, 32768);
+        int rc = rig_codegen_mesh_v2__rig_dup_9a0ca9d5(session->mesh, &opt, buf, 32768);
         snprintf(resp, sizeof(resp),
             "{\"ok\":%s,\"cmd\":\"rigart_face_codegen\","
             "\"target\":\"%s\",\"bytes\":%d,\"certeza\":%.6f}",
@@ -3268,7 +3269,7 @@ void rigart_face_v2_dispatch(WsServer *srv, const char *cmd,
         ws_broadcastf(srv, "%s", resp);
         if (rc >= 0) ws_broadcastf(srv, "%s", buf);
         free(buf);
-        return;
+        return 0;
     }
     snprintf(resp, sizeof(resp),
         "{\"ok\":false,\"cmd\":\"%s\",\"error\":\"comando face desconocido\"}",
@@ -3278,7 +3279,7 @@ void rigart_face_v2_dispatch(WsServer *srv, const char *cmd,
 int rigart_renderer_html_v4(const RIgArtRendererCtxV4 *ctx, RigArtResultV4 *out)
 {
     if (!ctx || !out) return -1;
-    rigart_v4_init_result(out);
+    rigart_v4_init_result__rig_variant_2c6804ec(out);
     RigArtCompositorCtx comp;
     memset(&comp, 0, sizeof(comp));
     comp.exposure         = ctx->exposure > 0.0f ? ctx->exposure : 1.0f;
@@ -3291,8 +3292,8 @@ int rigart_renderer_html_v4(const RIgArtRendererCtxV4 *ctx, RigArtResultV4 *out)
     comp.tonemapping_aces = true;
     comp.enable_vignette  = ctx->show_stats;
     RigArtResultV4 comp_res;
-    rigart_v4_init_result(&comp_res);
-    rigart_art_compositor(&comp, &comp_res);
+    rigart_v4_init_result__rig_variant_2c6804ec(&comp_res);
+    rigart_art_compositor__rig_variant_66d1e991(&comp, &comp_res);
     RigArtCanvasCtx canvas;
     memset(&canvas, 0, sizeof(canvas));
     canvas.width           = 1280;
@@ -3308,12 +3309,12 @@ int rigart_renderer_html_v4(const RIgArtRendererCtxV4 *ctx, RigArtResultV4 *out)
     canvas.layers[0].opacity    = 1.0f;
     canvas.layers[0].visible    = true;
     RigArtResultV4 canvas_res;
-    rigart_v4_init_result(&canvas_res);
-    rigart_art_canvas_gen(&canvas, &canvas_res);
+    rigart_v4_init_result__rig_variant_2c6804ec(&canvas_res);
+    rigart_art_canvas_gen__rig_variant_e9720543(&canvas, &canvas_res);
     char *html = malloc(BRIDGE_HTML_CAP);
     if (!html) {
-        rigart_v4_free_result(&comp_res);
-        rigart_v4_free_result(&canvas_res);
+        rigart_v4_free_result__rig_variant_42c478c7(&comp_res);
+        rigart_v4_free_result__rig_variant_42c478c7(&canvas_res);
         snprintf(out->error, 255, "OOM renderer html v4");
         return -1;
     }
@@ -3352,7 +3353,7 @@ int rigart_renderer_html_v4(const RIgArtRendererCtxV4 *ctx, RigArtResultV4 *out)
 "    antialias:true,depth:true,\n"
 "    colorSpace:'%s'\n"
 "  });\n"
-"  if(!gl){document.body.innerHTML='<p style=\"color:#d44\">WebGL2 requerido</p>';return;}\n\n"
+"  if(!gl){document.body.innerHTML='<p style=\"color:#d44\">WebGL2 requerido</p>';return 0;}\n\n"
 "  const VS=`#version 300 es\n"
 "  in vec4 aPos; in vec3 aNorm; in vec2 aUV;\n"
 "  uniform mat4 uMVP; uniform float uTime;\n"
@@ -3417,7 +3418,7 @@ int rigart_renderer_html_v4(const RIgArtRendererCtxV4 *ctx, RigArtResultV4 *out)
 "  const fs=compileShader(gl.FRAGMENT_SHADER,FS);\n"
 "  const prog=gl.createProgram();\n"
 "  gl.attachShader(prog,vs);gl.attachShader(prog,fs);gl.linkProgram(prog);\n"
-"  if(!gl.getProgramParameter(prog,gl.LINK_STATUS)){console.error(gl.getProgramInfoLog(prog));return;}\n\n"
+"  if(!gl.getProgramParameter(prog,gl.LINK_STATUS)){console.error(gl.getProgramInfoLog(prog));return 0;}\n\n"
 "  /* Icosfera φ-paramétrica procedural */\n"
 "  const t=(1.+Math.sqrt(5.))/2.;\n"
 "  const verts=[[-1,t,0],[1,t,0],[-1,-t,0],[1,-t,0],\n"
@@ -3516,8 +3517,8 @@ int rigart_renderer_html_v4(const RIgArtRendererCtxV4 *ctx, RigArtResultV4 *out)
     );
     if (pos <= 0 || pos >= BRIDGE_HTML_CAP) {
         free(html);
-        rigart_v4_free_result(&comp_res);
-        rigart_v4_free_result(&canvas_res);
+        rigart_v4_free_result__rig_variant_42c478c7(&comp_res);
+        rigart_v4_free_result__rig_variant_42c478c7(&canvas_res);
         snprintf(out->error, 255, "renderer_html_v4: buffer overflow");
         return -1;
     }
@@ -3525,7 +3526,7 @@ int rigart_renderer_html_v4(const RIgArtRendererCtxV4 *ctx, RigArtResultV4 *out)
     out->ok      = true;
     out->certeza = BRIDGE_PHI_INV;
     out->phi_ratio = BRIDGE_PHI;
-    rigart_v4_free_result(&comp_res);
-    rigart_v4_free_result(&canvas_res);
+    rigart_v4_free_result__rig_variant_42c478c7(&comp_res);
+    rigart_v4_free_result__rig_variant_42c478c7(&canvas_res);
     return 0;
 }

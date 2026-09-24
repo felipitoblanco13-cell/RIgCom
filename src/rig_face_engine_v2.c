@@ -80,7 +80,7 @@ RigFaceMeshV2 *rig_face_v2_create(const RigFaceParams *params,
 RigFaceMeshV2 *rig_face_v2_from_archetype(RigArchetypeID id)
 {
     if ((int)id < 0 || id >= RIG_ARCH_COUNT) return NULL;
-    const RigFaceArchetype *arch = rig_archetype_get(id);
+    const RigFaceArchetype *arch = rig_archetype_get__rig_dup_49442146(id);
     if (!arch) return NULL;
     uint32_t subdiv = (id >= 22) ? 5 : 4;
     RigFaceMeshV2 *m = rig_face_v2_create(&arch->params, subdiv);
@@ -261,8 +261,8 @@ int rig_age_apply_to_mesh(RigFaceMeshV2 *m, float age_years)
     if (!m) return -1;
     if (age_years <  0.0f) age_years =  0.0f;
     if (age_years > 100.0f) age_years = 100.0f;
-    const RigFaceArchetype *young = rig_archetype_get(RIG_ARCH_AGE_YOUNG_25);
-    const RigFaceArchetype *elder = rig_archetype_get(RIG_ARCH_AGE_ELDER_70);
+    const RigFaceArchetype *young = rig_archetype_get__rig_dup_49442146(RIG_ARCH_AGE_YOUNG_25);
+    const RigFaceArchetype *elder = rig_archetype_get__rig_dup_49442146(RIG_ARCH_AGE_ELDER_70);
     if (!young || !elder) return -1;
     float t = (age_years - 25.0f) / 45.0f;
     t = fmaxf(0.0f, fminf(1.0f, t));
@@ -570,7 +570,6 @@ int rig_face_v2_export_obj(const RigFaceMeshV2 *m, const char *path)
 #include "rig_noext_mem.h"
 #include "rig_noext_str.h"
 #include "../include/rig_face_engine_v2.h"
-#include "../include/rig_math.h"
 /* Hash pseudo-aleatorio determinista para sampling */
 static float _hash2(uint32_t seed, uint32_t idx) {
     uint32_t h = seed ^ (idx * 2654435761u);
@@ -690,7 +689,7 @@ int rig_face_build_follicle_map(RigFaceMeshV2 *mesh,
                 fo->diameter = hr->diameter * (0.9f + 0.2f * _hash2(seed, n_placed));
                 fo->length   = hr->length   * (0.85f + 0.3f * _hash2(seed + 1, n_placed));
                 fo->curl     = hr->curl_radius;
-                fo->melanin  = hr->melanin_eu + hr->melanin_ph * 0.5f;
+                fo->melanin  = hr->melanin_eu + hr->melanin_phe * 0.5f;
                 fo->region   = (uint8_t)reg;
                 n_placed++;
                 placed = true;

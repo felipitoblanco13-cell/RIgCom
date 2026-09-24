@@ -2,8 +2,8 @@
 #include "rig_face_engine_v2.h"
 #include "rig_noext_io.h"
 #include "rig_noext_str.h"
+#include "rig_lib.h"
 #include "rig_math.h"
-#include "../include/riglib_math.h"
 
 #define PARAMS_INIT(_cw,_ch,_cd,_phi,_ut,_mt,_lt,                  \
                     _iod,_ew,_od,_bp,                                \
@@ -121,7 +121,7 @@ static RigFaceLipDetail lip_neutral__rig_dup_8a31f5c7(float gender_factor) {
 static RigFaceArchetype g_archetypes[RIG_ARCH_COUNT];
 static bool             g_archetypes_init = false;
 
-static void init_archetypes__rig_variant_51bb7d47(void)
+static int init_archetypes__rig_variant_51bb7d47(void)
 {
     if (g_archetypes_init) return 0;
     rl_memset(g_archetypes, 0, sizeof(g_archetypes));
@@ -144,10 +144,10 @@ static void init_archetypes__rig_variant_51bb7d47(void)
         .roughness_override = -1.0f,
         .tags = "nordic,european,fair,blond,male,female",
     };
-    g_archetypes[RIG_ARCH_EUROPEAN_NORDIC].iris = iris_blue_green();
-    g_archetypes[RIG_ARCH_EUROPEAN_NORDIC].ear_left  = ear_default(false);
-    g_archetypes[RIG_ARCH_EUROPEAN_NORDIC].ear_right = ear_default(true);
-    g_archetypes[RIG_ARCH_EUROPEAN_NORDIC].lip = lip_neutral(0.5f);
+    g_archetypes[RIG_ARCH_EUROPEAN_NORDIC].iris = iris_blue_green__rig_dup_023855af();
+    g_archetypes[RIG_ARCH_EUROPEAN_NORDIC].ear_left  = ear_default__rig_dup_0a21103c(false);
+    g_archetypes[RIG_ARCH_EUROPEAN_NORDIC].ear_right = ear_default__rig_dup_0a21103c(true);
+    g_archetypes[RIG_ARCH_EUROPEAN_NORDIC].lip = lip_neutral__rig_dup_8a31f5c7(0.5f);
 
     g_archetypes[RIG_ARCH_EUROPEAN_MED] = (RigFaceArchetype){
         .id = RIG_ARCH_EUROPEAN_MED, .category = RIG_ARCHETYPE_CAT_ETHNOGRAPHIC,
@@ -167,10 +167,10 @@ static void init_archetypes__rig_variant_51bb7d47(void)
         .roughness_override = -1.0f,
         .tags = "mediterranean,european,olive,dark_hair,roman,greek",
     };
-    g_archetypes[RIG_ARCH_EUROPEAN_MED].iris = iris_brown_dark();
-    g_archetypes[RIG_ARCH_EUROPEAN_MED].ear_left  = ear_default(false);
-    g_archetypes[RIG_ARCH_EUROPEAN_MED].ear_right = ear_default(true);
-    g_archetypes[RIG_ARCH_EUROPEAN_MED].lip = lip_neutral(0.5f);
+    g_archetypes[RIG_ARCH_EUROPEAN_MED].iris = iris_brown_dark__rig_dup_85216e35();
+    g_archetypes[RIG_ARCH_EUROPEAN_MED].ear_left  = ear_default__rig_dup_0a21103c(false);
+    g_archetypes[RIG_ARCH_EUROPEAN_MED].ear_right = ear_default__rig_dup_0a21103c(true);
+    g_archetypes[RIG_ARCH_EUROPEAN_MED].lip = lip_neutral__rig_dup_8a31f5c7(0.5f);
 
     g_archetypes[RIG_ARCH_EAST_ASIAN] = (RigFaceArchetype){
         .id = RIG_ARCH_EAST_ASIAN, .category = RIG_ARCHETYPE_CAT_ETHNOGRAPHIC,
@@ -190,10 +190,10 @@ static void init_archetypes__rig_variant_51bb7d47(void)
         .roughness_override = -1.0f,
         .tags = "east_asian,chinese,japanese,korean,epicanthic",
     };
-    g_archetypes[RIG_ARCH_EAST_ASIAN].iris = iris_midnight();
-    g_archetypes[RIG_ARCH_EAST_ASIAN].ear_left  = ear_default(false);
-    g_archetypes[RIG_ARCH_EAST_ASIAN].ear_right = ear_default(true);
-    g_archetypes[RIG_ARCH_EAST_ASIAN].lip = lip_neutral(0.5f);
+    g_archetypes[RIG_ARCH_EAST_ASIAN].iris = iris_midnight__rig_dup_1d5bc2b9();
+    g_archetypes[RIG_ARCH_EAST_ASIAN].ear_left  = ear_default__rig_dup_0a21103c(false);
+    g_archetypes[RIG_ARCH_EAST_ASIAN].ear_right = ear_default__rig_dup_0a21103c(true);
+    g_archetypes[RIG_ARCH_EAST_ASIAN].lip = lip_neutral__rig_dup_8a31f5c7(0.5f);
 
     g_archetypes[RIG_ARCH_SOUTH_ASIAN] = (RigFaceArchetype){
         .id = RIG_ARCH_SOUTH_ASIAN, .category = RIG_ARCHETYPE_CAT_ETHNOGRAPHIC,
@@ -213,10 +213,10 @@ static void init_archetypes__rig_variant_51bb7d47(void)
         .roughness_override = -1.0f,
         .tags = "south_asian,indian,pakistani,bengali,dark,large_eyes",
     };
-    g_archetypes[RIG_ARCH_SOUTH_ASIAN].iris = iris_brown_dark();
-    g_archetypes[RIG_ARCH_SOUTH_ASIAN].ear_left  = ear_default(false);
-    g_archetypes[RIG_ARCH_SOUTH_ASIAN].ear_right = ear_default(true);
-    g_archetypes[RIG_ARCH_SOUTH_ASIAN].lip = lip_neutral(0.5f);
+    g_archetypes[RIG_ARCH_SOUTH_ASIAN].iris = iris_brown_dark__rig_dup_85216e35();
+    g_archetypes[RIG_ARCH_SOUTH_ASIAN].ear_left  = ear_default__rig_dup_0a21103c(false);
+    g_archetypes[RIG_ARCH_SOUTH_ASIAN].ear_right = ear_default__rig_dup_0a21103c(true);
+    g_archetypes[RIG_ARCH_SOUTH_ASIAN].lip = lip_neutral__rig_dup_8a31f5c7(0.5f);
 
     g_archetypes[RIG_ARCH_AFRICAN_WEST] = (RigFaceArchetype){
         .id = RIG_ARCH_AFRICAN_WEST, .category = RIG_ARCHETYPE_CAT_ETHNOGRAPHIC,
@@ -236,10 +236,10 @@ static void init_archetypes__rig_variant_51bb7d47(void)
         .roughness_override = -1.0f,
         .tags = "african,west_african,dark,full_lips,broad_nose",
     };
-    g_archetypes[RIG_ARCH_AFRICAN_WEST].iris = iris_midnight();
-    g_archetypes[RIG_ARCH_AFRICAN_WEST].ear_left  = ear_default(false);
-    g_archetypes[RIG_ARCH_AFRICAN_WEST].ear_right = ear_default(true);
-    g_archetypes[RIG_ARCH_AFRICAN_WEST].lip = lip_neutral(0.45f);
+    g_archetypes[RIG_ARCH_AFRICAN_WEST].iris = iris_midnight__rig_dup_1d5bc2b9();
+    g_archetypes[RIG_ARCH_AFRICAN_WEST].ear_left  = ear_default__rig_dup_0a21103c(false);
+    g_archetypes[RIG_ARCH_AFRICAN_WEST].ear_right = ear_default__rig_dup_0a21103c(true);
+    g_archetypes[RIG_ARCH_AFRICAN_WEST].lip = lip_neutral__rig_dup_8a31f5c7(0.45f);
 
     g_archetypes[RIG_ARCH_AFRICAN_EAST] = (RigFaceArchetype){
         .id = RIG_ARCH_AFRICAN_EAST, .category = RIG_ARCHETYPE_CAT_ETHNOGRAPHIC,
@@ -259,10 +259,10 @@ static void init_archetypes__rig_variant_51bb7d47(void)
         .roughness_override = -1.0f,
         .tags = "east_african,ethiopian,somali,narrow_nose,elongated",
     };
-    g_archetypes[RIG_ARCH_AFRICAN_EAST].iris = iris_midnight();
-    g_archetypes[RIG_ARCH_AFRICAN_EAST].ear_left  = ear_default(false);
-    g_archetypes[RIG_ARCH_AFRICAN_EAST].ear_right = ear_default(true);
-    g_archetypes[RIG_ARCH_AFRICAN_EAST].lip = lip_neutral(0.5f);
+    g_archetypes[RIG_ARCH_AFRICAN_EAST].iris = iris_midnight__rig_dup_1d5bc2b9();
+    g_archetypes[RIG_ARCH_AFRICAN_EAST].ear_left  = ear_default__rig_dup_0a21103c(false);
+    g_archetypes[RIG_ARCH_AFRICAN_EAST].ear_right = ear_default__rig_dup_0a21103c(true);
+    g_archetypes[RIG_ARCH_AFRICAN_EAST].lip = lip_neutral__rig_dup_8a31f5c7(0.5f);
 
     g_archetypes[RIG_ARCH_MIDDLE_EASTERN] = (RigFaceArchetype){
         .id = RIG_ARCH_MIDDLE_EASTERN, .category = RIG_ARCHETYPE_CAT_ETHNOGRAPHIC,
@@ -282,10 +282,10 @@ static void init_archetypes__rig_variant_51bb7d47(void)
         .roughness_override = -1.0f,
         .tags = "arab,persian,levantine,strong_nose,almond_eyes,olive",
     };
-    g_archetypes[RIG_ARCH_MIDDLE_EASTERN].iris = iris_brown_dark();
-    g_archetypes[RIG_ARCH_MIDDLE_EASTERN].ear_left  = ear_default(false);
-    g_archetypes[RIG_ARCH_MIDDLE_EASTERN].ear_right = ear_default(true);
-    g_archetypes[RIG_ARCH_MIDDLE_EASTERN].lip = lip_neutral(0.55f);
+    g_archetypes[RIG_ARCH_MIDDLE_EASTERN].iris = iris_brown_dark__rig_dup_85216e35();
+    g_archetypes[RIG_ARCH_MIDDLE_EASTERN].ear_left  = ear_default__rig_dup_0a21103c(false);
+    g_archetypes[RIG_ARCH_MIDDLE_EASTERN].ear_right = ear_default__rig_dup_0a21103c(true);
+    g_archetypes[RIG_ARCH_MIDDLE_EASTERN].lip = lip_neutral__rig_dup_8a31f5c7(0.55f);
 
     g_archetypes[RIG_ARCH_LATIN_AMERICAN] = (RigFaceArchetype){
         .id = RIG_ARCH_LATIN_AMERICAN, .category = RIG_ARCHETYPE_CAT_ETHNOGRAPHIC,
@@ -305,10 +305,10 @@ static void init_archetypes__rig_variant_51bb7d47(void)
         .roughness_override = -1.0f,
         .tags = "latino,mestizo,hispanic,ibero,mixed,brown",
     };
-    g_archetypes[RIG_ARCH_LATIN_AMERICAN].iris = iris_brown_dark();
-    g_archetypes[RIG_ARCH_LATIN_AMERICAN].ear_left  = ear_default(false);
-    g_archetypes[RIG_ARCH_LATIN_AMERICAN].ear_right = ear_default(true);
-    g_archetypes[RIG_ARCH_LATIN_AMERICAN].lip = lip_neutral(0.50f);
+    g_archetypes[RIG_ARCH_LATIN_AMERICAN].iris = iris_brown_dark__rig_dup_85216e35();
+    g_archetypes[RIG_ARCH_LATIN_AMERICAN].ear_left  = ear_default__rig_dup_0a21103c(false);
+    g_archetypes[RIG_ARCH_LATIN_AMERICAN].ear_right = ear_default__rig_dup_0a21103c(true);
+    g_archetypes[RIG_ARCH_LATIN_AMERICAN].lip = lip_neutral__rig_dup_8a31f5c7(0.50f);
 
     g_archetypes[RIG_ARCH_HERO_WARRIOR] = (RigFaceArchetype){
         .id = RIG_ARCH_HERO_WARRIOR, .category = RIG_ARCHETYPE_CAT_CLASSICAL,
@@ -327,10 +327,10 @@ static void init_archetypes__rig_variant_51bb7d47(void)
         .phi_reference = 1.600f,
         .tags = "hero,warrior,masculine,strong,square_jaw,determined",
     };
-    g_archetypes[RIG_ARCH_HERO_WARRIOR].iris = iris_blue_green();
-    g_archetypes[RIG_ARCH_HERO_WARRIOR].ear_left  = ear_default(false);
-    g_archetypes[RIG_ARCH_HERO_WARRIOR].ear_right = ear_default(true);
-    g_archetypes[RIG_ARCH_HERO_WARRIOR].lip = lip_neutral(0.80f);
+    g_archetypes[RIG_ARCH_HERO_WARRIOR].iris = iris_blue_green__rig_dup_023855af();
+    g_archetypes[RIG_ARCH_HERO_WARRIOR].ear_left  = ear_default__rig_dup_0a21103c(false);
+    g_archetypes[RIG_ARCH_HERO_WARRIOR].ear_right = ear_default__rig_dup_0a21103c(true);
+    g_archetypes[RIG_ARCH_HERO_WARRIOR].lip = lip_neutral__rig_dup_8a31f5c7(0.80f);
 
     g_archetypes[RIG_ARCH_SAGE_ELDER] = (RigFaceArchetype){
         .id = RIG_ARCH_SAGE_ELDER, .category = RIG_ARCHETYPE_CAT_CLASSICAL,
@@ -349,10 +349,10 @@ static void init_archetypes__rig_variant_51bb7d47(void)
         .phi_reference = 1.550f,
         .tags = "elder,sage,wise,old,wrinkled,paternal",
     };
-    g_archetypes[RIG_ARCH_SAGE_ELDER].iris = iris_amber_hazel();
-    g_archetypes[RIG_ARCH_SAGE_ELDER].ear_left  = ear_default(false);
-    g_archetypes[RIG_ARCH_SAGE_ELDER].ear_right = ear_default(true);
-    g_archetypes[RIG_ARCH_SAGE_ELDER].lip = lip_neutral(0.75f);
+    g_archetypes[RIG_ARCH_SAGE_ELDER].iris = iris_amber_hazel__rig_dup_e5bb738e();
+    g_archetypes[RIG_ARCH_SAGE_ELDER].ear_left  = ear_default__rig_dup_0a21103c(false);
+    g_archetypes[RIG_ARCH_SAGE_ELDER].ear_right = ear_default__rig_dup_0a21103c(true);
+    g_archetypes[RIG_ARCH_SAGE_ELDER].lip = lip_neutral__rig_dup_8a31f5c7(0.75f);
     g_archetypes[RIG_ARCH_SAGE_ELDER].ear_left.lobule_size = 0.7f;
     g_archetypes[RIG_ARCH_SAGE_ELDER].ear_right.lobule_size = 0.7f;
 
@@ -373,10 +373,10 @@ static void init_archetypes__rig_variant_51bb7d47(void)
         .phi_reference = 1.630f,
         .tags = "noble,aristocrat,refined,high_cheekbones,sharp_nose",
     };
-    g_archetypes[RIG_ARCH_NOBLE_ARISTOCRAT].iris = iris_blue_green();
-    g_archetypes[RIG_ARCH_NOBLE_ARISTOCRAT].ear_left  = ear_default(false);
-    g_archetypes[RIG_ARCH_NOBLE_ARISTOCRAT].ear_right = ear_default(true);
-    g_archetypes[RIG_ARCH_NOBLE_ARISTOCRAT].lip = lip_neutral(0.60f);
+    g_archetypes[RIG_ARCH_NOBLE_ARISTOCRAT].iris = iris_blue_green__rig_dup_023855af();
+    g_archetypes[RIG_ARCH_NOBLE_ARISTOCRAT].ear_left  = ear_default__rig_dup_0a21103c(false);
+    g_archetypes[RIG_ARCH_NOBLE_ARISTOCRAT].ear_right = ear_default__rig_dup_0a21103c(true);
+    g_archetypes[RIG_ARCH_NOBLE_ARISTOCRAT].lip = lip_neutral__rig_dup_8a31f5c7(0.60f);
 
     g_archetypes[RIG_ARCH_VILLAIN_SHARP] = (RigFaceArchetype){
         .id = RIG_ARCH_VILLAIN_SHARP, .category = RIG_ARCHETYPE_CAT_CLASSICAL,
@@ -395,10 +395,10 @@ static void init_archetypes__rig_variant_51bb7d47(void)
         .phi_reference = 1.520f,
         .tags = "villain,antagonist,sharp,angular,asymmetric,sinister",
     };
-    g_archetypes[RIG_ARCH_VILLAIN_SHARP].iris = iris_amber_hazel();
-    g_archetypes[RIG_ARCH_VILLAIN_SHARP].ear_left  = ear_default(false);
-    g_archetypes[RIG_ARCH_VILLAIN_SHARP].ear_right = ear_default(true);
-    g_archetypes[RIG_ARCH_VILLAIN_SHARP].lip = lip_neutral(0.82f);
+    g_archetypes[RIG_ARCH_VILLAIN_SHARP].iris = iris_amber_hazel__rig_dup_e5bb738e();
+    g_archetypes[RIG_ARCH_VILLAIN_SHARP].ear_left  = ear_default__rig_dup_0a21103c(false);
+    g_archetypes[RIG_ARCH_VILLAIN_SHARP].ear_right = ear_default__rig_dup_0a21103c(true);
+    g_archetypes[RIG_ARCH_VILLAIN_SHARP].lip = lip_neutral__rig_dup_8a31f5c7(0.82f);
 
     g_archetypes[RIG_ARCH_ANDROGYNOUS] = (RigFaceArchetype){
         .id = RIG_ARCH_ANDROGYNOUS, .category = RIG_ARCHETYPE_CAT_CLASSICAL,
@@ -417,10 +417,10 @@ static void init_archetypes__rig_variant_51bb7d47(void)
         .phi_reference = 1.610f,
         .tags = "androgynous,neutral,balanced,gender_neutral,ethereal",
     };
-    g_archetypes[RIG_ARCH_ANDROGYNOUS].iris = iris_blue_green();
-    g_archetypes[RIG_ARCH_ANDROGYNOUS].ear_left  = ear_default(false);
-    g_archetypes[RIG_ARCH_ANDROGYNOUS].ear_right = ear_default(true);
-    g_archetypes[RIG_ARCH_ANDROGYNOUS].lip = lip_neutral(0.50f);
+    g_archetypes[RIG_ARCH_ANDROGYNOUS].iris = iris_blue_green__rig_dup_023855af();
+    g_archetypes[RIG_ARCH_ANDROGYNOUS].ear_left  = ear_default__rig_dup_0a21103c(false);
+    g_archetypes[RIG_ARCH_ANDROGYNOUS].ear_right = ear_default__rig_dup_0a21103c(true);
+    g_archetypes[RIG_ARCH_ANDROGYNOUS].lip = lip_neutral__rig_dup_8a31f5c7(0.50f);
 
     g_archetypes[RIG_ARCH_CHILD_ARCHETYPE] = (RigFaceArchetype){
         .id = RIG_ARCH_CHILD_ARCHETYPE, .category = RIG_ARCHETYPE_CAT_CLASSICAL,
@@ -439,10 +439,10 @@ static void init_archetypes__rig_variant_51bb7d47(void)
         .phi_reference = 1.440f,
         .tags = "child,infant,young,cute,round,neoteny",
     };
-    g_archetypes[RIG_ARCH_CHILD_ARCHETYPE].iris = iris_blue_green();
-    g_archetypes[RIG_ARCH_CHILD_ARCHETYPE].ear_left  = ear_default(false);
-    g_archetypes[RIG_ARCH_CHILD_ARCHETYPE].ear_right = ear_default(true);
-    g_archetypes[RIG_ARCH_CHILD_ARCHETYPE].lip = lip_neutral(0.50f);
+    g_archetypes[RIG_ARCH_CHILD_ARCHETYPE].iris = iris_blue_green__rig_dup_023855af();
+    g_archetypes[RIG_ARCH_CHILD_ARCHETYPE].ear_left  = ear_default__rig_dup_0a21103c(false);
+    g_archetypes[RIG_ARCH_CHILD_ARCHETYPE].ear_right = ear_default__rig_dup_0a21103c(true);
+    g_archetypes[RIG_ARCH_CHILD_ARCHETYPE].lip = lip_neutral__rig_dup_8a31f5c7(0.50f);
 
     g_archetypes[RIG_ARCH_SCHOLAR_REFINED] = (RigFaceArchetype){
         .id = RIG_ARCH_SCHOLAR_REFINED, .category = RIG_ARCHETYPE_CAT_CLASSICAL,
@@ -461,10 +461,10 @@ static void init_archetypes__rig_variant_51bb7d47(void)
         .phi_reference = 1.610f,
         .tags = "scholar,intellectual,refined,high_forehead,contemplative",
     };
-    g_archetypes[RIG_ARCH_SCHOLAR_REFINED].iris = iris_blue_green();
-    g_archetypes[RIG_ARCH_SCHOLAR_REFINED].ear_left  = ear_default(false);
-    g_archetypes[RIG_ARCH_SCHOLAR_REFINED].ear_right = ear_default(true);
-    g_archetypes[RIG_ARCH_SCHOLAR_REFINED].lip = lip_neutral(0.70f);
+    g_archetypes[RIG_ARCH_SCHOLAR_REFINED].iris = iris_blue_green__rig_dup_023855af();
+    g_archetypes[RIG_ARCH_SCHOLAR_REFINED].ear_left  = ear_default__rig_dup_0a21103c(false);
+    g_archetypes[RIG_ARCH_SCHOLAR_REFINED].ear_right = ear_default__rig_dup_0a21103c(true);
+    g_archetypes[RIG_ARCH_SCHOLAR_REFINED].lip = lip_neutral__rig_dup_8a31f5c7(0.70f);
 
     g_archetypes[RIG_ARCH_WARRIOR_FEMALE] = (RigFaceArchetype){
         .id = RIG_ARCH_WARRIOR_FEMALE, .category = RIG_ARCHETYPE_CAT_CLASSICAL,
@@ -483,13 +483,13 @@ static void init_archetypes__rig_variant_51bb7d47(void)
         .phi_reference = 1.620f,
         .tags = "female,warrior,strong,angular,feminine,powerful",
     };
-    g_archetypes[RIG_ARCH_WARRIOR_FEMALE].iris = iris_amber_hazel();
-    g_archetypes[RIG_ARCH_WARRIOR_FEMALE].ear_left  = ear_default(false);
-    g_archetypes[RIG_ARCH_WARRIOR_FEMALE].ear_right = ear_default(true);
-    g_archetypes[RIG_ARCH_WARRIOR_FEMALE].lip = lip_neutral(0.25f);
+    g_archetypes[RIG_ARCH_WARRIOR_FEMALE].iris = iris_amber_hazel__rig_dup_e5bb738e();
+    g_archetypes[RIG_ARCH_WARRIOR_FEMALE].ear_left  = ear_default__rig_dup_0a21103c(false);
+    g_archetypes[RIG_ARCH_WARRIOR_FEMALE].ear_right = ear_default__rig_dup_0a21103c(true);
+    g_archetypes[RIG_ARCH_WARRIOR_FEMALE].lip = lip_neutral__rig_dup_8a31f5c7(0.25f);
 
     g_archetypes[RIG_ARCH_AGE_INFANT] = (RigFaceArchetype){
-        .id = RIG_ARCH_AGE_INFANT, .category = RIG_ARCHETYPE_CAT_AGE_STUDY,
+        .id = RIG_ARCH_AGE_INFANT, .category = RIG_ARCHETYPE_CAT_AGE,
         .name = "Age Study: Infant",
         .description = "Neonato: proporciones neoténicas máximas, cráneo 60% de la cara, mejillas pronunciadas.",
         .codename = "age_0",
@@ -507,7 +507,7 @@ static void init_archetypes__rig_variant_51bb7d47(void)
     };
 
     g_archetypes[RIG_ARCH_AGE_CHILD_7] = (RigFaceArchetype){
-        .id = RIG_ARCH_AGE_CHILD_7, .category = RIG_ARCHETYPE_CAT_AGE_STUDY,
+        .id = RIG_ARCH_AGE_CHILD_7, .category = RIG_ARCHETYPE_CAT_AGE,
         .name = "Age Study: Child 7yr",
         .description = "Niño de 7 años: cara en desarrollo, dientes de leche reemplazados, frente amplia, nariz pequeña.",
         .codename = "age_7",
@@ -525,7 +525,7 @@ static void init_archetypes__rig_variant_51bb7d47(void)
     };
 
     g_archetypes[RIG_ARCH_AGE_TEEN_16] = (RigFaceArchetype){
-        .id = RIG_ARCH_AGE_TEEN_16, .category = RIG_ARCHETYPE_CAT_AGE_STUDY,
+        .id = RIG_ARCH_AGE_TEEN_16, .category = RIG_ARCHETYPE_CAT_AGE,
         .name = "Age Study: Teen 16yr",
         .description = "Adolescente 16 años: rasgos en transición adulta, proporciones casi completas, piel con volumen.",
         .codename = "age_16",
@@ -543,7 +543,7 @@ static void init_archetypes__rig_variant_51bb7d47(void)
     };
 
     g_archetypes[RIG_ARCH_AGE_YOUNG_25] = (RigFaceArchetype){
-        .id = RIG_ARCH_AGE_YOUNG_25, .category = RIG_ARCHETYPE_CAT_AGE_STUDY,
+        .id = RIG_ARCH_AGE_YOUNG_25, .category = RIG_ARCHETYPE_CAT_AGE,
         .name = "Age Study: Young Adult 25yr",
         .description = "Adulto joven 25 años: colágeno máximo, proporciones completas, piel sin marcas de tiempo.",
         .codename = "age_25",
@@ -561,7 +561,7 @@ static void init_archetypes__rig_variant_51bb7d47(void)
     };
 
     g_archetypes[RIG_ARCH_AGE_MATURE_45] = (RigFaceArchetype){
-        .id = RIG_ARCH_AGE_MATURE_45, .category = RIG_ARCHETYPE_CAT_AGE_STUDY,
+        .id = RIG_ARCH_AGE_MATURE_45, .category = RIG_ARCHETYPE_CAT_AGE,
         .name = "Age Study: Mature 45yr",
         .description = "Adulto maduro 45 años: surcos nasolabiales, párpado superior con leve ptosis, pérdida de colágeno.",
         .codename = "age_45",
@@ -579,7 +579,7 @@ static void init_archetypes__rig_variant_51bb7d47(void)
     };
 
     g_archetypes[RIG_ARCH_AGE_ELDER_70] = (RigFaceArchetype){
-        .id = RIG_ARCH_AGE_ELDER_70, .category = RIG_ARCHETYPE_CAT_AGE_STUDY,
+        .id = RIG_ARCH_AGE_ELDER_70, .category = RIG_ARCHETYPE_CAT_AGE,
         .name = "Age Study: Elder 70yr",
         .description = "Anciano 70 años: tejido descendido, arrugas profundas, pérdida ósea alveolar, cuello flácido.",
         .codename = "age_70",
@@ -615,10 +615,10 @@ static void init_archetypes__rig_variant_51bb7d47(void)
         .phi_reference = 1.6180339887498948f,
         .tags = "greek,classical,ideal,polykleitos,praxiteles,marble",
     };
-    g_archetypes[RIG_ARCH_GREEK_IDEAL].iris = iris_blue_green();
-    g_archetypes[RIG_ARCH_GREEK_IDEAL].ear_left  = ear_default(false);
-    g_archetypes[RIG_ARCH_GREEK_IDEAL].ear_right = ear_default(true);
-    g_archetypes[RIG_ARCH_GREEK_IDEAL].lip = lip_neutral(0.55f);
+    g_archetypes[RIG_ARCH_GREEK_IDEAL].iris = iris_blue_green__rig_dup_023855af();
+    g_archetypes[RIG_ARCH_GREEK_IDEAL].ear_left  = ear_default__rig_dup_0a21103c(false);
+    g_archetypes[RIG_ARCH_GREEK_IDEAL].ear_right = ear_default__rig_dup_0a21103c(true);
+    g_archetypes[RIG_ARCH_GREEK_IDEAL].lip = lip_neutral__rig_dup_8a31f5c7(0.55f);
 
     g_archetypes[RIG_ARCH_VITRUVIAN_CANON] = (RigFaceArchetype){
         .id = RIG_ARCH_VITRUVIAN_CANON, .category = RIG_ARCHETYPE_CAT_ARTISTIC,
@@ -736,9 +736,9 @@ static void init_archetypes__rig_variant_51bb7d47(void)
         al_iris.crypt_density = 0.1f; al_iris.wolfflin_count = 0.0f; al_iris.furrow_count = 2.0f;
         g_archetypes[RIG_ARCH_ALBINISM].iris = al_iris;
     }
-    g_archetypes[RIG_ARCH_ALBINISM].ear_left  = ear_default(false);
-    g_archetypes[RIG_ARCH_ALBINISM].ear_right = ear_default(true);
-    g_archetypes[RIG_ARCH_ALBINISM].lip = lip_neutral(0.50f);
+    g_archetypes[RIG_ARCH_ALBINISM].ear_left  = ear_default__rig_dup_0a21103c(false);
+    g_archetypes[RIG_ARCH_ALBINISM].ear_right = ear_default__rig_dup_0a21103c(true);
+    g_archetypes[RIG_ARCH_ALBINISM].lip = lip_neutral__rig_dup_8a31f5c7(0.50f);
 
     g_archetypes[RIG_ARCH_VITILIGO] = (RigFaceArchetype){
         .id = RIG_ARCH_VITILIGO, .category = RIG_ARCHETYPE_CAT_SPECIAL,
@@ -757,7 +757,7 @@ static void init_archetypes__rig_variant_51bb7d47(void)
         .phi_reference = 1.600f,
         .tags = "vitiligo,depigmentation,fractal_pattern,clinical,diverse",
     };
-    g_archetypes[RIG_ARCH_VITILIGO].iris = iris_brown_dark();
+    g_archetypes[RIG_ARCH_VITILIGO].iris = iris_brown_dark__rig_dup_85216e35();
 
     g_archetypes[RIG_ARCH_BATTLE_SCARRED] = (RigFaceArchetype){
         .id = RIG_ARCH_BATTLE_SCARRED, .category = RIG_ARCHETYPE_CAT_SPECIAL,
@@ -776,7 +776,7 @@ static void init_archetypes__rig_variant_51bb7d47(void)
         .phi_reference = 1.560f,
         .tags = "scarred,veteran,battle,warrior,character,damaged,cinematic",
     };
-    g_archetypes[RIG_ARCH_BATTLE_SCARRED].iris = iris_amber_hazel();
+    g_archetypes[RIG_ARCH_BATTLE_SCARRED].iris = iris_amber_hazel__rig_dup_e5bb738e();
 
     g_archetypes[RIG_ARCH_NEONATAL] = (RigFaceArchetype){
         .id = RIG_ARCH_NEONATAL, .category = RIG_ARCHETYPE_CAT_SPECIAL,
@@ -813,7 +813,7 @@ static void init_archetypes__rig_variant_51bb7d47(void)
         .phi_reference = 1.6180339887498948f,
         .tags = "apollo,solar,greek,legendary,godlike,serene,phi",
     };
-    g_archetypes[RIG_ARCH_APOLLONIAN].iris = iris_blue_green();
+    g_archetypes[RIG_ARCH_APOLLONIAN].iris = iris_blue_green__rig_dup_023855af();
 
     g_archetypes[RIG_ARCH_MAYAN_CLASSIC] = (RigFaceArchetype){
         .id = RIG_ARCH_MAYAN_CLASSIC, .category = RIG_ARCHETYPE_CAT_LEGENDARY,
@@ -832,7 +832,7 @@ static void init_archetypes__rig_variant_51bb7d47(void)
         .phi_reference = 1.560f,
         .tags = "mayan,mesoamerican,classic,ceremonial,aquiline,pre_columbian",
     };
-    g_archetypes[RIG_ARCH_MAYAN_CLASSIC].iris = iris_midnight();
+    g_archetypes[RIG_ARCH_MAYAN_CLASSIC].iris = iris_midnight__rig_dup_1d5bc2b9();
 
     g_archetypes[RIG_ARCH_RIGADIEL_SOVEREIGN] = (RigFaceArchetype){
         .id = RIG_ARCH_RIGADIEL_SOVEREIGN, .category = RIG_ARCHETYPE_CAT_LEGENDARY,
@@ -855,7 +855,7 @@ static void init_archetypes__rig_variant_51bb7d47(void)
         .phi_reference = 1.6180339887498948f,
         .tags = "rigadiel,sovereign,phi,rigcom,gabriel,negra_maria,richard",
     };
-    g_archetypes[RIG_ARCH_RIGADIEL_SOVEREIGN].iris = iris_amber_hazel();
+    g_archetypes[RIG_ARCH_RIGADIEL_SOVEREIGN].iris = iris_amber_hazel__rig_dup_e5bb738e();
     g_archetypes[RIG_ARCH_RIGADIEL_SOVEREIGN].iris.heterochromia = true;
     g_archetypes[RIG_ARCH_RIGADIEL_SOVEREIGN].iris.secondary_color[0] = 0.35f;
     g_archetypes[RIG_ARCH_RIGADIEL_SOVEREIGN].iris.secondary_color[1] = 0.58f;
@@ -883,16 +883,16 @@ static void init_archetypes__rig_variant_51bb7d47(void)
         .phi_reference = 1.6180339887498948f,
         .tags = "omega,rigadiel,neural,deterministic,schumann,hodgkin_huxley",
     };
-    g_archetypes[RIG_ARCH_OMEGA_MIND].iris = iris_midnight();
+    g_archetypes[RIG_ARCH_OMEGA_MIND].iris = iris_midnight__rig_dup_1d5bc2b9();
     g_archetypes[RIG_ARCH_OMEGA_MIND].iris.limbal_ring_width = 2.0f;
     g_archetypes[RIG_ARCH_OMEGA_MIND].iris.limbal_ring_darkness = 1.0f;
 
     for (int i = 0; i < RIG_ARCH_COUNT; i++) {
         RigFaceArchetype *a = &g_archetypes[i];
-        if (a->ear_left.ear_height  == 0.0f) a->ear_left  = ear_default(false);
-        if (a->ear_right.ear_height == 0.0f) a->ear_right = ear_default(true);
-        if (a->lip.upper_lip_height == 0.0f) a->lip = lip_neutral(a->params.gender_factor);
-        if (a->iris.iris_radius     == 0.0f) a->iris = iris_brown_dark();
+        if (a->ear_left.ear_height  == 0.0f) a->ear_left  = ear_default__rig_dup_0a21103c(false);
+        if (a->ear_right.ear_height == 0.0f) a->ear_right = ear_default__rig_dup_0a21103c(true);
+        if (a->lip.upper_lip_height == 0.0f) a->lip = lip_neutral__rig_dup_8a31f5c7(a->params.gender_factor);
+        if (a->iris.iris_radius     == 0.0f) a->iris = iris_brown_dark__rig_dup_85216e35();
         if (a->roughness_override    == 0.0f) a->roughness_override = -1.0f;
     }
 
@@ -937,9 +937,9 @@ RigFaceParams rig_archetype_blend_params__rig_dup_c1b475a9(RigArchetypeID id_a,
     return r;
 }
 
-void rig_archetype_list_all__rig_variant_5392ccce(void)
+int rig_archetype_list_all__rig_variant_5392ccce(void)
 {
-    init_archetypes();
+    init_archetypes__rig_variant_51bb7d47();
     rl_dprintf(1, "╔══════════════════════════════════════════════════════════════╗\n");
     rl_dprintf(1, "║  RigCom v24 THE SANTORIUM OF COMPILER — Face Archetypes  —  36 Templates               ║\n");
     rl_dprintf(1, "╠══════════════════════════════════════════════════════════════╣\n");
@@ -948,7 +948,7 @@ void rig_archetype_list_all__rig_variant_5392ccce(void)
     for (int i = 0; i < RIG_ARCH_COUNT; i++) {
         const RigFaceArchetype *a = &g_archetypes[i];
         if (a->category != last_cat) {
-            rl_dprintf(1, "║  ── %s ──\n", rig_archetype_category_name(a->category));
+            rl_dprintf(1, "║  ── %s ──\n", rig_archetype_category_name__rig_dup_c35e7552(a->category));
             last_cat = a->category;
         }
         rl_dprintf(1, "║  [%02d] %-22s  %-16s  φ=%.4f  subdiv=%u\n",
@@ -977,5 +977,5 @@ RigFaceMesh* rig_face_from_archetype_v1__rig_dup_11e057dd(RigArchetypeID id)
 {
     const RigFaceArchetype *a = rig_archetype_get__rig_dup_49442146(id);
     if (!a) return NULL;
-    return rig_face_create(&a->params, a->recommended_subdiv);
+    return rig_face_create__rig_variant_f9c5724f(&a->params, a->recommended_subdiv);
 }

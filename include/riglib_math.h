@@ -32,3 +32,9 @@ static inline float smoothstepf(float e0, float e1, float x) {
     float t = clampf((x - e0) / (e1 - e0), 0.0f, 1.0f);
     return t * t * (3.0f - 2.0f * t);
 }
+
+#ifndef RIG_PHI
+#define RIG_PHI 1.6180339887498948482f
+#endif
+static inline float phi_lerp__rig_base(float a, float b, float t) { return a + (b - a) * t; }
+#define phi_lerp phi_lerp__rig_base
