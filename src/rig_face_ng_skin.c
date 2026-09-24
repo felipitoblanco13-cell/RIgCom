@@ -24,6 +24,7 @@
 #include "rig_noext_str.h"
 #include "rig_math.h"
 #include "rig_noext_io.h"
+#include "rig_lib.h"
 #include "../include/riglib_math.h"
 
 #define NG_PHI          1.6180339887498948482f

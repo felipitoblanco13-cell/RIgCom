@@ -24,7 +24,7 @@ int rig_sov_export_glb(const RigSovMesh *m,const RigSovSkeleton *s,const RigSovM
     minp[0]=maxp[0]=m->vertices[0].position.x;minp[1]=maxp[1]=m->vertices[0].position.y;minp[2]=maxp[2]=m->vertices[0].position.z;
     for(i=0;i<m->vertex_count;i++){const RigSovVec3 p=m->vertices[i].position;if(p.x<minp[0])minp[0]=p.x;if(p.y<minp[1])minp[1]=p.y;if(p.z<minp[2])minp[2]=p.z;if(p.x>maxp[0])maxp[0]=p.x;if(p.y>maxp[1])maxp[1]=p.y;if(p.z>maxp[2])maxp[2]=p.z;}
     /* Interleaving is intentionally avoided: accessors remain directly consumable by all glTF 2.0 readers. */
-#define ... (do{off[ID]=bin.n;for(i=0;i<m->vertex_count;i++){TYPE v=(EXPR);if((rc=blob_add(&bin,&v,sizeof(v))))goto done;}len[ID]=bin.n-off[ID];if((rc=blob_zero_align(&bin,4)))goto done;}while(0))
+#define ADD_SECTION(ID,TYPE,EXPR) do{off[ID]=bin.n;for(i=0;i<m->vertex_count;i++){TYPE v=(EXPR);if((rc=blob_add(&bin,&v,sizeof(v))))goto done;}len[ID]=bin.n-off[ID];if((rc=blob_zero_align(&bin,4)))goto done;}while(0)
     {typedef struct{float x,y,z;} F3;ADD_SECTION(0,F3,((F3){m->vertices[i].position.x,m->vertices[i].position.y,m->vertices[i].position.z}));}
     {typedef struct{float x,y,z;} F3;ADD_SECTION(1,F3,((F3){m->vertices[i].normal.x,m->vertices[i].normal.y,m->vertices[i].normal.z}));}
     {typedef struct{float x,y;} F2;ADD_SECTION(2,F2,((F2){m->vertices[i].uv.x,m->vertices[i].uv.y}));}

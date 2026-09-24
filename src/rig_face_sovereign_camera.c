@@ -1,4 +1,11 @@
 #include "rig_face_sovereign.h"
+#include <sys/ioctl.h>
+#include <sys/mman.h>
+#include <sys/select.h>
+#include <poll.h>
+int rig_sov_camera_open__rig_variant_489be054(RigSovCamera **out,const char *device,unsigned width,unsigned height);
+int rig_sov_camera_read__rig_variant_2204a3a3(RigSovCamera *c,RigSovImage *frame,unsigned timeout_ms);
+void rig_sov_camera_close__rig_variant_2724c592(RigSovCamera *c);
 
 #include "rig_noext_io.h"
 

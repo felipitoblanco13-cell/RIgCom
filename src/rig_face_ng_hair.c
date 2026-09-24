@@ -53,6 +53,7 @@
 #include "rig_noext_str.h"
 #include "rig_math.h"
 #include "rig_noext_io.h"
+#include "rig_lib.h"
 #include "../include/riglib_math.h"
 
 #define HAIR_BUF       (512 * 1024)
@@ -68,67 +69,12 @@
 /* ═══════════════════════════════════════════════════════════════
  * TIPOS DE CURVA — geometría del cabello por etnia
  * ═══════════════════════════════════════════════════════════════ */
-typedef enum {
-    HAIR_CURVE_STRAIGHT    = 0,  /* Asiático: recto, circular */
-    HAIR_CURVE_WAVY        = 1,  /* Europeo: ondulado */
-    HAIR_CURVE_CURLY       = 2,  /* Latino/Med: rizado suelto */
-    HAIR_CURVE_COILY       = 3,  /* Africano: zig-zag apretado */
-    HAIR_CURVE_KINKY       = 4,  /* Afro: helicoidal apretado */
-} HairCurveType;
+/* typedef HairCurveType → rig_face_ng.h (unificado) */
 
 /* ═══════════════════════════════════════════════════════════════
  * CONTEXTO DEL SISTEMA DE CABELLO
  * ═══════════════════════════════════════════════════════════════ */
-typedef struct RigHairNGCtx {
-    /* Bioquímica */
-    float melanin_eu;          /* 0-1 eumelanina */
-    float melanin_ph;          /* 0-1 feomelanina */
-    float melanin_sigma;       /* varianza por hebra (diversidad) */
-    float gray_fraction;       /* 0-1 fracción gris */
-    float tint_r, tint_g, tint_b; /* color de tinte artificial */
-    float tint_strength;       /* 0-1 fuerza del tinte */
-    float highlight_intensity; /* 0-1 reflejos de sol/químico */
-
-    /* Geometría */
-    HairCurveType curve_type;
-    float curl_radius_mm;      /* radio del rizo en mm */
-    float curl_freq;           /* frecuencia: 0=recto 10=muy rizado */
-    float strand_width_root;   /* diámetro raíz en μm */
-    float strand_width_tip;    /* diámetro punta en μm */
-    float length_avg_cm;       /* longitud promedio en cm */
-    float length_sigma;        /* varianza de longitud */
-    int   strand_count;        /* hebras renderizables */
-    float cross_section_ratio; /* 1.0=circular 0.5=muy elíptico */
-
-    /* PBD Física */
-    float stiffness;           /* rigidez 0-1 */
-    float damping;             /* amortiguación 0-1 */
-    float wind_strength;       /* fuerza del viento */
-    float wind_dir_x, wind_dir_y, wind_dir_z;
-    float wind_turbulence;     /* turbulencia (gustos) */
-    float gravity_scale;       /* modificador de gravedad */
-    float flyaway_factor;      /* carga electrostática */
-    int   pbd_iterations;      /* iteraciones PBD por frame */
-    int   pbd_segments;        /* segmentos de la cadena */
-
-    /* Óptica */
-    float roughness_long;      /* rugosidad longitudinal */
-    float roughness_azimuth;   /* rugosidad azimutal */
-    float cuticle_tilt;        /* inclinación cuticular (deg) */
-    float specular_lobe_r;     /* peso lóbulo R (reflexión) */
-    float specular_lobe_tt;    /* peso lóbulo TT (transmisión) */
-    float specular_lobe_trt;   /* peso lóbulo TRT (glint) */
-    float medulla_fraction;    /* fracción médula 0-1 */
-    float ior_cortex;          /* IOR corteza 1.55 */
-    float ior_medulla;         /* IOR médula 1.35 */
-
-    /* Agrupación */
-    float clump_strength;      /* 0-1 fuerza de agrupación */
-    float clump_radius_mm;     /* radio del clump en mm */
-    float wisp_strength;       /* 0-1 separación de puntas */
-    float parting_pos;         /* -1=izq 0=centro 1=derecha */
-    float parting_sharpness;   /* qué tan definida es la raya */
-} RigHairNGCtx;
+/* typedef RigHairNGCtx → rig_face_ng.h (unificado) */
 
 /* ═══════════════════════════════════════════════════════════════
  * GLSL — MARSCHNER DUAL-LOBE COMPLETO

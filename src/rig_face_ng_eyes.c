@@ -59,19 +59,14 @@
 #include "rig_noext_str.h"
 #include "rig_math.h"
 #include "rig_noext_io.h"
+#include "rig_lib.h"
 #include "../include/riglib_math.h"
 
 /* clamp soberano (faltaba) */
 static inline float clamp(float x, float lo, float hi){ return x<lo?lo:(x>hi?hi:x); }
 
 /* Contexto físico del ojo (modelo del .c; distinto del RigFaceNGEyeCtx artístico) */
-typedef struct RigEyeNGCtx {
-    float pupil_radius, iris_radius;
-    float iris_r, iris_g, iris_b, iris_melanin;
-    float crypts_density, collarette_pos, limbal_health;
-    float age_norm, hemoglobin, jaundice, dryness;
-    float tear_thickness_um, cornea_depth_mm;
-} RigEyeNGCtx;
+/* typedef RigEyeNGCtx → rig_face_ng.h (unificado) */
 
 #define EYE_BUF    (512 * 1024)
 #define EYE_JS_BUF (128 * 1024)

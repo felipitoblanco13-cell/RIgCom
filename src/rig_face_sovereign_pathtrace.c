@@ -3,6 +3,7 @@
 /* [SOBERANO] rigdeps/rig_std_base.h eliminado — cubierto por stack noext */
 #include "rig_math.h"
 #include "rig_noext_mem.h"
+#include <float.h>
 #include "rig_lib.h"
 
 #ifndef M_PI

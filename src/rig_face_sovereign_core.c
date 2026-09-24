@@ -7,6 +7,7 @@
 #include "rig_noext_io.h"
 #include "rig_noext_mem.h"
 #include "rig_noext_str.h"
+#include <ctype.h>
 #include "rig_lib.h"
 
 #ifndef M_PI
