@@ -1,5 +1,5 @@
 /* [SOBERANO] rigdeps/rig_std_base.h eliminado — cubierto por stack noext */
-#include "../include/rigart_v5_mobile.h"
+#include "rigart_v5_mobile.h"
 #include "rig_noext_mem.h"
 #include "rig_noext_str.h"
 #include "rig_noext_io.h"

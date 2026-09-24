@@ -10,7 +10,7 @@
  * Coordenadas:  0..1 normalizadas (0,0 = top-left, 1,1 = bottom-right)
  *               → shaders usan NDC [-1,1] via: ndc_x = x*2-1
  * ════════════════════════════════════════════════════════════════════════════ */
-#include "../include/catedral_ui.h"
+#include "catedral_ui.h"
 #include "../include/wsserver.h"
 #include "../include/rig_gpu.h"
 

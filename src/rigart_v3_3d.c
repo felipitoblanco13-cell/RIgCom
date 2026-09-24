@@ -1,7 +1,7 @@
 /* [SOBERANO] rigdeps/rig_std_base.h eliminado — cubierto por stack noext */
 #define _POSIX_C_SOURCE 200809L
 
-#include "../include/rigart_v3_3d.h"
+#include "rigart_v3_3d.h"
 #include "../include/wsserver.h"
 #include "../include/rigart_geo_extra.h"
 

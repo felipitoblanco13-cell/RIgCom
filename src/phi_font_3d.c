@@ -7,7 +7,7 @@
  *   # luego enlazar build/phi_font_3d.o junto con los demás .o
  *
  * Integración en main.c  (3 líneas, ver §INTEGRACION al final del archivo):
- *   1. #include "../include/phi_font_3d.h"          ← junto con los demás
+ *   1. #include "phi_font_3d.h"          ← junto con los demás
  *   2. En el bloque else-if del router de comandos WS, añadir:
  *        } else if (strcmp(cmd, "phi_font_3d") == 0) {
  *            pf3_ws_dispatch__rig_variant_12d618e8(srv, cmd, payload);
@@ -18,7 +18,7 @@
 
 #define _POSIX_C_SOURCE 200809L
 
-#include "../include/phi_font_3d.h"
+#include "phi_font_3d.h"
 #include "../include/wsserver.h"
 
 #include "rig_noext_io.h"
@@ -1117,7 +1117,7 @@ const char *pf3_version__rig_dup_838941c3(void) { return PF3_VERSION; }
  *
  *  CAMBIO 1 — al bloque de #includes de main.c (junto a rigart_v3.h):
  *
- *    #include "../include/phi_font_3d.h"
+ *    #include "phi_font_3d.h"
  *
  * ─────────────────────────────────────────────────────────────────────────
  *

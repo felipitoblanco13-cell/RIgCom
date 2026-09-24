@@ -1,5 +1,5 @@
 /* [SOBERANO] rigdeps/rig_std_base.h eliminado — cubierto por stack noext */
-#include "../include/rigart_v3.h"
+#include "rigart_v3.h"
 #include "../include/wsserver.h"
 
 #include "rig_noext_io.h"

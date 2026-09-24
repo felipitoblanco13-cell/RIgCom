@@ -1,6 +1,7 @@
 #pragma once
 /* GEN — rigart_v4_art.h reconstruido: tipos públicos del módulo rigart v4. */
 #include "rig_face_ng.h"
+#include "rig_face_v2_bridge.h"
 
 #define RIG_MAX_LAYERS 16
 #ifndef RIG_SHADER_MAXBUF

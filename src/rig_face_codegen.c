@@ -1,5 +1,7 @@
 /* [SOBERANO] rigdeps/rig_std_base.h eliminado — cubierto por stack noext */
+#include "rig_lib.h"
 #include "rig_face_engine_v2.h"
+#include "rig_face_codegen.h"
 #include "rig_noext_io.h"
 #include "rig_noext_str.h"
 #include "rig_syscall.h"
@@ -11,7 +13,7 @@
     }                                                                   \
 } while(0)
 
-static void cg_timestamp__rig_variant_a2bee92d(char *buf, size_t sz)
+int cg_timestamp__rig_variant_a2bee92d(char *buf, size_t sz)
 {
     time_t t = time(NULL);
     struct tm *tm_info = gmtime(&t);
@@ -262,7 +264,7 @@ int rig_codegen_archetype__rig_dup_76d1695b(RigArchetypeID id,
                            const RigCodegenOptions *opt,
                            char *buf, size_t sz)
 {
-    const RigFaceArchetype *arch = rig_archetype_get(id);
+    const RigFaceArchetype *arch = rig_archetype_get__rig_dup_49442146(id);
     if (!arch || !buf || sz == 0) return -1;
 
     if (opt && opt->target == RIG_CODEGEN_RIGSCRIPT) {
@@ -310,7 +312,7 @@ int rig_codegen_archetype__rig_dup_76d1695b(RigArchetypeID id,
         "}",
         arch->codename, (int)arch->id,
         arch->name,
-        rig_archetype_category_name(arch->category),
+        rig_archetype_category_name__rig_dup_c35e7552(arch->category),
         (double)arch->phi_reference,
         (double)p->melanin, (double)p->hemoglobin, (double)p->carotene,
         (double)p->age_factor, (double)p->gender_factor,
@@ -507,7 +509,7 @@ int rig_codegen_all_archetypes_header__rig_dup_2b02366f(char *buf, size_t sz)
         ts);
 
     for (int i = 0; i < RIG_ARCH_COUNT; i++) {
-        const RigFaceArchetype *a = rig_archetype_get((RigArchetypeID)i);
+        const RigFaceArchetype *a = rig_archetype_get__rig_dup_49442146((RigArchetypeID)i);
         if (!a) continue;
         char upper[64];
         int ui = 0;
@@ -522,12 +524,12 @@ int rig_codegen_all_archetypes_header__rig_dup_2b02366f(char *buf, size_t sz)
 
     CG_APPEND(buf, sz, pos,
         "\n/* ── Lookup por nombre ─────────────────────────────────────── */\n"
-        "/* rig_archetype_get(RIG_ARCH_NORDIC_ID) → const RigFaceArchetype* */\n\n"
+        "/* rig_archetype_get__rig_dup_49442146(RIG_ARCH_NORDIC_ID) → const RigFaceArchetype* */\n\n"
         "/* ── Tabla de φ-referencias ─────────────────────────────────── */\n"
         "static const float rig_arch_phi_table[%d] = {\n", RIG_ARCH_COUNT);
 
     for (int i = 0; i < RIG_ARCH_COUNT; i++) {
-        const RigFaceArchetype *a = rig_archetype_get((RigArchetypeID)i);
+        const RigFaceArchetype *a = rig_archetype_get__rig_dup_49442146((RigArchetypeID)i);
         CG_APPEND(buf, sz, pos, "    %.10ff%s  /* [%02d] %s */\n",
             a ? a->phi_reference : 0.0f,
             (i < RIG_ARCH_COUNT - 1) ? "," : " ",
