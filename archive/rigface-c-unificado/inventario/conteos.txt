@@ -1,0 +1,15 @@
+archivos_fuente_leidos             147
+modulos_unificados                 33
+definiciones_de_funcion_emitidas   531
+funciones_extern                   299
+funciones_static                   232
+nombres_distintos                  511
+variantes_preservadas              95
+unidades_injertadas                126
+unidades_en_cuarentena             3
+bytes_totales                      1452806
+cuerpos_distintos_origen           522
+definiciones_emitidas              531
+cuerpos_reconocidos                519
+en_cuarentena                      3
+perdidos                           0

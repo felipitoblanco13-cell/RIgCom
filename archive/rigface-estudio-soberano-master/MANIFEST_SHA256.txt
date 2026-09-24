@@ -1,0 +1,3 @@
+# RIGFACE Honor 400 Sovereign Manifest SHA-256
+Target: Honor 400 DNY-NX9 (Snapdragon 7 Gen 3 / Adreno 720 / Android 16)
+Master Clock: 7.83 Hz

@@ -1,0 +1,59 @@
+Archivo,Funcion_Principal,Perfil,Modulo_Anatomico,Control_UI_Asociado
+rigart_v3.c,rigart_v3_render_typo,Modular,L. Estudio artístico RigArt,Editor tipográfico y cinética CSS/SVG
+rig_face_ng_hair.c,rig_hair_simulate_physics,Modular,E. Cabello y crecimiento,Dispersión Marschner R/TT/TRT y físicas
+rig_face_sovereign_camera.c,rig_sov_camera_track_frame,Modular,C. Escaneo y reconstrucción,Captura V4L2 Honor 400 y 68 landmarks
+rig_face_engine_v2.c,rig_v2_generate_microdetail,Modular,D. Piel viva,"Generación de poros, vasos y arrugas V2"
+rig_haptic.c,rig_haptic_drive_matrix,Modular,"K. Tacto, AOM y sonido material","Matriz ultrasónica 8x8 @ 40kHz, fases y fuerza"
+rig_face_soft_body.c,rig_softbody_simulate_pbd,Modular,I. Cuerpo y física,Física de tejidos blandos y resortes PBD
+rig_face_age_timeline.c,rig_age_interpolate_pchip,Modular,A. Creación facial y anatomía,Línea temporal Fritsch-Carlson (0-100a)
+rig_face_codegen.c,rig_codegen_emit_c11,Modular,N. Exportación y desarrollo,"Generación de código C11, RigScript y JSON"
+rig_height3d.c,rig_height3d_sample_pattern,Modular,"K. Tacto, AOM y sonido material","Relieve 3D, microporos, moleteado e impasto"
+rig_master.c,rig_master_dispatch_event,Modular,"K. Tacto, AOM y sonido material",Orquestador reloj unificado Schumann 7.83Hz
+rig_face_eye_vergence.c,rig_vergence_compute_fixation,Modular,F. Ojos y visión,"Vergencia binocular, acomodación y pupila"
+rig_face_engine.c,rig_engine_build_icosahedron,Modular,A. Creación facial y anatomía,Subdivisión icosaédrica y skinning dual-quat
+rig_face_archetypes.c,rig_archetype_blend_matrix,Modular,B. Arquetipos y genética,Mezcla de 36 arquetipos canónicos
+rig_material.c,rig_material_eval_pbr,Modular,"J. Materiales, entorno y renderizado","34 presets PBR, Sheen, SSS e Iridiscencia"
+rig_face_ng_anim.c,rig_anim_apply_facs_au,Modular,"H. Voz, audio y animación facial",Animación 128 AUs FACS y 43 músculos
+rig_face_sovereign_audio.c,rig_audio_analyze_formants,Modular,"H. Voz, audio y animación facial","Análisis FFT, formantes y visemas"
+rigart_v5_mobile.c,rigart_v5_mobile_ui_build,Modular,L. Estudio artístico RigArt,Catálogo móvil 26 texturas y 18 ventanas
+rig_face_recon_bridge.c,rig_recon_map_anthropometry,Modular,C. Escaneo y reconstrucción,Puente mediciones antropométricas a malla
+rigart_geo_extra.c,rigart_geo_generate_dodecahedron,Modular,L. Estudio artístico RigArt,"Geometrías 3D dodecaedro, icosfera y cono"
+rig_face_sovereign_gltf.c,rig_gltf_export_binary_glb,Modular,N. Exportación y desarrollo,Exportador GLB 2.0 binario soberano
+rig_face_export_vrm.c,rig_vrm_export_humanoid,Modular,N. Exportación y desarrollo,Mapa humanoide y extensión VRM 1.0
+rig_face_sovereign_pathtrace.c,rig_pathtrace_single_mesh,Modular,"J. Materiales, entorno y renderizado",Path tracing CPU con estructura BVH
+demos/espacio_3d_webgl.html,webgl_space_render_loop,Modular,L. Estudio artístico RigArt,Modo espacio 3D WebGL con albedo y 3 luces
+demos/centro_medico_avatares.html,medical_avatar_reconstruct,Modular,C. Escaneo y reconstrucción,Modo centro médico y reconstrucción 68pts
+demos/rigcom_master.html,rigcom_master_pbr_pom_bind,Modular,"J. Materiales, entorno y renderizado","Superficie operativa PBR, POM e IBL"
+demos/centro_arte_rigcom_v2.html,art_center_v2_paint_stroke,Modular,L. Estudio artístico RigArt,"Acuarela húmeda, óleo y partículas"
+demos/la_ventana.html,window_offaxis_projection,Modular,F. Ojos y visión,Proyección fuera de eje y seguimiento ocular
+demos/el_tacto.html,tacto_aom_raymarch,Modular,"K. Tacto, AOM y sonido material",Raymarching de volumen AOM y contacto
+demos/centro_arte_rigcom.html,art_catalog_build_templates,Modular,L. Estudio artístico RigArt,Catálogo artístico de luces y plantillas
+demos/malla_grid_3d.html,canvas_grid_project_3d,Modular,L. Estudio artístico RigArt,Canvas proyección 3D manual 6 formas
+rig_aom.c,rig_aom_compute_bragg,Modular,"K. Tacto, AOM y sonido material","Volumen RGB AOM, ángulo Bragg y difracción"
+rig_face_cloth.c,rig_cloth_simulate_spatial_hash,Modular,I. Cuerpo y física,Física de ropa y autocolisión por hash
+rig_face_dentition.c,rig_dentition_generate_arcade,Modular,"G. Boca, labios y dentición",Arcadas dental maxilar/mandibular (32 dientes)
+rig_parametric.c,rig_parametric_synth_signal,Modular,"K. Tacto, AOM y sonido material",Señal acústica paramétrica e hibridación
+rig_face_ng_assembly.c,rig_assembly_build_avatar,Modular,A. Creación facial y anatomía,Ensamblador modular NG de avatar
+rig_face_v2_bridge.c,rig_v2_bridge_websocket_dispatch,Modular,N. Exportación y desarrollo,Puente V2 WebSocket y sesiones
+rigart_v3_3d.c,rigart_v3_3d_dispatch_scene,Modular,L. Estudio artístico RigArt,Despacho tridimensional 10 formas
+rig_face_ng.c,rig_ng_consolidated_update,Consolidado,A. Creación facial y anatomía,"Motor consolidado NG piel, ojos y cabello"
+rig_face_sovereign_cli.c,rig_cli_exec_selftest,Modular,N. Exportación y desarrollo,"Órdenes CLI selftest, track y phonemes"
+rig_headtrack.c,rig_headtrack_one_euro_filter,Modular,F. Ojos y visión,Filtro One Euro seguimiento de cabeza Honor 400
+rig_face_v2.c,rig_v2_consolidated_render,Consolidado,A. Creación facial y anatomía,Motor consolidado V2 rostro y vello
+rig_face_pathtrace_multi.c,rig_pathtrace_tlas_blas_eval,Modular,"J. Materiales, entorno y renderizado",Path tracing multi-instancia TLAS/BLAS
+rigart_v3_cont.c,rigart_v3_cont_apply_oklch,Modular,L. Estudio artístico RigArt,"Efectos tipográficos, cuadrícula phi y OKLCh"
+rig_face_sovereign_body.c,rig_body_build_ellipsoid_skeleton,Modular,I. Cuerpo y física,"Cuerpo procedural, elipsoides y esqueleto"
+rig_face_ng_eyes.c,rig_eyes_eval_purkinje_refraction,Modular,F. Ojos y visión,"Córnea, refracción, Zernike y Purkinje"
+rig_face_dermal_dynamics.c,rig_dermal_update_blush_sweat,Modular,D. Piel viva,"Dinámica dérmica, rubor, sudor y heridas"
+rig_face_genetics.c,rig_genetics_pca_project_48,Modular,B. Arquetipos y genética,Genoma de 48 rasgos y proyección PCA
+rig_face_vision_retarget.c,rig_vision_retarget_facs,Modular,"H. Voz, audio y animación facial",Retargeting 68 puntos a 128 AUs FACS
+rig_face_sovereign_core.c,rig_core_alloc_mesh_memory,Modular,N. Exportación y desarrollo,"Infraestructura común, memoria y MLP"
+rig_face_sovereign_vision.c,rig_vision_mlp_classify_skin,Modular,C. Escaneo y reconstrucción,MLP clasificadora de piel y 68 landmarks
+rig_face_export_arkit.c,rig_arkit_export_52_blendshapes,Modular,"H. Voz, audio y animación facial",Conversión FACS a 52 blendshapes ARKit
+rig_voz.c,rig_voz_synth_system_state,Modular,"H. Voz, audio y animación facial",Voz expresiva del sistema glotal LF
+rig_face_ng_skin.c,rig_skin_generate_8layer_pbr,Modular,D. Piel viva,Piel espectral PBR de 8 capas
+rig_master_pbr.frag,main_pbr_optical_emission,Modular,"J. Materiales, entorno y renderizado",Shader PBR maestro Cook-Torrance GGX
+rigart_v4_art.c,rigart_v4_art_render_canvas,Modular,L. Estudio artístico RigArt,"Lienzos, óleo, acuarela y escultura"
+rig_env.c,rig_env_eval_sh_irradiance,Modular,"J. Materiales, entorno y renderizado","Entorno luminoso, sol y armónicos esféricos"
+rig_face_hair_growth.c,rig_hair_follicle_growth_cycle,Modular,E. Cabello y crecimiento,"Ciclo anágeno, catágeno, telógeno y canas"
+rig_face_voice_synth.c,rig_voice_synthesize_pcm16,Modular,"H. Voz, audio y animación facial",Sintetizador fonemas a WAV PCM16

@@ -1,0 +1,1643 @@
+{
+ "origen": "TODoRigFace.zip",
+ "archivos_fuente_leidos": [
+  "nested/16_FACE_NG-1/16_FACE_NG/src/rig_face_archetypes.c",
+  "nested/16_FACE_NG-1/16_FACE_NG/src/rig_face_codegen.c",
+  "nested/16_FACE_NG-1/16_FACE_NG/src/rig_face_engine.c",
+  "nested/16_FACE_NG-1/16_FACE_NG/src/rig_face_ng.c",
+  "nested/16_FACE_NG-1/16_FACE_NG/src/rig_face_v2.c",
+  "nested/16_FACE_NG/16_FACE_NG/src/rig_face_archetypes.c",
+  "nested/16_FACE_NG/16_FACE_NG/src/rig_face_codegen.c",
+  "nested/16_FACE_NG/16_FACE_NG/src/rig_face_engine.c",
+  "nested/16_FACE_NG/16_FACE_NG/src/rig_face_ng.c",
+  "nested/16_FACE_NG/16_FACE_NG/src/rig_face_v2.c",
+  "nested/Face_Pose_Body/rig_face_archetypes.c",
+  "nested/Face_Pose_Body/rig_face_codegen.c",
+  "nested/Face_Pose_Body/rig_face_engine.c",
+  "nested/Face_Pose_Body/rig_face_engine_v2.c",
+  "nested/Face_Pose_Body/rig_face_ng_anim.c",
+  "nested/Face_Pose_Body/rig_face_ng_assembly.c",
+  "nested/Face_Pose_Body/rig_face_ng_eyes.c",
+  "nested/Face_Pose_Body/rig_face_ng_hair.c",
+  "nested/Face_Pose_Body/rig_face_ng_skin.c",
+  "nested/Face_Pose_Body/rig_face_sovereign_audio.c",
+  "nested/Face_Pose_Body/rig_face_sovereign_body.c",
+  "nested/Face_Pose_Body/rig_face_sovereign_camera.c",
+  "nested/Face_Pose_Body/rig_face_sovereign_cli.c",
+  "nested/Face_Pose_Body/rig_face_sovereign_core.c",
+  "nested/Face_Pose_Body/rig_face_sovereign_gltf.c",
+  "nested/Face_Pose_Body/rig_face_sovereign_pathtrace.c",
+  "nested/Face_Pose_Body/rig_face_sovereign_vision.c",
+  "nested/Face_Pose_Body/rig_face_v2.c",
+  "nested/Face_Pose_Body/rig_face_v2_bridge.c",
+  "nested/HEDERSFACE/include/rig_face_archetypes.h",
+  "nested/HEDERSFACE/include/rig_face_codegen.h",
+  "nested/HEDERSFACE/include/rig_face_engine.h",
+  "nested/HEDERSFACE/include/rig_face_engine_v2.h",
+  "nested/HEDERSFACE/include/rig_face_ng_anim.h",
+  "nested/HEDERSFACE/include/rig_face_ng_assembly.h",
+  "nested/HEDERSFACE/include/rig_face_ng_eyes.h",
+  "nested/HEDERSFACE/include/rig_face_ng_hair.h",
+  "nested/HEDERSFACE/include/rig_face_ng_skin.h",
+  "nested/HEDERSFACE/include/rig_face_sovereign_audio.h",
+  "nested/HEDERSFACE/include/rig_face_sovereign_body.h",
+  "nested/HEDERSFACE/include/rig_face_sovereign_camera.h",
+  "nested/HEDERSFACE/include/rig_face_sovereign_cli.h",
+  "nested/HEDERSFACE/include/rig_face_sovereign_core.h",
+  "nested/HEDERSFACE/include/rig_face_sovereign_gltf.h",
+  "nested/HEDERSFACE/include/rig_face_sovereign_pathtrace.h",
+  "nested/HEDERSFACE/include/rig_face_sovereign_vision.h",
+  "nested/HEDERSFACE/include/rig_face_v2.h",
+  "nested/HEDERSFACE/include/rig_face_v2_bridge.h",
+  "nested/HEDERSFACE/src/rig_face_archetypes.c",
+  "nested/HEDERSFACE/src/rig_face_codegen.c",
+  "nested/HEDERSFACE/src/rig_face_engine.c",
+  "nested/HEDERSFACE/src/rig_face_engine_v2.c",
+  "nested/HEDERSFACE/src/rig_face_ng_anim.c",
+  "nested/HEDERSFACE/src/rig_face_ng_assembly.c",
+  "nested/HEDERSFACE/src/rig_face_ng_eyes.c",
+  "nested/HEDERSFACE/src/rig_face_ng_hair.c",
+  "nested/HEDERSFACE/src/rig_face_ng_skin.c",
+  "nested/HEDERSFACE/src/rig_face_sovereign_audio.c",
+  "nested/HEDERSFACE/src/rig_face_sovereign_body.c",
+  "nested/HEDERSFACE/src/rig_face_sovereign_camera.c",
+  "nested/HEDERSFACE/src/rig_face_sovereign_cli.c",
+  "nested/HEDERSFACE/src/rig_face_sovereign_core.c",
+  "nested/HEDERSFACE/src/rig_face_sovereign_gltf.c",
+  "nested/HEDERSFACE/src/rig_face_sovereign_pathtrace.c",
+  "nested/HEDERSFACE/src/rig_face_sovereign_vision.c",
+  "nested/HEDERSFACE/src/rig_face_v2.c",
+  "nested/HEDERSFACE/src/rig_face_v2_bridge.c",
+  "nested/rig_face_ng_v24/tmp/rig_ng_package/src/rig_face_ng.h",
+  "nested/rig_face_ng_v24/tmp/rig_ng_package/src/rig_face_ng_anim.c",
+  "nested/rig_face_ng_v24/tmp/rig_ng_package/src/rig_face_ng_assembly.c",
+  "nested/rig_face_ng_v24/tmp/rig_ng_package/src/rig_face_ng_eyes.c",
+  "nested/rig_face_ng_v24/tmp/rig_ng_package/src/rig_face_ng_hair.c",
+  "nested/rig_face_ng_v24/tmp/rig_ng_package/src/rig_face_ng_skin.c",
+  "nested/rig_face_sovereign_complete/rig_face_sovereign_delivery/patched_originals/rig_face_archetypes.c",
+  "nested/rig_face_sovereign_complete/rig_face_sovereign_delivery/patched_originals/rig_face_codegen.c",
+  "nested/rig_face_sovereign_complete/rig_face_sovereign_delivery/patched_originals/rig_face_engine.c",
+  "nested/rig_face_sovereign_complete/rig_face_sovereign_delivery/patched_originals/rig_face_engine_v2.c",
+  "nested/rig_face_sovereign_complete/rig_face_sovereign_delivery/patched_originals/rig_face_ng_anim.c",
+  "nested/rig_face_sovereign_complete/rig_face_sovereign_delivery/patched_originals/rig_face_ng_assembly.c",
+  "nested/rig_face_sovereign_complete/rig_face_sovereign_delivery/patched_originals/rig_face_ng_eyes.c",
+  "nested/rig_face_sovereign_complete/rig_face_sovereign_delivery/patched_originals/rig_face_ng_hair.c",
+  "nested/rig_face_sovereign_complete/rig_face_sovereign_delivery/patched_originals/rig_face_ng_skin.c",
+  "nested/rig_face_sovereign_complete/rig_face_sovereign_delivery/patched_originals/rig_face_v2.c",
+  "nested/rig_face_sovereign_complete/rig_face_sovereign_delivery/patched_originals/rig_face_v2_bridge.c",
+  "nested/rig_face_sovereign_complete/rig_face_sovereign_delivery/sovereign_src/rig_face_sovereign.h",
+  "nested/rig_face_sovereign_complete/rig_face_sovereign_delivery/sovereign_src/rig_face_sovereign_audio.c",
+  "nested/rig_face_sovereign_complete/rig_face_sovereign_delivery/sovereign_src/rig_face_sovereign_body.c",
+  "nested/rig_face_sovereign_complete/rig_face_sovereign_delivery/sovereign_src/rig_face_sovereign_camera.c",
+  "nested/rig_face_sovereign_complete/rig_face_sovereign_delivery/sovereign_src/rig_face_sovereign_cli.c",
+  "nested/rig_face_sovereign_complete/rig_face_sovereign_delivery/sovereign_src/rig_face_sovereign_core.c",
+  "nested/rig_face_sovereign_complete/rig_face_sovereign_delivery/sovereign_src/rig_face_sovereign_gltf.c",
+  "nested/rig_face_sovereign_complete/rig_face_sovereign_delivery/sovereign_src/rig_face_sovereign_pathtrace.c",
+  "nested/rig_face_sovereign_complete/rig_face_sovereign_delivery/sovereign_src/rig_face_sovereign_vision.c",
+  "nested/rig_face_v2_bridge/rig_face_archetypes.c",
+  "nested/rig_face_v2_bridge/rig_face_codegen.c",
+  "nested/rig_face_v2_bridge/rig_face_engine.c",
+  "nested/rig_face_v2_bridge/rig_face_engine_v2.c",
+  "nested/rig_face_v2_bridge/rig_face_ng_anim.c",
+  "nested/rig_face_v2_bridge/rig_face_ng_assembly.c",
+  "nested/rig_face_v2_bridge/rig_face_ng_eyes.c",
+  "nested/rig_face_v2_bridge/rig_face_ng_hair.c",
+  "nested/rig_face_v2_bridge/rig_face_ng_skin.c",
+  "nested/rig_face_v2_bridge/rig_face_pose_body_main.c",
+  "nested/rig_face_v2_bridge/rig_face_pose_body_suite.c",
+  "nested/rig_face_v2_bridge/rig_face_sovereign_audio.c",
+  "nested/rig_face_v2_bridge/rig_face_sovereign_body.c",
+  "nested/rig_face_v2_bridge/rig_face_sovereign_camera.c",
+  "nested/rig_face_v2_bridge/rig_face_sovereign_cli.c",
+  "nested/rig_face_v2_bridge/rig_face_sovereign_core.c",
+  "nested/rig_face_v2_bridge/rig_face_sovereign_gltf.c",
+  "nested/rig_face_v2_bridge/rig_face_sovereign_pathtrace.c",
+  "nested/rig_face_v2_bridge/rig_face_sovereign_vision.c",
+  "nested/rig_face_v2_bridge/rig_face_suite_compat.c",
+  "nested/rig_face_v2_bridge/rig_face_v2.c",
+  "nested/rig_face_v2_bridge/rig_face_v2_bridge.c",
+  "src_raw/rig_face_archetypes.c",
+  "src_raw/rig_face_cloth-1.c",
+  "src_raw/rig_face_codegen.c",
+  "src_raw/rig_face_dentition.c",
+  "src_raw/rig_face_dermal_dynamics.c",
+  "src_raw/rig_face_engine_v2.c",
+  "src_raw/rig_face_export_arkit-1.c",
+  "src_raw/rig_face_export_vrm-1.c",
+  "src_raw/rig_face_eye_vergence-1.c",
+  "src_raw/rig_face_genetics-1.c",
+  "src_raw/rig_face_hair_growth-1.c",
+  "src_raw/rig_face_ng.h",
+  "src_raw/rig_face_ng_anim.c",
+  "src_raw/rig_face_ng_assembly.c",
+  "src_raw/rig_face_ng_eyes.c",
+  "src_raw/rig_face_ng_hair.c",
+  "src_raw/rig_face_ng_skin (1).c",
+  "src_raw/rig_face_pathtrace_multi-1.c",
+  "src_raw/rig_face_pathtrace_multi.c",
+  "src_raw/rig_face_recon_bridge-1.c",
+  "src_raw/rig_face_soft_body-1.c",
+  "src_raw/rig_face_sovereign-1.h",
+  "src_raw/rig_face_sovereign_audio.c",
+  "src_raw/rig_face_sovereign_body.c",
+  "src_raw/rig_face_sovereign_camera.c",
+  "src_raw/rig_face_sovereign_cli.c",
+  "src_raw/rig_face_sovereign_core.c",
+  "src_raw/rig_face_sovereign_gltf.c",
+  "src_raw/rig_face_sovereign_vision.c",
+  "src_raw/rig_face_v2.c",
+  "src_raw/rig_face_v2_bridge.c",
+  "src_raw/rig_face_voice_synth-1.c"
+ ],
+ "modulos": [
+  {
+   "orden": 1,
+   "archivo": "src/01_rig_face_cloth.c",
+   "modulo": "rig_face_cloth",
+   "canonica": "src_raw/rig_face_cloth-1.c",
+   "copias_fundidas": [
+    "src_raw/rig_face_cloth-1.c"
+   ],
+   "funciones": 17,
+   "injertadas": 0,
+   "variantes": 0,
+   "bytes": 19991,
+   "sha256": "eb5476f40086661f651391eebd348fa9e938c5c9277f1d7c895f571c0ec0b83d"
+  },
+  {
+   "orden": 2,
+   "archivo": "src/02_rig_face_dentition.c",
+   "modulo": "rig_face_dentition",
+   "canonica": "src_raw/rig_face_dentition.c",
+   "copias_fundidas": [
+    "src_raw/rig_face_dentition.c"
+   ],
+   "funciones": 9,
+   "injertadas": 0,
+   "variantes": 0,
+   "bytes": 23624,
+   "sha256": "3918c380bf0002b1607277b0cd2c51bc0b67ace6269254d468abdb148585f4cd"
+  },
+  {
+   "orden": 3,
+   "archivo": "src/03_rig_face_dermal_dynamics.c",
+   "modulo": "rig_face_dermal_dynamics",
+   "canonica": "src_raw/rig_face_dermal_dynamics.c",
+   "copias_fundidas": [
+    "src_raw/rig_face_dermal_dynamics.c"
+   ],
+   "funciones": 14,
+   "injertadas": 0,
+   "variantes": 0,
+   "bytes": 18196,
+   "sha256": "05897f48836e195983d96800db727e77f3fa74fe70992d0a3311c6ecb8960d38"
+  },
+  {
+   "orden": 4,
+   "archivo": "src/04_rig_face_engine.c",
+   "modulo": "rig_face_engine",
+   "canonica": "nested/rig_face_v2_bridge/rig_face_engine.c",
+   "copias_fundidas": [
+    "nested/rig_face_v2_bridge/rig_face_engine.c",
+    "nested/Face_Pose_Body/rig_face_engine.c",
+    "nested/rig_face_sovereign_complete/rig_face_sovereign_delivery/patched_originals/rig_face_engine.c",
+    "nested/16_FACE_NG-1/16_FACE_NG/src/rig_face_engine.c",
+    "nested/16_FACE_NG/16_FACE_NG/src/rig_face_engine.c",
+    "nested/HEDERSFACE/src/rig_face_engine.c"
+   ],
+   "funciones": 76,
+   "injertadas": 44,
+   "variantes": 44,
+   "bytes": 128847,
+   "sha256": "dbddfde70b1fd41f094b96ccf0aa9a714ff40482a9f49760331212a9cff47ee8"
+  },
+  {
+   "orden": 5,
+   "archivo": "src/05_rig_face_export_arkit.c",
+   "modulo": "rig_face_export_arkit",
+   "canonica": "src_raw/rig_face_export_arkit-1.c",
+   "copias_fundidas": [
+    "src_raw/rig_face_export_arkit-1.c"
+   ],
+   "funciones": 5,
+   "injertadas": 0,
+   "variantes": 0,
+   "bytes": 13052,
+   "sha256": "779059fd9aa61ce16bf771562d1f6d964c070c129190fd14c1783a58268d9e46"
+  },
+  {
+   "orden": 6,
+   "archivo": "src/06_rig_face_export_vrm.c",
+   "modulo": "rig_face_export_vrm",
+   "canonica": "src_raw/rig_face_export_vrm-1.c",
+   "copias_fundidas": [
+    "src_raw/rig_face_export_vrm-1.c"
+   ],
+   "funciones": 7,
+   "injertadas": 0,
+   "variantes": 0,
+   "bytes": 12801,
+   "sha256": "10dd45b25d58330db9e5cbca3e1ee027224c367d1f2407c958d50093aaba4090"
+  },
+  {
+   "orden": 7,
+   "archivo": "src/07_rig_face_eye_vergence.c",
+   "modulo": "rig_face_eye_vergence",
+   "canonica": "src_raw/rig_face_eye_vergence-1.c",
+   "copias_fundidas": [
+    "src_raw/rig_face_eye_vergence-1.c"
+   ],
+   "funciones": 8,
+   "injertadas": 0,
+   "variantes": 0,
+   "bytes": 11764,
+   "sha256": "9ef4bf61fded2a8c2d2110b32a597e5d792a1a7984e99ca9054abe3ebb929f92"
+  },
+  {
+   "orden": 8,
+   "archivo": "src/08_rig_face_genetics.c",
+   "modulo": "rig_face_genetics",
+   "canonica": "src_raw/rig_face_genetics-1.c",
+   "copias_fundidas": [
+    "src_raw/rig_face_genetics-1.c"
+   ],
+   "funciones": 19,
+   "injertadas": 0,
+   "variantes": 0,
+   "bytes": 19265,
+   "sha256": "f97f97302b1ec1916f74bba8720cdab1e0f21f0bdd5e0693ba27c468eb363b7b"
+  },
+  {
+   "orden": 9,
+   "archivo": "src/09_rig_face_hair_growth.c",
+   "modulo": "rig_face_hair_growth",
+   "canonica": "src_raw/rig_face_hair_growth-1.c",
+   "copias_fundidas": [
+    "src_raw/rig_face_hair_growth-1.c"
+   ],
+   "funciones": 12,
+   "injertadas": 0,
+   "variantes": 0,
+   "bytes": 15137,
+   "sha256": "b8ef1930f4468df593645baa7b6ea3976f196bccd5a502018200e441685ba7b4"
+  },
+  {
+   "orden": 10,
+   "archivo": "src/10_rig_face_ng_anim.c",
+   "modulo": "rig_face_ng_anim",
+   "canonica": "nested/Face_Pose_Body/rig_face_ng_anim.c",
+   "copias_fundidas": [
+    "nested/Face_Pose_Body/rig_face_ng_anim.c",
+    "nested/HEDERSFACE/src/rig_face_ng_anim.c",
+    "nested/rig_face_sovereign_complete/rig_face_sovereign_delivery/patched_originals/rig_face_ng_anim.c",
+    "nested/rig_face_v2_bridge/rig_face_ng_anim.c",
+    "src_raw/rig_face_ng_anim.c",
+    "nested/rig_face_ng_v24/tmp/rig_ng_package/src/rig_face_ng_anim.c"
+   ],
+   "funciones": 2,
+   "injertadas": 3,
+   "variantes": 3,
+   "bytes": 93326,
+   "sha256": "261b50b91ff4040695b8274902170618eba18ff0dcca3c9d0629b6ecf9da8290"
+  },
+  {
+   "orden": 11,
+   "archivo": "src/11_rig_face_ng_assembly.c",
+   "modulo": "rig_face_ng_assembly",
+   "canonica": "nested/Face_Pose_Body/rig_face_ng_assembly.c",
+   "copias_fundidas": [
+    "nested/Face_Pose_Body/rig_face_ng_assembly.c",
+    "nested/rig_face_sovereign_complete/rig_face_sovereign_delivery/patched_originals/rig_face_ng_assembly.c",
+    "nested/rig_face_v2_bridge/rig_face_ng_assembly.c",
+    "nested/rig_face_ng_v24/tmp/rig_ng_package/src/rig_face_ng_assembly.c",
+    "src_raw/rig_face_ng_assembly.c",
+    "nested/HEDERSFACE/src/rig_face_ng_assembly.c"
+   ],
+   "funciones": 9,
+   "injertadas": 7,
+   "variantes": 7,
+   "bytes": 218242,
+   "sha256": "28c5e38b912befec831158ec551b9a90791812640457f503821a4992540ad129"
+  },
+  {
+   "orden": 12,
+   "archivo": "src/12_rig_face_ng_eyes.c",
+   "modulo": "rig_face_ng_eyes",
+   "canonica": "nested/Face_Pose_Body/rig_face_ng_eyes.c",
+   "copias_fundidas": [
+    "nested/Face_Pose_Body/rig_face_ng_eyes.c",
+    "nested/HEDERSFACE/src/rig_face_ng_eyes.c",
+    "nested/rig_face_sovereign_complete/rig_face_sovereign_delivery/patched_originals/rig_face_ng_eyes.c",
+    "src_raw/rig_face_ng_eyes.c",
+    "nested/rig_face_v2_bridge/rig_face_ng_eyes.c",
+    "nested/rig_face_ng_v24/tmp/rig_ng_package/src/rig_face_ng_eyes.c"
+   ],
+   "funciones": 9,
+   "injertadas": 4,
+   "variantes": 4,
+   "bytes": 41978,
+   "sha256": "f8e63ebfb16c5b4dcb12f57eb879eb3df781d519559cd4926c54428ca36853ad"
+  },
+  {
+   "orden": 13,
+   "archivo": "src/13_rig_face_ng_hair.c",
+   "modulo": "rig_face_ng_hair",
+   "canonica": "nested/Face_Pose_Body/rig_face_ng_hair.c",
+   "copias_fundidas": [
+    "nested/Face_Pose_Body/rig_face_ng_hair.c",
+    "nested/HEDERSFACE/src/rig_face_ng_hair.c",
+    "nested/rig_face_sovereign_complete/rig_face_sovereign_delivery/patched_originals/rig_face_ng_hair.c",
+    "nested/rig_face_ng_v24/tmp/rig_ng_package/src/rig_face_ng_hair.c",
+    "src_raw/rig_face_ng_hair.c",
+    "nested/rig_face_v2_bridge/rig_face_ng_hair.c"
+   ],
+   "funciones": 9,
+   "injertadas": 35,
+   "variantes": 5,
+   "bytes": 220339,
+   "sha256": "dbc97eca67e72116741c83bc605102ea96d9d6ef3bab5454e90fdb4b5bcdca8c"
+  },
+  {
+   "orden": 14,
+   "archivo": "src/14_rig_face_ng_skin.c",
+   "modulo": "rig_face_ng_skin",
+   "canonica": "nested/Face_Pose_Body/rig_face_ng_skin.c",
+   "copias_fundidas": [
+    "nested/Face_Pose_Body/rig_face_ng_skin.c",
+    "nested/rig_face_ng_v24/tmp/rig_ng_package/src/rig_face_ng_skin.c",
+    "nested/rig_face_sovereign_complete/rig_face_sovereign_delivery/patched_originals/rig_face_ng_skin.c",
+    "nested/rig_face_v2_bridge/rig_face_ng_skin.c",
+    "src_raw/rig_face_ng_skin (1).c",
+    "nested/HEDERSFACE/src/rig_face_ng_skin.c"
+   ],
+   "funciones": 1,
+   "injertadas": 0,
+   "variantes": 0,
+   "bytes": 54057,
+   "sha256": "2eb148037f9fead2e90e219fb0f47f1d8adbbe61d176e48a7209e1c31f4caa47"
+  },
+  {
+   "orden": 15,
+   "archivo": "src/15_rig_face_pathtrace_multi.c",
+   "modulo": "rig_face_pathtrace_multi",
+   "canonica": "src_raw/rig_face_pathtrace_multi-1.c",
+   "copias_fundidas": [
+    "src_raw/rig_face_pathtrace_multi-1.c",
+    "src_raw/rig_face_pathtrace_multi.c"
+   ],
+   "funciones": 23,
+   "injertadas": 0,
+   "variantes": 0,
+   "bytes": 21193,
+   "sha256": "eef50afab85aa60c69048822a6ced6b0969a2f5f0b51be98528a14922c635a2a"
+  },
+  {
+   "orden": 16,
+   "archivo": "src/16_rig_face_soft_body.c",
+   "modulo": "rig_face_soft_body",
+   "canonica": "src_raw/rig_face_soft_body-1.c",
+   "copias_fundidas": [
+    "src_raw/rig_face_soft_body-1.c"
+   ],
+   "funciones": 15,
+   "injertadas": 0,
+   "variantes": 0,
+   "bytes": 13257,
+   "sha256": "c21f68c0d5ee639eed532c00c08d9bd072826bd63508c49a2049884f9791752f"
+  },
+  {
+   "orden": 17,
+   "archivo": "src/17_rig_face_sovereign_audio.c",
+   "modulo": "rig_face_sovereign_audio",
+   "canonica": "nested/Face_Pose_Body/rig_face_sovereign_audio.c",
+   "copias_fundidas": [
+    "nested/Face_Pose_Body/rig_face_sovereign_audio.c",
+    "nested/HEDERSFACE/src/rig_face_sovereign_audio.c",
+    "nested/rig_face_sovereign_complete/rig_face_sovereign_delivery/sovereign_src/rig_face_sovereign_audio.c",
+    "nested/rig_face_v2_bridge/rig_face_sovereign_audio.c",
+    "src_raw/rig_face_sovereign_audio.c"
+   ],
+   "funciones": 10,
+   "injertadas": 0,
+   "variantes": 0,
+   "bytes": 9074,
+   "sha256": "7656db82cfb86c1b2503c6c49475c6deb6189f229a19c86e964bcc8280110c77"
+  },
+  {
+   "orden": 18,
+   "archivo": "src/18_rig_face_suite_compat.c",
+   "modulo": "rig_face_suite_compat",
+   "canonica": "nested/rig_face_v2_bridge/rig_face_suite_compat.c",
+   "copias_fundidas": [
+    "nested/rig_face_v2_bridge/rig_face_suite_compat.c"
+   ],
+   "funciones": 4,
+   "injertadas": 0,
+   "variantes": 0,
+   "bytes": 3531,
+   "sha256": "cd1ff5d0724a7f68616e7a8868ada0a035547abe272b7809877d51dae2014db5"
+  },
+  {
+   "orden": 19,
+   "archivo": "src/19_rig_face_voice_synth.c",
+   "modulo": "rig_face_voice_synth",
+   "canonica": "src_raw/rig_face_voice_synth-1.c",
+   "copias_fundidas": [
+    "src_raw/rig_face_voice_synth-1.c"
+   ],
+   "funciones": 13,
+   "injertadas": 0,
+   "variantes": 0,
+   "bytes": 17785,
+   "sha256": "696f89451cff0e4b0581bec1787777b7d07749c8ac9b52a2c5b80e21a8328be3"
+  },
+  {
+   "orden": 20,
+   "archivo": "src/20_rig_face_archetypes.c",
+   "modulo": "rig_face_archetypes",
+   "canonica": "nested/Face_Pose_Body/rig_face_archetypes.c",
+   "copias_fundidas": [
+    "nested/Face_Pose_Body/rig_face_archetypes.c",
+    "nested/HEDERSFACE/src/rig_face_archetypes.c",
+    "nested/rig_face_sovereign_complete/rig_face_sovereign_delivery/patched_originals/rig_face_archetypes.c",
+    "nested/rig_face_v2_bridge/rig_face_archetypes.c",
+    "nested/16_FACE_NG-1/16_FACE_NG/src/rig_face_archetypes.c",
+    "nested/16_FACE_NG/16_FACE_NG/src/rig_face_archetypes.c",
+    "src_raw/rig_face_archetypes.c"
+   ],
+   "funciones": 15,
+   "injertadas": 3,
+   "variantes": 3,
+   "bytes": 92162,
+   "sha256": "d21708f6db7138980480eb83ebb1f55005784d76d6b8a251221279076af20738"
+  },
+  {
+   "orden": 21,
+   "archivo": "src/21_rig_face_codegen.c",
+   "modulo": "rig_face_codegen",
+   "canonica": "nested/Face_Pose_Body/rig_face_codegen.c",
+   "copias_fundidas": [
+    "nested/Face_Pose_Body/rig_face_codegen.c",
+    "nested/HEDERSFACE/src/rig_face_codegen.c",
+    "nested/rig_face_sovereign_complete/rig_face_sovereign_delivery/patched_originals/rig_face_codegen.c",
+    "nested/rig_face_v2_bridge/rig_face_codegen.c",
+    "nested/16_FACE_NG-1/16_FACE_NG/src/rig_face_codegen.c",
+    "nested/16_FACE_NG/16_FACE_NG/src/rig_face_codegen.c",
+    "src_raw/rig_face_codegen.c"
+   ],
+   "funciones": 9,
+   "injertadas": 2,
+   "variantes": 2,
+   "bytes": 30852,
+   "sha256": "c1a5068e5e5d535cae7c844af1fc0b5bc0ed854e7549e03a80ab92a7e32fec53"
+  },
+  {
+   "orden": 22,
+   "archivo": "src/22_rig_face_sovereign_body.c",
+   "modulo": "rig_face_sovereign_body",
+   "canonica": "nested/Face_Pose_Body/rig_face_sovereign_body.c",
+   "copias_fundidas": [
+    "nested/Face_Pose_Body/rig_face_sovereign_body.c",
+    "nested/HEDERSFACE/src/rig_face_sovereign_body.c",
+    "nested/rig_face_sovereign_complete/rig_face_sovereign_delivery/sovereign_src/rig_face_sovereign_body.c",
+    "nested/rig_face_v2_bridge/rig_face_sovereign_body.c",
+    "src_raw/rig_face_sovereign_body.c"
+   ],
+   "funciones": 20,
+   "injertadas": 0,
+   "variantes": 0,
+   "bytes": 15862,
+   "sha256": "aabed46550d07a6ba381656ef9ab4cb0c0173fd53f6102ac210c01aa8d4ac8bb"
+  },
+  {
+   "orden": 23,
+   "archivo": "src/23_rig_face_sovereign_core.c",
+   "modulo": "rig_face_sovereign_core",
+   "canonica": "nested/Face_Pose_Body/rig_face_sovereign_core.c",
+   "copias_fundidas": [
+    "nested/Face_Pose_Body/rig_face_sovereign_core.c",
+    "nested/HEDERSFACE/src/rig_face_sovereign_core.c",
+    "nested/rig_face_sovereign_complete/rig_face_sovereign_delivery/sovereign_src/rig_face_sovereign_core.c",
+    "nested/rig_face_v2_bridge/rig_face_sovereign_core.c",
+    "src_raw/rig_face_sovereign_core.c"
+   ],
+   "funciones": 35,
+   "injertadas": 0,
+   "variantes": 0,
+   "bytes": 19630,
+   "sha256": "feb0c5181b9e4811658e76346fbf670f921ea93faa664ae4cf493c83426aa858"
+  },
+  {
+   "orden": 24,
+   "archivo": "src/24_rig_face_sovereign_gltf.c",
+   "modulo": "rig_face_sovereign_gltf",
+   "canonica": "nested/Face_Pose_Body/rig_face_sovereign_gltf.c",
+   "copias_fundidas": [
+    "nested/Face_Pose_Body/rig_face_sovereign_gltf.c",
+    "nested/rig_face_sovereign_complete/rig_face_sovereign_delivery/sovereign_src/rig_face_sovereign_gltf.c",
+    "nested/rig_face_v2_bridge/rig_face_sovereign_gltf.c",
+    "src_raw/rig_face_sovereign_gltf.c",
+    "nested/HEDERSFACE/src/rig_face_sovereign_gltf.c"
+   ],
+   "funciones": 8,
+   "injertadas": 0,
+   "variantes": 0,
+   "bytes": 9858,
+   "sha256": "da84a457a99c0c2e80ac4e29b2df8a2bc16dc5734867cf649da879d4c73d8bce"
+  },
+  {
+   "orden": 25,
+   "archivo": "src/25_rig_face_sovereign_vision.c",
+   "modulo": "rig_face_sovereign_vision",
+   "canonica": "nested/Face_Pose_Body/rig_face_sovereign_vision.c",
+   "copias_fundidas": [
+    "nested/Face_Pose_Body/rig_face_sovereign_vision.c",
+    "nested/HEDERSFACE/src/rig_face_sovereign_vision.c",
+    "nested/rig_face_sovereign_complete/rig_face_sovereign_delivery/sovereign_src/rig_face_sovereign_vision.c",
+    "nested/rig_face_v2_bridge/rig_face_sovereign_vision.c",
+    "src_raw/rig_face_sovereign_vision.c"
+   ],
+   "funciones": 13,
+   "injertadas": 0,
+   "variantes": 0,
+   "bytes": 11973,
+   "sha256": "121c89687c83f006ec874d84ecc6760da5b57d56a1e440c53611e1fa6e07050d"
+  },
+  {
+   "orden": 26,
+   "archivo": "src/26_rig_face_sovereign_camera.c",
+   "modulo": "rig_face_sovereign_camera",
+   "canonica": "nested/Face_Pose_Body/rig_face_sovereign_camera.c",
+   "copias_fundidas": [
+    "nested/Face_Pose_Body/rig_face_sovereign_camera.c",
+    "nested/HEDERSFACE/src/rig_face_sovereign_camera.c",
+    "nested/rig_face_sovereign_complete/rig_face_sovereign_delivery/sovereign_src/rig_face_sovereign_camera.c",
+    "nested/rig_face_v2_bridge/rig_face_sovereign_camera.c",
+    "src_raw/rig_face_sovereign_camera.c"
+   ],
+   "funciones": 10,
+   "injertadas": 0,
+   "variantes": 0,
+   "bytes": 6676,
+   "sha256": "556c49c273c5f3c7ef5e4eb5f7123a34eb64d43122531e6813fedc7b46a75fa8"
+  },
+  {
+   "orden": 27,
+   "archivo": "src/27_rig_face_recon_bridge.c",
+   "modulo": "rig_face_recon_bridge",
+   "canonica": "src_raw/rig_face_recon_bridge-1.c",
+   "copias_fundidas": [
+    "src_raw/rig_face_recon_bridge-1.c"
+   ],
+   "funciones": 8,
+   "injertadas": 0,
+   "variantes": 0,
+   "bytes": 18853,
+   "sha256": "f9a8cf09e179d0ff57abec81b685d58b9c3f9cb6bb67c13ec89ecb39739e3b0c"
+  },
+  {
+   "orden": 28,
+   "archivo": "src/28_rig_face_sovereign_pathtrace.c",
+   "modulo": "rig_face_sovereign_pathtrace",
+   "canonica": "nested/Face_Pose_Body/rig_face_sovereign_pathtrace.c",
+   "copias_fundidas": [
+    "nested/Face_Pose_Body/rig_face_sovereign_pathtrace.c",
+    "nested/HEDERSFACE/src/rig_face_sovereign_pathtrace.c",
+    "nested/rig_face_sovereign_complete/rig_face_sovereign_delivery/sovereign_src/rig_face_sovereign_pathtrace.c",
+    "nested/rig_face_v2_bridge/rig_face_sovereign_pathtrace.c"
+   ],
+   "funciones": 34,
+   "injertadas": 0,
+   "variantes": 0,
+   "bytes": 10915,
+   "sha256": "83c985c7a429b2c5e29cd707a257d96e2308ddec2d804e1cdc386590c8873c2b"
+  },
+  {
+   "orden": 29,
+   "archivo": "src/29_rig_face_v2.c",
+   "modulo": "rig_face_v2",
+   "canonica": "nested/16_FACE_NG-1/16_FACE_NG/src/rig_face_v2.c",
+   "copias_fundidas": [
+    "nested/16_FACE_NG-1/16_FACE_NG/src/rig_face_v2.c",
+    "nested/16_FACE_NG/16_FACE_NG/src/rig_face_v2.c",
+    "nested/rig_face_v2_bridge/rig_face_v2.c",
+    "nested/Face_Pose_Body/rig_face_v2.c",
+    "nested/HEDERSFACE/src/rig_face_v2.c",
+    "nested/rig_face_sovereign_complete/rig_face_sovereign_delivery/patched_originals/rig_face_v2.c",
+    "src_raw/rig_face_v2.c"
+   ],
+   "funciones": 81,
+   "injertadas": 23,
+   "variantes": 22,
+   "bytes": 201496,
+   "sha256": "576e18745a34fc6b0a70ddeae00d9f59e0083c7faccb5224110fa1383584b7ac"
+  },
+  {
+   "orden": 30,
+   "archivo": "src/30_rig_face_v2_bridge.c",
+   "modulo": "rig_face_v2_bridge",
+   "canonica": "nested/rig_face_v2_bridge/rig_face_v2_bridge.c",
+   "copias_fundidas": [
+    "nested/rig_face_v2_bridge/rig_face_v2_bridge.c",
+    "nested/Face_Pose_Body/rig_face_v2_bridge.c",
+    "nested/HEDERSFACE/src/rig_face_v2_bridge.c",
+    "nested/rig_face_sovereign_complete/rig_face_sovereign_delivery/patched_originals/rig_face_v2_bridge.c",
+    "src_raw/rig_face_v2_bridge.c"
+   ],
+   "funciones": 13,
+   "injertadas": 5,
+   "variantes": 5,
+   "bytes": 52661,
+   "sha256": "61a8f2c51f477089fd904053acb42a4590bf45f7c61e1d6ee66e0688654be6bb"
+  },
+  {
+   "orden": 31,
+   "archivo": "src/31_rig_face_sovereign_cli.c",
+   "modulo": "rig_face_sovereign_cli",
+   "canonica": "nested/Face_Pose_Body/rig_face_sovereign_cli.c",
+   "copias_fundidas": [
+    "nested/Face_Pose_Body/rig_face_sovereign_cli.c",
+    "nested/HEDERSFACE/src/rig_face_sovereign_cli.c",
+    "nested/rig_face_sovereign_complete/rig_face_sovereign_delivery/sovereign_src/rig_face_sovereign_cli.c",
+    "nested/rig_face_v2_bridge/rig_face_sovereign_cli.c",
+    "src_raw/rig_face_sovereign_cli.c"
+   ],
+   "funciones": 7,
+   "injertadas": 0,
+   "variantes": 0,
+   "bytes": 8935,
+   "sha256": "6629867b7308ab4cc1b62dc293a12ce704472da8b432ba94636f6bf57aa3b712"
+  },
+  {
+   "orden": 32,
+   "archivo": "src/32_rig_face_pose_body_suite.c",
+   "modulo": "rig_face_pose_body_suite",
+   "canonica": "nested/rig_face_v2_bridge/rig_face_pose_body_suite.c",
+   "copias_fundidas": [
+    "nested/rig_face_v2_bridge/rig_face_pose_body_suite.c"
+   ],
+   "funciones": 13,
+   "injertadas": 0,
+   "variantes": 0,
+   "bytes": 13809,
+   "sha256": "ba06e401bc095a8e7d0fecfff9ee28de1875f42b0f3b127593ccba7c1733d4ff"
+  },
+  {
+   "orden": 33,
+   "archivo": "src/33_rig_face_pose_body_main.c",
+   "modulo": "rig_face_pose_body_main",
+   "canonica": "nested/rig_face_v2_bridge/rig_face_pose_body_main.c",
+   "copias_fundidas": [
+    "nested/rig_face_v2_bridge/rig_face_pose_body_main.c"
+   ],
+   "funciones": 3,
+   "injertadas": 0,
+   "variantes": 0,
+   "bytes": 3665,
+   "sha256": "f013dd3bbdd4c6f598b7fdc1c11d3c638d3265a1033820ab55c0da8a73e443c7"
+  }
+ ],
+ "variantes": [
+  {
+   "modulo": "rig_face_engine",
+   "canonico": "void",
+   "variante": "void__v2",
+   "tipo": "global",
+   "origen": "nested/16_FACE_NG-1/16_FACE_NG/src/rig_face_engine.c:26",
+   "almacenamiento": "extern",
+   "motivo": "dato global divergente; ausente en la copia canonica"
+  },
+  {
+   "modulo": "rig_face_engine",
+   "canonico": "void",
+   "variante": "void__v3",
+   "tipo": "global",
+   "origen": "nested/16_FACE_NG-1/16_FACE_NG/src/rig_face_engine.c:44",
+   "almacenamiento": "extern",
+   "motivo": "dato global divergente; ausente en la copia canonica"
+  },
+  {
+   "modulo": "rig_face_engine",
+   "canonico": "void",
+   "variante": "void__v4",
+   "tipo": "global",
+   "origen": "nested/16_FACE_NG-1/16_FACE_NG/src/rig_face_engine.c:64",
+   "almacenamiento": "extern",
+   "motivo": "dato global divergente; ausente en la copia canonica"
+  },
+  {
+   "modulo": "rig_face_engine",
+   "canonico": "depth",
+   "variante": "depth__v2",
+   "tipo": "global",
+   "origen": "nested/16_FACE_NG-1/16_FACE_NG/src/rig_face_engine.c:236",
+   "almacenamiento": "extern",
+   "motivo": "dato global divergente; ausente en la copia canonica"
+  },
+  {
+   "modulo": "rig_face_engine",
+   "canonico": "height",
+   "variante": "height__v2",
+   "tipo": "global",
+   "origen": "nested/16_FACE_NG-1/16_FACE_NG/src/rig_face_engine.c:262",
+   "almacenamiento": "extern",
+   "motivo": "dato global divergente; ausente en la copia canonica"
+  },
+  {
+   "modulo": "rig_face_engine",
+   "canonico": "amount",
+   "variante": "amount__v2",
+   "tipo": "global",
+   "origen": "nested/16_FACE_NG-1/16_FACE_NG/src/rig_face_engine.c:275",
+   "almacenamiento": "extern",
+   "motivo": "dato global divergente; ausente en la copia canonica"
+  },
+  {
+   "modulo": "rig_face_engine",
+   "canonico": "zones",
+   "variante": "zones__v2",
+   "tipo": "global",
+   "origen": "nested/16_FACE_NG-1/16_FACE_NG/src/rig_face_engine.c:925",
+   "almacenamiento": "extern",
+   "motivo": "dato global divergente; ausente en la copia canonica"
+  },
+  {
+   "modulo": "rig_face_engine",
+   "canonico": "RIG_FACE_BONES",
+   "variante": "RIG_FACE_BONES__v2",
+   "tipo": "global",
+   "origen": "nested/16_FACE_NG-1/16_FACE_NG/src/rig_face_engine.c:1114",
+   "almacenamiento": "extern",
+   "motivo": "dato global divergente; ausente en la copia canonica"
+  },
+  {
+   "modulo": "rig_face_engine",
+   "canonico": "tail",
+   "variante": "tail__v2",
+   "tipo": "global",
+   "origen": "nested/16_FACE_NG-1/16_FACE_NG/src/rig_face_engine.c:1142",
+   "almacenamiento": "extern",
+   "motivo": "dato global divergente; ausente en la copia canonica"
+  },
+  {
+   "modulo": "rig_face_engine",
+   "canonico": "mode",
+   "variante": "mode__v2",
+   "tipo": "global",
+   "origen": "nested/16_FACE_NG-1/16_FACE_NG/src/rig_face_engine.c:1391",
+   "almacenamiento": "extern",
+   "motivo": "dato global divergente; ausente en la copia canonica"
+  },
+  {
+   "modulo": "rig_face_engine",
+   "canonico": "rig_face_build_neck",
+   "variante": "rig_face_build_neck__v2",
+   "tipo": "function",
+   "origen": "nested/Face_Pose_Body/rig_face_engine.c:782",
+   "almacenamiento": "extern",
+   "motivo": "cuerpo divergente; ausente en la copia canonica"
+  },
+  {
+   "modulo": "rig_face_engine",
+   "canonico": "rig_face_project_to_skull",
+   "variante": "rig_face_project_to_skull__v2",
+   "tipo": "function",
+   "origen": "nested/Face_Pose_Body/rig_face_engine.c:1694",
+   "almacenamiento": "extern",
+   "motivo": "cuerpo divergente; ausente en la copia canonica"
+  },
+  {
+   "modulo": "rig_face_engine",
+   "canonico": "arena_init",
+   "variante": "arena_init__v2",
+   "tipo": "function",
+   "origen": "nested/16_FACE_NG-1/16_FACE_NG/src/rig_face_engine.c:18",
+   "almacenamiento": "static",
+   "motivo": "cuerpo divergente; ausente en la copia canonica"
+  },
+  {
+   "modulo": "rig_face_engine",
+   "canonico": "arena_alloc",
+   "variante": "arena_alloc__v2",
+   "tipo": "function",
+   "origen": "nested/16_FACE_NG-1/16_FACE_NG/src/rig_face_engine.c:30",
+   "almacenamiento": "static",
+   "motivo": "cuerpo divergente; ausente en la copia canonica"
+  },
+  {
+   "modulo": "rig_face_engine",
+   "canonico": "arena_reset",
+   "variante": "arena_reset__v2",
+   "tipo": "function",
+   "origen": "nested/16_FACE_NG-1/16_FACE_NG/src/rig_face_engine.c:42",
+   "almacenamiento": "static",
+   "motivo": "cuerpo divergente; ausente en la copia canonica"
+  },
+  {
+   "modulo": "rig_face_engine",
+   "canonico": "edge_table_clear",
+   "variante": "edge_table_clear__v2",
+   "tipo": "function",
+   "origen": "nested/16_FACE_NG-1/16_FACE_NG/src/rig_face_engine.c:59",
+   "almacenamiento": "static",
+   "motivo": "cuerpo divergente; ausente en la copia canonica"
+  },
+  {
+   "modulo": "rig_face_engine",
+   "canonico": "edge_get_or_create",
+   "variante": "edge_get_or_create__v2",
+   "tipo": "function",
+   "origen": "nested/16_FACE_NG-1/16_FACE_NG/src/rig_face_engine.c:68",
+   "almacenamiento": "static",
+   "motivo": "cuerpo divergente; ausente en la copia canonica"
+  },
+  {
+   "modulo": "rig_face_engine",
+   "canonico": "rig_face_build_base_sphere",
+   "variante": "rig_face_build_base_sphere__v2",
+   "tipo": "function",
+   "origen": "nested/16_FACE_NG-1/16_FACE_NG/src/rig_face_engine.c:122",
+   "almacenamiento": "extern",
+   "motivo": "cuerpo divergente; ausente en la copia canonica"
+  },
+  {
+   "modulo": "rig_face_engine",
+   "canonico": "rig_face_subdivide_catmull_clark",
+   "variante": "rig_face_subdivide_catmull_clark__v2",
+   "tipo": "function",
+   "origen": "nested/16_FACE_NG-1/16_FACE_NG/src/rig_face_engine.c:144",
+   "almacenamiento": "extern",
+   "motivo": "cuerpo divergente; ausente en la copia canonica"
+  },
+  {
+   "modulo": "rig_face_engine",
+   "canonico": "rig_face_apply_cranial_deform",
+   "variante": "rig_face_apply_cranial_deform__v2",
+   "tipo": "function",
+   "origen": "nested/16_FACE_NG-1/16_FACE_NG/src/rig_face_engine.c:189",
+   "almacenamiento": "extern",
+   "motivo": "cuerpo divergente; ausente en la copia canonica"
+  },
+  {
+   "modulo": "rig_face_engine",
+   "canonico": "sculpt_sink",
+   "variante": "sculpt_sink__v2",
+   "tipo": "function",
+   "origen": "nested/16_FACE_NG-1/16_FACE_NG/src/rig_face_engine.c:226",
+   "almacenamiento": "static",
+   "motivo": "cuerpo divergente; ausente en la copia canonica"
+  },
+  {
+   "modulo": "rig_face_engine",
+   "canonico": "sculpt_raise",
+   "variante": "sculpt_raise__v2",
+   "tipo": "function",
+   "origen": "nested/16_FACE_NG-1/16_FACE_NG/src/rig_face_engine.c:240",
+   "almacenamiento": "static",
+   "motivo": "cuerpo divergente; ausente en la copia canonica"
+  },
+  {
+   "modulo": "rig_face_engine",
+   "canonico": "sculpt_push",
+   "variante": "sculpt_push__v2",
+   "tipo": "function",
+   "origen": "nested/16_FACE_NG-1/16_FACE_NG/src/rig_face_engine.c:266",
+   "almacenamiento": "static",
+   "motivo": "cuerpo divergente; ausente en la copia canonica"
+  },
+  {
+   "modulo": "rig_face_engine",
+   "canonico": "rig_face_sculpt_features",
+   "variante": "rig_face_sculpt_features__v2",
+   "tipo": "function",
+   "origen": "nested/16_FACE_NG-1/16_FACE_NG/src/rig_face_engine.c:279",
+   "almacenamiento": "extern",
+   "motivo": "cuerpo divergente; ausente en la copia canonica"
+  },
+  {
+   "modulo": "rig_face_engine",
+   "canonico": "rig_face_compute_smooth_normals",
+   "variante": "rig_face_compute_smooth_normals__v2",
+   "tipo": "function",
+   "origen": "nested/16_FACE_NG-1/16_FACE_NG/src/rig_face_engine.c:374",
+   "almacenamiento": "extern",
+   "motivo": "cuerpo divergente; ausente en la copia canonica"
+  },
+  {
+   "modulo": "rig_face_engine",
+   "canonico": "rig_face_compute_tangent_basis",
+   "variante": "rig_face_compute_tangent_basis__v2",
+   "tipo": "function",
+   "origen": "nested/16_FACE_NG-1/16_FACE_NG/src/rig_face_engine.c:432",
+   "almacenamiento": "extern",
+   "motivo": "cuerpo divergente; ausente en la copia canonica"
+  },
+  {
+   "modulo": "rig_face_engine",
+   "canonico": "rig_face_bake_vertex_color",
+   "variante": "rig_face_bake_vertex_color__v2",
+   "tipo": "function",
+   "origen": "nested/16_FACE_NG-1/16_FACE_NG/src/rig_face_engine.c:537",
+   "almacenamiento": "extern",
+   "motivo": "cuerpo divergente; ausente en la copia canonica"
+  },
+  {
+   "modulo": "rig_face_engine",
+   "canonico": "rig_face_unwrap_uv_seams",
+   "variante": "rig_face_unwrap_uv_seams__v2",
+   "tipo": "function",
+   "origen": "nested/16_FACE_NG-1/16_FACE_NG/src/rig_face_engine.c:584",
+   "almacenamiento": "extern",
+   "motivo": "cuerpo divergente; ausente en la copia canonica"
+  },
+  {
+   "modulo": "rig_face_engine",
+   "canonico": "rig_face_export_glsl_uniforms",
+   "variante": "rig_face_export_glsl_uniforms__v2",
+   "tipo": "function",
+   "origen": "nested/16_FACE_NG-1/16_FACE_NG/src/rig_face_engine.c:664",
+   "almacenamiento": "extern",
+   "motivo": "cuerpo divergente; ausente en la copia canonica"
+  },
+  {
+   "modulo": "rig_face_engine",
+   "canonico": "rig_face_create",
+   "variante": "rig_face_create__v2",
+   "tipo": "function",
+   "origen": "nested/16_FACE_NG-1/16_FACE_NG/src/rig_face_engine.c:692",
+   "almacenamiento": "extern",
+   "motivo": "cuerpo divergente; ausente en la copia canonica"
+  },
+  {
+   "modulo": "rig_face_engine",
+   "canonico": "rig_face_destroy",
+   "variante": "rig_face_destroy__v2",
+   "tipo": "function",
+   "origen": "nested/16_FACE_NG-1/16_FACE_NG/src/rig_face_engine.c:734",
+   "almacenamiento": "extern",
+   "motivo": "cuerpo divergente; ausente en la copia canonica"
+  },
+  {
+   "modulo": "rig_face_engine",
+   "canonico": "rig_face_build_neck",
+   "variante": "rig_face_build_neck__v3",
+   "tipo": "function",
+   "origen": "nested/16_FACE_NG-1/16_FACE_NG/src/rig_face_engine.c:740",
+   "almacenamiento": "extern",
+   "motivo": "cuerpo divergente; ausente en la copia canonica"
+  },
+  {
+   "modulo": "rig_face_engine",
+   "canonico": "facs_compute_zone_centers",
+   "variante": "facs_compute_zone_centers__v2",
+   "tipo": "function",
+   "origen": "nested/16_FACE_NG-1/16_FACE_NG/src/rig_face_engine.c:898",
+   "almacenamiento": "static",
+   "motivo": "cuerpo divergente; ausente en la copia canonica"
+  },
+  {
+   "modulo": "rig_face_engine",
+   "canonico": "rig_face_build_facs_shapes",
+   "variante": "rig_face_build_facs_shapes__v2",
+   "tipo": "function",
+   "origen": "nested/16_FACE_NG-1/16_FACE_NG/src/rig_face_engine.c:929",
+   "almacenamiento": "extern",
+   "motivo": "cuerpo divergente; ausente en la copia canonica"
+  },
+  {
+   "modulo": "rig_face_engine",
+   "canonico": "rig_face_apply_expression",
+   "variante": "rig_face_apply_expression__v2",
+   "tipo": "function",
+   "origen": "nested/16_FACE_NG-1/16_FACE_NG/src/rig_face_engine.c:984",
+   "almacenamiento": "extern",
+   "motivo": "cuerpo divergente; ausente en la copia canonica"
+  },
+  {
+   "modulo": "rig_face_engine",
+   "canonico": "rig_face_solve_psd",
+   "variante": "rig_face_solve_psd__v2",
+   "tipo": "function",
+   "origen": "nested/16_FACE_NG-1/16_FACE_NG/src/rig_face_engine.c:1003",
+   "almacenamiento": "extern",
+   "motivo": "cuerpo divergente; ausente en la copia canonica"
+  },
+  {
+   "modulo": "rig_face_engine",
+   "canonico": "bones_from_params",
+   "variante": "bones_from_params__v2",
+   "tipo": "function",
+   "origen": "nested/16_FACE_NG-1/16_FACE_NG/src/rig_face_engine.c:1048",
+   "almacenamiento": "static",
+   "motivo": "cuerpo divergente; ausente en la copia canonica"
+  },
+  {
+   "modulo": "rig_face_engine",
+   "canonico": "bone_build_bind",
+   "variante": "bone_build_bind__v2",
+   "tipo": "function",
+   "origen": "nested/16_FACE_NG-1/16_FACE_NG/src/rig_face_engine.c:1118",
+   "almacenamiento": "static",
+   "motivo": "cuerpo divergente; ausente en la copia canonica"
+  },
+  {
+   "modulo": "rig_face_engine",
+   "canonico": "rig_face_bind_skeleton",
+   "variante": "rig_face_bind_skeleton__v2",
+   "tipo": "function",
+   "origen": "nested/16_FACE_NG-1/16_FACE_NG/src/rig_face_engine.c:1146",
+   "almacenamiento": "extern",
+   "motivo": "cuerpo divergente; ausente en la copia canonica"
+  },
+  {
+   "modulo": "rig_face_engine",
+   "canonico": "rig_face_skin_dual_quaternion",
+   "variante": "rig_face_skin_dual_quaternion__v2",
+   "tipo": "function",
+   "origen": "nested/16_FACE_NG-1/16_FACE_NG/src/rig_face_engine.c:1285",
+   "almacenamiento": "extern",
+   "motivo": "cuerpo divergente; ausente en la copia canonica"
+  },
+  {
+   "modulo": "rig_face_engine",
+   "canonico": "raster_tri",
+   "variante": "raster_tri__v2",
+   "tipo": "function",
+   "origen": "nested/16_FACE_NG-1/16_FACE_NG/src/rig_face_engine.c:1332",
+   "almacenamiento": "static",
+   "motivo": "cuerpo divergente; ausente en la copia canonica"
+  },
+  {
+   "modulo": "rig_face_engine",
+   "canonico": "rig_face_generate_normal_map",
+   "variante": "rig_face_generate_normal_map__v2",
+   "tipo": "function",
+   "origen": "nested/16_FACE_NG-1/16_FACE_NG/src/rig_face_engine.c:1395",
+   "almacenamiento": "extern",
+   "motivo": "cuerpo divergente; ausente en la copia canonica"
+  },
+  {
+   "modulo": "rig_face_engine",
+   "canonico": "rig_face_generate_sss_map",
+   "variante": "rig_face_generate_sss_map__v2",
+   "tipo": "function",
+   "origen": "nested/16_FACE_NG-1/16_FACE_NG/src/rig_face_engine.c:1414",
+   "almacenamiento": "extern",
+   "motivo": "cuerpo divergente; ausente en la copia canonica"
+  },
+  {
+   "modulo": "rig_face_engine",
+   "canonico": "rig_face_project_to_skull",
+   "variante": "rig_face_project_to_skull__v3",
+   "tipo": "function",
+   "origen": "nested/16_FACE_NG-1/16_FACE_NG/src/rig_face_engine.c:1641",
+   "almacenamiento": "extern",
+   "motivo": "cuerpo divergente; ausente en la copia canonica"
+  },
+  {
+   "modulo": "rig_face_ng_anim",
+   "canonico": "NG_FACS_TABLE",
+   "variante": "NG_FACS_TABLE__v2",
+   "tipo": "global",
+   "origen": "nested/rig_face_ng_v24/tmp/rig_ng_package/src/rig_face_ng_anim.c:102",
+   "almacenamiento": "static",
+   "motivo": "dato global divergente; ausente en la copia canonica"
+  },
+  {
+   "modulo": "rig_face_ng_anim",
+   "canonico": "NG_PHONEME_TABLE",
+   "variante": "NG_PHONEME_TABLE__v2",
+   "tipo": "global",
+   "origen": "nested/rig_face_ng_v24/tmp/rig_ng_package/src/rig_face_ng_anim.c:318",
+   "almacenamiento": "static",
+   "motivo": "dato global divergente; ausente en la copia canonica"
+  },
+  {
+   "modulo": "rig_face_ng_anim",
+   "canonico": "rig_face_ng_anim_generate",
+   "variante": "rig_face_ng_anim_generate__v2",
+   "tipo": "function",
+   "origen": "nested/16_FACE_NG-1/16_FACE_NG/src/rig_face_ng.c:3736",
+   "almacenamiento": "extern",
+   "motivo": "cuerpo divergente; absorbido de rig_face_ng"
+  },
+  {
+   "modulo": "rig_face_ng_assembly",
+   "canonico": "NG_JS_RUNTIME",
+   "variante": "NG_JS_RUNTIME__v2",
+   "tipo": "global",
+   "origen": "nested/rig_face_v2_bridge/rig_face_ng_assembly.c:224",
+   "almacenamiento": "static",
+   "motivo": "dato global divergente; ausente en la copia canonica"
+  },
+  {
+   "modulo": "rig_face_ng_assembly",
+   "canonico": "NG_JS_RUNTIME",
+   "variante": "NG_JS_RUNTIME__v3",
+   "tipo": "global",
+   "origen": "nested/rig_face_ng_v24/tmp/rig_ng_package/src/rig_face_ng_assembly.c:224",
+   "almacenamiento": "static",
+   "motivo": "dato global divergente; ausente en la copia canonica"
+  },
+  {
+   "modulo": "rig_face_ng_assembly",
+   "canonico": "rig_face_ng_generate_html",
+   "variante": "rig_face_ng_generate_html__v2",
+   "tipo": "function",
+   "origen": "nested/rig_face_v2_bridge/rig_face_ng_assembly.c:1060",
+   "almacenamiento": "extern",
+   "motivo": "cuerpo divergente; ausente en la copia canonica"
+  },
+  {
+   "modulo": "rig_face_ng_assembly",
+   "canonico": "rig_face_ng_generate_html",
+   "variante": "rig_face_ng_generate_html__v3",
+   "tipo": "function",
+   "origen": "nested/rig_face_ng_v24/tmp/rig_ng_package/src/rig_face_ng_assembly.c:1033",
+   "almacenamiento": "extern",
+   "motivo": "cuerpo divergente; ausente en la copia canonica"
+  },
+  {
+   "modulo": "rig_face_ng_assembly",
+   "canonico": "rig_face_ng_params_default",
+   "variante": "rig_face_ng_params_default__v2",
+   "tipo": "function",
+   "origen": "nested/rig_face_ng_v24/tmp/rig_ng_package/src/rig_face_ng_assembly.c:1343",
+   "almacenamiento": "extern",
+   "motivo": "cuerpo divergente; ausente en la copia canonica"
+  },
+  {
+   "modulo": "rig_face_ng_assembly",
+   "canonico": "rig_face_ng_result_free",
+   "variante": "rig_face_ng_result_free__v2",
+   "tipo": "function",
+   "origen": "nested/rig_face_ng_v24/tmp/rig_ng_package/src/rig_face_ng_assembly.c:1402",
+   "almacenamiento": "extern",
+   "motivo": "cuerpo divergente; ausente en la copia canonica"
+  },
+  {
+   "modulo": "rig_face_ng_assembly",
+   "canonico": "rig_face_ng_generate_html",
+   "variante": "rig_face_ng_generate_html__v4",
+   "tipo": "function",
+   "origen": "nested/16_FACE_NG-1/16_FACE_NG/src/rig_face_ng.c:4842",
+   "almacenamiento": "extern",
+   "motivo": "cuerpo divergente; absorbido de rig_face_ng"
+  },
+  {
+   "modulo": "rig_face_ng_eyes",
+   "canonico": "eye_dynamics_init",
+   "variante": "eye_dynamics_init__v2",
+   "tipo": "function",
+   "origen": "nested/rig_face_v2_bridge/rig_face_ng_eyes.c:493",
+   "almacenamiento": "extern",
+   "motivo": "cuerpo divergente; ausente en la copia canonica"
+  },
+  {
+   "modulo": "rig_face_ng_eyes",
+   "canonico": "eye_dynamics_init",
+   "variante": "eye_dynamics_init__v3",
+   "tipo": "function",
+   "origen": "nested/rig_face_ng_v24/tmp/rig_ng_package/src/rig_face_ng_eyes.c:487",
+   "almacenamiento": "static",
+   "motivo": "cuerpo divergente; ausente en la copia canonica"
+  },
+  {
+   "modulo": "rig_face_ng_eyes",
+   "canonico": "eye_dynamics_update",
+   "variante": "eye_dynamics_update__v2",
+   "tipo": "function",
+   "origen": "nested/rig_face_ng_v24/tmp/rig_ng_package/src/rig_face_ng_eyes.c:501",
+   "almacenamiento": "extern",
+   "motivo": "cuerpo divergente; ausente en la copia canonica"
+  },
+  {
+   "modulo": "rig_face_ng_eyes",
+   "canonico": "eye_dynamics_set_gaze",
+   "variante": "eye_dynamics_set_gaze__v2",
+   "tipo": "function",
+   "origen": "nested/rig_face_ng_v24/tmp/rig_ng_package/src/rig_face_ng_eyes.c:584",
+   "almacenamiento": "extern",
+   "motivo": "cuerpo divergente; ausente en la copia canonica"
+  },
+  {
+   "modulo": "rig_face_ng_hair",
+   "canonico": "hair_strand_init",
+   "variante": "hair_strand_init__v2",
+   "tipo": "function",
+   "origen": "nested/rig_face_ng_v24/tmp/rig_ng_package/src/rig_face_ng_hair.c:504",
+   "almacenamiento": "static",
+   "motivo": "cuerpo divergente; ausente en la copia canonica"
+  },
+  {
+   "modulo": "rig_face_ng_hair",
+   "canonico": "hair_sim_step",
+   "variante": "hair_sim_step__v2",
+   "tipo": "function",
+   "origen": "nested/rig_face_ng_v24/tmp/rig_ng_package/src/rig_face_ng_hair.c:563",
+   "almacenamiento": "extern",
+   "motivo": "cuerpo divergente; ausente en la copia canonica"
+  },
+  {
+   "modulo": "rig_face_ng_hair",
+   "canonico": "hair_sim_free",
+   "variante": "hair_sim_free__v2",
+   "tipo": "function",
+   "origen": "nested/rig_face_ng_v24/tmp/rig_ng_package/src/rig_face_ng_hair.c:685",
+   "almacenamiento": "extern",
+   "motivo": "cuerpo divergente; ausente en la copia canonica"
+  },
+  {
+   "modulo": "rig_face_ng_hair",
+   "canonico": "hair_strand_init",
+   "variante": "hair_strand_init__v3",
+   "tipo": "function",
+   "origen": "nested/rig_face_v2_bridge/rig_face_ng_hair.c:449",
+   "almacenamiento": "extern",
+   "motivo": "cuerpo divergente; ausente en la copia canonica"
+  },
+  {
+   "modulo": "rig_face_ng_hair",
+   "canonico": "hair_strand_init",
+   "variante": "hair_strand_init__v4",
+   "tipo": "function",
+   "origen": "nested/16_FACE_NG-1/16_FACE_NG/src/rig_face_ng.c:2300",
+   "almacenamiento": "static",
+   "motivo": "cuerpo divergente; absorbido de rig_face_ng"
+  },
+  {
+   "modulo": "rig_face_archetypes",
+   "canonico": "void",
+   "variante": "void__v2",
+   "tipo": "global",
+   "origen": "nested/16_FACE_NG-1/16_FACE_NG/src/rig_face_archetypes.c:929",
+   "almacenamiento": "extern",
+   "motivo": "dato global divergente; ausente en la copia canonica"
+  },
+  {
+   "modulo": "rig_face_archetypes",
+   "canonico": "init_archetypes",
+   "variante": "init_archetypes__v2",
+   "tipo": "function",
+   "origen": "nested/16_FACE_NG-1/16_FACE_NG/src/rig_face_archetypes.c:151",
+   "almacenamiento": "static",
+   "motivo": "cuerpo divergente; ausente en la copia canonica"
+  },
+  {
+   "modulo": "rig_face_archetypes",
+   "canonico": "rig_archetype_list_all",
+   "variante": "rig_archetype_list_all__v2",
+   "tipo": "function",
+   "origen": "nested/16_FACE_NG-1/16_FACE_NG/src/rig_face_archetypes.c:971",
+   "almacenamiento": "extern",
+   "motivo": "cuerpo divergente; ausente en la copia canonica"
+  },
+  {
+   "modulo": "rig_face_codegen",
+   "canonico": "sz",
+   "variante": "sz__v2",
+   "tipo": "global",
+   "origen": "nested/16_FACE_NG-1/16_FACE_NG/src/rig_face_codegen.c:24",
+   "almacenamiento": "extern",
+   "motivo": "dato global divergente; ausente en la copia canonica"
+  },
+  {
+   "modulo": "rig_face_codegen",
+   "canonico": "cg_timestamp",
+   "variante": "cg_timestamp__v2",
+   "tipo": "function",
+   "origen": "nested/16_FACE_NG-1/16_FACE_NG/src/rig_face_codegen.c:14",
+   "almacenamiento": "static",
+   "motivo": "cuerpo divergente; ausente en la copia canonica"
+  },
+  {
+   "modulo": "rig_face_v2",
+   "canonico": "rig_face_v2_mouth_geo",
+   "variante": "rig_face_v2_mouth_geo__v2",
+   "tipo": "function",
+   "origen": "nested/rig_face_v2_bridge/rig_face_v2.c:524",
+   "almacenamiento": "extern",
+   "motivo": "cuerpo divergente; ausente en la copia canonica"
+  },
+  {
+   "modulo": "rig_face_v2",
+   "canonico": "fc_lerp",
+   "variante": "fc_lerp__v2",
+   "tipo": "function",
+   "origen": "src_raw/rig_face_v2.c:27",
+   "almacenamiento": "static",
+   "motivo": "cuerpo divergente; ausente en la copia canonica"
+  },
+  {
+   "modulo": "rig_face_v2",
+   "canonico": "fc_smoothstep",
+   "variante": "fc_smoothstep__v2",
+   "tipo": "function",
+   "origen": "src_raw/rig_face_v2.c:28",
+   "almacenamiento": "static",
+   "motivo": "cuerpo divergente; ausente en la copia canonica"
+  },
+  {
+   "modulo": "rig_face_v2",
+   "canonico": "v2_noise",
+   "variante": "v2_noise__v2",
+   "tipo": "function",
+   "origen": "nested/rig_face_v2_bridge/rig_face_engine_v2.c:25",
+   "almacenamiento": "static",
+   "motivo": "cuerpo divergente; absorbido de rig_face_engine_v2"
+  },
+  {
+   "modulo": "rig_face_v2",
+   "canonico": "rig_face_v2_create",
+   "variante": "rig_face_v2_create__v2",
+   "tipo": "function",
+   "origen": "nested/rig_face_v2_bridge/rig_face_engine_v2.c:64",
+   "almacenamiento": "extern",
+   "motivo": "cuerpo divergente; absorbido de rig_face_engine_v2"
+  },
+  {
+   "modulo": "rig_face_v2",
+   "canonico": "rig_face_v2_destroy",
+   "variante": "rig_face_v2_destroy__v2",
+   "tipo": "function",
+   "origen": "nested/rig_face_v2_bridge/rig_face_engine_v2.c:135",
+   "almacenamiento": "extern",
+   "motivo": "cuerpo divergente; absorbido de rig_face_engine_v2"
+  },
+  {
+   "modulo": "rig_face_v2",
+   "canonico": "rig_face_build_pore_system",
+   "variante": "rig_face_build_pore_system__v2",
+   "tipo": "function",
+   "origen": "nested/rig_face_v2_bridge/rig_face_engine_v2.c:155",
+   "almacenamiento": "extern",
+   "motivo": "cuerpo divergente; absorbido de rig_face_engine_v2"
+  },
+  {
+   "modulo": "rig_face_v2",
+   "canonico": "rig_face_build_vascular_tree",
+   "variante": "rig_face_build_vascular_tree__v2",
+   "tipo": "function",
+   "origen": "nested/rig_face_v2_bridge/rig_face_engine_v2.c:214",
+   "almacenamiento": "extern",
+   "motivo": "cuerpo divergente; absorbido de rig_face_engine_v2"
+  },
+  {
+   "modulo": "rig_face_v2",
+   "canonico": "rig_face_build_wrinkle_lines",
+   "variante": "rig_face_build_wrinkle_lines__v2",
+   "tipo": "function",
+   "origen": "nested/rig_face_v2_bridge/rig_face_engine_v2.c:254",
+   "almacenamiento": "extern",
+   "motivo": "cuerpo divergente; absorbido de rig_face_engine_v2"
+  },
+  {
+   "modulo": "rig_face_v2",
+   "canonico": "rig_age_apply_to_mesh",
+   "variante": "rig_age_apply_to_mesh__v2",
+   "tipo": "function",
+   "origen": "nested/rig_face_v2_bridge/rig_face_engine_v2.c:325",
+   "almacenamiento": "extern",
+   "motivo": "cuerpo divergente; absorbido de rig_face_engine_v2"
+  },
+  {
+   "modulo": "rig_face_v2",
+   "canonico": "rig_face_build_iris_geometry",
+   "variante": "rig_face_build_iris_geometry__v2",
+   "tipo": "function",
+   "origen": "nested/rig_face_v2_bridge/rig_face_engine_v2.c:402",
+   "almacenamiento": "extern",
+   "motivo": "cuerpo divergente; absorbido de rig_face_engine_v2"
+  },
+  {
+   "modulo": "rig_face_v2",
+   "canonico": "rig_face_bake_iris_texture",
+   "variante": "rig_face_bake_iris_texture__v2",
+   "tipo": "function",
+   "origen": "nested/rig_face_v2_bridge/rig_face_engine_v2.c:413",
+   "almacenamiento": "extern",
+   "motivo": "cuerpo divergente; absorbido de rig_face_engine_v2"
+  },
+  {
+   "modulo": "rig_face_v2",
+   "canonico": "rig_iris_set_pupil_dilation",
+   "variante": "rig_iris_set_pupil_dilation__v2",
+   "tipo": "function",
+   "origen": "nested/rig_face_v2_bridge/rig_face_engine_v2.c:447",
+   "almacenamiento": "extern",
+   "motivo": "cuerpo divergente; absorbido de rig_face_engine_v2"
+  },
+  {
+   "modulo": "rig_face_v2",
+   "canonico": "rig_face_build_ear_geometry",
+   "variante": "rig_face_build_ear_geometry__v2",
+   "tipo": "function",
+   "origen": "nested/rig_face_v2_bridge/rig_face_engine_v2.c:471",
+   "almacenamiento": "extern",
+   "motivo": "cuerpo divergente; absorbido de rig_face_engine_v2"
+  },
+  {
+   "modulo": "rig_face_v2",
+   "canonico": "rig_face_attach_ears",
+   "variante": "rig_face_attach_ears__v2",
+   "tipo": "function",
+   "origen": "nested/rig_face_v2_bridge/rig_face_engine_v2.c:519",
+   "almacenamiento": "extern",
+   "motivo": "cuerpo divergente; absorbido de rig_face_engine_v2"
+  },
+  {
+   "modulo": "rig_face_v2",
+   "canonico": "rig_face_sculpt_lips_v2",
+   "variante": "rig_face_sculpt_lips_v2__v2",
+   "tipo": "function",
+   "origen": "nested/rig_face_v2_bridge/rig_face_engine_v2.c:548",
+   "almacenamiento": "extern",
+   "motivo": "cuerpo divergente; absorbido de rig_face_engine_v2"
+  },
+  {
+   "modulo": "rig_face_v2",
+   "canonico": "rig_face_bake_lip_color_map",
+   "variante": "rig_face_bake_lip_color_map__v2",
+   "tipo": "function",
+   "origen": "nested/rig_face_v2_bridge/rig_face_engine_v2.c:567",
+   "almacenamiento": "extern",
+   "motivo": "cuerpo divergente; absorbido de rig_face_engine_v2"
+  },
+  {
+   "modulo": "rig_face_v2",
+   "canonico": "rig_face_bake_pore_normal_map",
+   "variante": "rig_face_bake_pore_normal_map__v2",
+   "tipo": "function",
+   "origen": "nested/rig_face_v2_bridge/rig_face_engine_v2.c:617",
+   "almacenamiento": "extern",
+   "motivo": "cuerpo divergente; absorbido de rig_face_engine_v2"
+  },
+  {
+   "modulo": "rig_face_v2",
+   "canonico": "rig_face_bake_vascular_map",
+   "variante": "rig_face_bake_vascular_map__v2",
+   "tipo": "function",
+   "origen": "nested/rig_face_v2_bridge/rig_face_engine_v2.c:623",
+   "almacenamiento": "extern",
+   "motivo": "cuerpo divergente; absorbido de rig_face_engine_v2"
+  },
+  {
+   "modulo": "rig_face_v2",
+   "canonico": "rig_face_bake_wrinkle_normal_map",
+   "variante": "rig_face_bake_wrinkle_normal_map__v2",
+   "tipo": "function",
+   "origen": "nested/rig_face_v2_bridge/rig_face_engine_v2.c:629",
+   "almacenamiento": "extern",
+   "motivo": "cuerpo divergente; absorbido de rig_face_engine_v2"
+  },
+  {
+   "modulo": "rig_face_v2",
+   "canonico": "rig_face_build_follicle_map",
+   "variante": "rig_face_build_follicle_map__v2",
+   "tipo": "function",
+   "origen": "nested/rig_face_v2_bridge/rig_face_engine_v2.c:734",
+   "almacenamiento": "extern",
+   "motivo": "cuerpo divergente; absorbido de rig_face_engine_v2"
+  },
+  {
+   "modulo": "rig_face_v2",
+   "canonico": "rig_face_build_ear_geometry",
+   "variante": "rig_face_build_ear_geometry__v3",
+   "tipo": "function",
+   "origen": "nested/Face_Pose_Body/rig_face_engine_v2.c:471",
+   "almacenamiento": "extern",
+   "motivo": "cuerpo divergente; absorbido de rig_face_engine_v2"
+  },
+  {
+   "modulo": "rig_face_v2_bridge",
+   "canonico": "rigart_renderer_html_v4",
+   "variante": "rigart_renderer_html_v4__v2",
+   "tipo": "function",
+   "origen": "nested/Face_Pose_Body/rig_face_v2_bridge.c:398",
+   "almacenamiento": "extern",
+   "motivo": "cuerpo divergente; ausente en la copia canonica"
+  },
+  {
+   "modulo": "rig_face_v2_bridge",
+   "canonico": "b4_str",
+   "variante": "b4_str__v2",
+   "tipo": "function",
+   "origen": "src_raw/rig_face_v2_bridge.c:43",
+   "almacenamiento": "static",
+   "motivo": "cuerpo divergente; ausente en la copia canonica"
+  },
+  {
+   "modulo": "rig_face_v2_bridge",
+   "canonico": "rigart_face_session_v2_init",
+   "variante": "rigart_face_session_v2_init__v2",
+   "tipo": "function",
+   "origen": "src_raw/rig_face_v2_bridge.c:60",
+   "almacenamiento": "extern",
+   "motivo": "cuerpo divergente; ausente en la copia canonica"
+  },
+  {
+   "modulo": "rig_face_v2_bridge",
+   "canonico": "rigart_face_session_v2_destroy",
+   "variante": "rigart_face_session_v2_destroy__v2",
+   "tipo": "function",
+   "origen": "src_raw/rig_face_v2_bridge.c:71",
+   "almacenamiento": "extern",
+   "motivo": "cuerpo divergente; ausente en la copia canonica"
+  },
+  {
+   "modulo": "rig_face_v2_bridge",
+   "canonico": "rigart_face_v2_dispatch",
+   "variante": "rigart_face_v2_dispatch__v2",
+   "tipo": "function",
+   "origen": "src_raw/rig_face_v2_bridge.c:78",
+   "almacenamiento": "extern",
+   "motivo": "cuerpo divergente; ausente en la copia canonica"
+  }
+ ],
+ "cuarentena": [
+  {
+   "file": "nested/HEDERSFACE/src/rig_face_engine.c",
+   "line": 59,
+   "kind": "function",
+   "name": "arena_reset",
+   "module": "rig_face_engine",
+   "defects": [
+    {
+     "code": "CUERPO_SUSTITUIDO",
+     "detail": "escribe solo locales ['rig_seed']; no llama a nada; un hermano escribe ['g_arena']"
+    }
+   ],
+   "accion": "cuarentena: unidad corrupta en el origen; existe equivalente limpio"
+  },
+  {
+   "file": "nested/HEDERSFACE/src/rig_face_sovereign_gltf.c",
+   "line": 19,
+   "kind": "function",
+   "name": "rig_sov_export_glb",
+   "module": "rig_face_sovereign_gltf",
+   "defects": [
+    {
+     "code": "MACRO_SIN_NOMBRE",
+     "detail": "..."
+    }
+   ],
+   "accion": "cuarentena: unidad corrupta en el origen; existe equivalente limpio"
+  },
+  {
+   "file": "src_raw/rig_face_engine_v2.c",
+   "line": 703,
+   "kind": "function",
+   "name": "rig_face_build_follicle_map",
+   "module": "rig_face_v2",
+   "defects": [
+    {
+     "code": "SUFIJO_INVALIDO",
+     "detail": "0xC4TEDRAL1u"
+    }
+   ],
+   "accion": "cuarentena: unidad corrupta en el origen; existe equivalente limpio"
+  }
+ ],
+ "verificacion": {
+  "cuerpos_distintos_origen": 522,
+  "definiciones_emitidas": 531,
+  "cuerpos_reconocidos": 519,
+  "en_cuarentena": 3,
+  "perdidos": 0
+ },
+ "orden_dependencia": [
+  "rig_face_cloth",
+  "rig_face_dentition",
+  "rig_face_dermal_dynamics",
+  "rig_face_engine",
+  "rig_face_export_arkit",
+  "rig_face_export_vrm",
+  "rig_face_eye_vergence",
+  "rig_face_genetics",
+  "rig_face_hair_growth",
+  "rig_face_ng_anim",
+  "rig_face_ng_assembly",
+  "rig_face_ng_eyes",
+  "rig_face_ng_hair",
+  "rig_face_ng_skin",
+  "rig_face_pathtrace_multi",
+  "rig_face_soft_body",
+  "rig_face_sovereign_audio",
+  "rig_face_suite_compat",
+  "rig_face_voice_synth",
+  "rig_face_archetypes",
+  "rig_face_codegen",
+  "rig_face_sovereign_body",
+  "rig_face_sovereign_core",
+  "rig_face_sovereign_gltf",
+  "rig_face_sovereign_vision",
+  "rig_face_sovereign_camera",
+  "rig_face_recon_bridge",
+  "rig_face_sovereign_pathtrace",
+  "rig_face_v2",
+  "rig_face_v2_bridge",
+  "rig_face_sovereign_cli",
+  "rig_face_pose_body_suite",
+  "rig_face_pose_body_main"
+ ]
+}
