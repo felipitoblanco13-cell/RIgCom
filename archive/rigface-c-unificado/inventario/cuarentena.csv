@@ -1,0 +1,4 @@
+archivo,linea,funcion,defecto,detalle
+nested/HEDERSFACE/src/rig_face_engine.c,59,arena_reset,CUERPO_SUSTITUIDO,"escribe solo locales ['rig_seed']; no llama a nada; un hermano escribe ['g_arena']"
+nested/HEDERSFACE/src/rig_face_sovereign_gltf.c,19,rig_sov_export_glb,MACRO_SIN_NOMBRE,"..."
+src_raw/rig_face_engine_v2.c,703,rig_face_build_follicle_map,SUFIJO_INVALIDO,"0xC4TEDRAL1u"
